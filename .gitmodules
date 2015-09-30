@@ -1,0 +1,3 @@
+[submodule "themes/jb-pelican-theme"]
+	path = themes/jb-pelican-theme
+	url = git@github.com:jbzdak/jb-pelican-theme.git
