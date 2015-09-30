@@ -12,9 +12,9 @@ FTP_HOST=localhost
 FTP_USER=anonymous
 FTP_TARGET_DIR=/
 
-SSH_HOST=localhost
+SSH_HOST=db.fizyka.pw.edu.pl
 SSH_PORT=22
-SSH_USER=root
+SSH_USER=jbzdak
 SSH_TARGET_DIR=/var/www
 
 S3_BUCKET=my_s3_bucket

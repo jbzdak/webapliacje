@@ -24,27 +24,7 @@ Cel przedmiotu
 
 Co student będzie umiał po zajęciach:
 
-* (O)Programowanie typowych problemow naukowych w języku python
-* Praca z medium-scale data (dane mieszczące się w pamięci ram) ~20GB
-* Programowanie równoległe na CPU
-
-  * Głównie w przypadkach na których paralelizacja jest trywialna
-    (w takim przypadku zadanie da się podzielić na niezależne od siebie
-    podzadania)
-  * Może zdążymy wyjść poza ten zakres
-
-Co jest poza zakresem:
-
-* Paralelizacja na GPU
-
-  * Polecam wziąć kurs (coursera, edX) z Cudy/OpenCL a potem zaznajomić się z
-    PyCuda i PyOpenCL
-
-* Pisanie wydajnych algorytmów pracujących równolegle na jednym zestawie danych
-  np. równoległe sortowanie, równoległy skan
-* Ogarnianie terabajtowych zestawów danych
-
-  * Ogarnięcie 1000 zestawów danych po 1GB jest w zakresie :)
+TODO
 
 Sylabus
 -------
@@ -54,93 +34,54 @@ Nie wiem co dla Państwa będzie proste, więc sylabus jest tylko lekko naszkico
 
 Przedmiot jest w formacie 10 x 3h, co razem daje 30 godzin.
 
-Blok 1: Podstawy Pythona
+Blok 1: Podstawy ``SQL``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Blok ten będzie trwał dwa/trzy zajęcia.
+Blok ten będzie trwał dwa zajęcia.
 
-**Cel:** Zaznajomić studentów z językiem Python, oraz pojęciami takimi jak:
+**Cel**: Celem tego bloku jest przekazanie minimalnej wiedzy koniecznej do tworzenia
+webaplikacji w których źródłem danych jest baza danych ``SQL``.
 
-* Język dynamiczny
-* Duck-typing
-* Domknięcie (*z ang.* closure)
-* Moduł, paczka Pythona
+**Narzędzia** Studenci zapoznają się z bazą danych postgresql oraz programem
+``pgadminIII``.
 
-**Narzędzia:** Studenci będą tworzyć kod w edytorze tekstu i wykonywać za pomoca
-interpretera Pythona. Zostaną zapoznani z podstawami systemu kontroli wersji GIT.
+Blok 2: Podstawy języka Python
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Zadanie na koniec bloku** (do wykonania na zajęciach): napisanie programu
-przetwarzającego duży (10GB) plik tekstowy.
+Blok ten będzie trwał dwa zajęcia.
 
-Blok 2: ``numpy`` podstawowe narzędzie do analizy dużych zestawów danych
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Blok ten będzie trwał dwa/trzy zajęcia.
-
-**Cel:** Zaznajomić studentów z pracą w bibliotece ``numpy``,
-oraz takimi zagadnieniami jak:
-
-* Wektoryzacja
-* Układ pamięci (memory layout)
-* Tworzenie i format plików binarnych
-* Wywołanie systemowe ``mmap`` (i odpowiednik na Windowsie)
-
+**Cel:** Celem jest zapoznanie studwntów z podstawami Języka Python
 **Narzędzia:** Studenci będą pracować w IDE PyCharm. Dodatkowo studenci zapoznają się 
 z pojęciem środowiska virtualnego oraz nauczą się instalować Pythonowe moduły
 za pomocą managera paczek PIP, oraz narzędzi setuptools.
 
-**Zadanie na konice bloku** (do wykonania na zajęciach): napisanie programu
-wydajnie pracującego na dużym zestawie danych binarnych.
 
-Blok 3: Równoległe przetwarzanie danych za pomocą Pythona
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Blok 3: Podstawy webaplikacji Django
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Blok ten będzie trwał dwa/trzy zajęcia.
+Blok ten będzie trwał cztery zajęcia.
 
+**Cel:** Studenci zapoznają się z:
 
-**Cel:** W ramach zajęć studenci zapoznają się problematyką równoległego przetwarzania
-dużych zestawów danych. W tym z takimi zagadnieniami jak.
+* Protokołem HTTP
+* Podstawami HTML oraz CSS
+* Pojęciem dynamicznej aplikacji
+* Podstawami tworzenia aplikacji w Django
 
-* Różnica między wątkiem a procesem
+**Narzędzia:** Studenci zapoznają z frameworkiem Django.
 
-  * Wielowątkowość a wieloprocesowość 
-
-* Operacja map i map-reduce
-
-  * Wykonywanie wieloprocesowej operacji map
-
-* IPython notebook jako narzędzie do równoległego przetwarzania danych
-
-**Narzędzia:** Studenci będą pracować w programie IPython notebooks.
-Tutaj zapoznają się z biblioteką ``pandas``
-
-**Zadanie na konice bloku** (do wykonania na zajęciach): napisanie programu
-wydajnie pracującego na dużym zestawie danych binarnych.
+Blok 4: Zaawansowane webaplikacje Django
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-Pozostałe zagadnienia
-^^^^^^^^^^^^^^^^^^^^^
+Blok ten będzie trwał trzy zajęcia.
 
-Pozostałe zagadnienia dobiorę do zainteresowań studentów. mam takie propozycje
-(propozycje raczej na pół zajęć/jedne zajęcia każda):
+**Cel:** Studenci zapoznają się z:
 
-* Integracja Pythona z kodem C/C++/Fortrana
-
-  * Biblioteki Cyhton, ``scipy.weave``
-
-* Zastosowanie Pythona do tworzenia skryptów
-* Zastosowanie Pythona jako narzędzia ułatwiającego uruchamianie istniejącego
-  kodu symulacyjnego napisanego w mniej przyjaznych językach.
-* Przygotowywanie dokumentacji i stronu projektu. Łatwoe tworzenie stron
-  (na przykład stron przedmiotów ;)).
-* Piękne wykresy za pomocą `matplotlib`
-
-Zgłaszanie zagadnień
---------------------
-
-Zapraszam Państwa do zgłaszania pomysłów na potrzebne Wam tematy zajęć,
-najprościej będzie wysłać temat pocztą, jeśli zbierze się więcej tematów
-to zrobię głosowanie.
+* Bezpieczeństwem webaplikacji
+* Zarządzaniem schematem bazy danych
+* Profilowaniem kodu
+* Wdrażaniem webaplikacji
 
 
 
@@ -162,7 +103,6 @@ Regulamin oceniania
     popraw nie przewiduję.
 
 * Ocena z projektu (waga 1)
-
 
 Wykonanie projektu nie jest konieczne do zaliczenia (ocena wtedy wynosi 2.0 i
 jest wliczania do średniej opisanej powyżej), natomiast konieczne jest

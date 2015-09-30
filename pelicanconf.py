@@ -63,5 +63,9 @@ JINJA_FILTERS = {
     "truncate_words": blog_utils.truncate
 }
 
+ARTICLE_EXCLUDES = ['downloads']
+
+STATIC_PATHS = ['downloads']
+
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
