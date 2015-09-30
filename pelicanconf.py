@@ -2,6 +2,26 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
+import os, sys
+import pathlib
+
+DIRNAME = os.path.dirname(__file__)
+
+if not DIRNAME in sys.path:
+    sys.path.append(DIRNAME)
+
+THEME = str(pathlib.Path(__file__).parent / "themes" / 'jb-pelican-theme')
+
+if not THEME in sys.path:
+    sys.path.append(THEME)
+
+print(sys.path)
+
+import blog_utils
+
+PLUGIN_PATHS = [str(pathlib.Path(DIRNAME) / 'pelican-plugins')]
+
+
 AUTHOR = 'Jacek Bzdak'
 SITENAME = 'Projektowanie Webaplikacji'
 SITEURL = ''
@@ -30,6 +50,18 @@ SOCIAL = (('You can add links in your config file', '#'),
           ('Another social link', '#'),)
 
 DEFAULT_PAGINATION = False
+
+
+JINJA_EXTENSIONS = [
+    'jinja2.ext.with_'
+]
+
+
+JINJA_FILTERS = {
+    "tagsort_by_popularity": blog_utils.tagsort_by_popularity,
+    "as_dict": blog_utils.as_dict,
+    "truncate_words": blog_utils.truncate
+}
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
