@@ -1,72 +1,77 @@
 Wykład 1
 ========
 
+
+:date: 2015-10-01
+:tags: zaj1, wykład
+:category: organizacja
+
+
 Rodzaje baz danych
 ------------------
 
 Relacyjne (z ang. relational)
+
     podstawą są tabele, czasem nazywane
     relacjami oraz więzi
     (inaczej ograniczenia) między nimi.
 
 Klucz-wartość (z ang. key-value)
+
     pozwalają zapisywać
     przypisywać do kluczy (będących dowolnym ciągiem znaków) wartości.
     Przykładowo system plików przypisuje kluczom (nazwom plików)
     wartości (zawartość plików).
 
 Dokumentowe
+
     służą do przechowywania dokumentów, mają dużo
     słabsze ograniczenia na spójność danych, ponieważ dokumenty,
     mogą się zmieniać.
 
 Kolumnowe
+
     W bazach typowych relacyjnych na dysku, dane o jednym
     rzędzie w tabeli przechowywane są razem. W bazach kolumnowych
     razem przechowujemy dane o kolumnie.
 
 Grafowe (z ang. graph)
+
     przechowują grafy danych.
 
 Bazy danych, które nie są relacyjne często określa się terminem
 NoSQL.
 
-
-Zalety systemów relacyjnych
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Zalety systemów relacyjnych**:
 
 .. note::
 
     Proszę nie traktować rzeczy podanych w zaletach i wadach systemów
     relacyjnych, jako wyroczni. Od tych ogólnych zasad są wyjątki!
 
-Na etapie konstrukcji bazy danych nie musimy wiedzieć jakie
-rodzaje zapytań będą wykonywane na bazie danych (nie jest to
-prawda dla nierelacyjnych baz danych).
+* Na etapie konstrukcji bazy danych nie musimy wiedzieć jakie
+  rodzaje zapytań będą wykonywane na bazie danych (nie jest to
+  prawda dla nierelacyjnych baz danych).
+* Na etapie konstruowania zapytania nie musimy myśleć o tym,
+  jak zostanie wykonane (jest to prawda również dla innych systemów)
+* Gwarantują spójność danych.
 
-Na etapie konstruowania zapytania nie musimy myśleć o tym,
-jak zostanie wykonane (jest to prawda również dla innych systemów)
+* Gwarantują zachowanie tranzakcji w systemie.
 
-Gwarantują spójność danych.
+**Wady systemów relacyjnych**
 
-Gwarantują zachowanie tranzakcji w systemie.
-
-Wady systemów relacyjnych
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Systemy ``NoSQL`` zasadniczo lepiej się skalują, tj. łatwiej jest wykonać
-system składający się z kilkuset fizycznych serwerów ``NoSQL`` działających razem,
-niż system kilkudziesięciu serwerów relacyjnych działających razem.
-
-Specjalistyczne (czyli takie, które są w stanie przechowywać tylko pewien
-rodzaj danych: na przykład grafowe, dokumentowe, klucz-wartość) systemy ``NoSQL``,
-są w stanie wydajniej i wygodniej przechowywać ten rodzaj danych, niż systemy
-relacyjne.
+* Systemy ``NoSQL`` zasadniczo lepiej się skalują, tj. łatwiej jest wykonać
+  system składający się z kilkuset fizycznych serwerów ``NoSQL`` działających razem,
+  niż system kilkudziesięciu serwerów relacyjnych działających razem.
+* Specjalistyczne (czyli takie, które są w stanie przechowywać tylko pewien
+* rodzaj danych: na przykład grafowe, dokumentowe, klucz-wartość) systemy ``NoSQL``,
+  są w stanie wydajniej i wygodniej przechowywać ten rodzaj danych, niż systemy
+  relacyjne.
 
 Przykład schematu relacyjnego
 -----------------------------
 
-.. figure:: /wyklad1/data/relacja.*
+.. figure:: /downloads/wyklad1/data/relacja.png
 
     Przykład schematu relacyjnego
 
@@ -77,7 +82,7 @@ Ważne cechy schematu relacyjnego:
 * Na poszczególne wiersze nałożone mogą być pewne ograniczenia.
 * System musi być przygotowany do repreezentowania "braku informacji"
 
-Ciekawym dokumentem może być 12 zasad systemów relacyjnych: http://en.wikipedia.org/w/index.php?title=Codd%27s_12_rules&oldid=574873395.
+Opcjonalnie możecie się zapoznać z tym dokumentem: http://en.wikipedia.org/w/index.php?title=Codd%27s_12_rules&oldid=574873395.
 
 Informacje o strukturze danych w bazie nazywamy
 schematem (z ang. database schema).
@@ -95,9 +100,6 @@ nigdy nie będzie równa NULL. Bez wartości ``NULL`` musielibyśmy uznać, że 
 ``-1`` oznacza, że dany ocena nie jest dostępna, co jest mniej oczywiste.
 
 
-.. index:: NULL, NON NULL, primary key, foreign key, constraint, CHECK
-
-
 Ograniczenia w bazie danych
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -105,18 +107,22 @@ Systemy relacyjne pozwalają nakładać na schemat pewne ograniczenia albo inacz
 więzy (*z ang.* constraints) przykłady klasy ograniczeń zawartych w przykładzie:
 
 klucz główny *z ang.* primary key
+
     Kolumna ``id`` tabeli student jest unikalna (dwóm wierszom nie może być
     przypisana taka sama wartość w tej kolumnie) oraz nie może przyjmować
     wartości pustej. Klucz główny jednoznacznie definiuje dany wiersz w tabeli.
 
 nie pustość *z ang.* non null
+
     Kolumny ``imie`` oraz ``nazwisko`` nie mogą zawierać wartości pustej ``NULL``
 
 sprawdzenie *z ang.* check constraint
+
     Check constraint pozwala wymusić, by dany wiersz spełniał zadane wyrażenie
     logiczne. W kolumnie ocena są wartości od 2 do 5.
 
 klucz obcy *z ang.* foreign key
+
     Jeśli w tabeli ``ocena`` w kolumnie ``pk_studenta`` będzie
     wartość X, to istnieje student o ``id`` równym X.
 
@@ -174,7 +180,7 @@ Jedynym problemem, jaki mogą Państwo mieć jest to, by w łączeniu
 do lokalnego komputera pole host zostawić puste.
 Słowem  konfiguracja serwera powinna być taka:
 
-.. figure:: /wyklad1/data/postgres-add-database.png
+.. figure:: /downloads/wyklad1/data/postgres-add-database.png
 
     Poprawna konfiguracja postgresql
 
@@ -201,14 +207,14 @@ W najprostszej wersji polecenie to ma taką postać:
 
     SELECT * FROM tabela;
 
-`Wynik zapytania <{attach}/wyklad1/data/selectstar.html>`
+`Wynik zapytania <downloads/wyklad1/data/selectstar.html>`__
 
 Znaczy ono: zbiór danych, który chce pobrać zawiera dane
 ze wszystkich kolumn i wszystkich wierszy tabeli.
 
 Na pierwszych zajęciach będziemy pracowali na takiej tabeli:
 
-.. figure:: /wyklad1/data/zaj1.schema.png
+.. figure:: /downloads/wyklad1/data/zaj1.schema.png
 
     Schemat do pierwszych zajęć
 
@@ -233,7 +239,7 @@ Powiedzmy, że chcemy wybrać dane ze stycznia 2012 roku.
 
     SELECT * FROM zaj1 WHERE date BETWEEN '2012-01-01' AND '2012-01-31';
 
-:download:`Wyniki zapytania </wyklad1/data/selectwhere.html>`
+`Wyniki zapytania <downloads/wyklad1/data/selectwhere.html>`__
 
 .. note::
 
@@ -256,7 +262,7 @@ dane ze stycznia w dniach, w których jednocześnie przekroczono poziomy
         WHERE date BETWEEN '2012-01-01'
             AND '2012-01-31' AND ( pm_10 > 50 or no_2 > 200);
 
-:download:`Wyniki zapytania </wyklad1/data/selectwhere_expre.html>`
+`Wyniki zapytania <downloads/wyklad1/data/selectwhere_expre.html>`__
 
 Dodatkowe informacje:
 
@@ -275,7 +281,7 @@ określają poszczególne kolumny wybranego zbioru danych:
 
         SELECT date, wind_dir FROM zaj1;
 
-:download:`Wynik zapytania </wyklad1/data/selectcolumn.html>`
+`Wynik zapytania <downloads/wyklad1/data/selectcolumn.html>`__
 
 Nie musimy wybierać kolumn tabeli, możemy wybrać dowolne wyrażenia, które
 operują (lub nie) na danych z poszczególnych kolumn.
@@ -284,7 +290,7 @@ operują (lub nie) na danych z poszczególnych kolumn.
 
     SELECT date, radians(wind_dir) FROM zaj1;
 
-:download:`Wynik zapytania </wyklad1/data/selectradians.html>`
+`Wynik zapytania <downloads/wyklad1/data/selectradians.html>`__
 
 Wyrażenia wybierane mogą być całkiem dowolne:
 
@@ -292,7 +298,7 @@ Wyrażenia wybierane mogą być całkiem dowolne:
 
     SELECT 6/2*(1+2) FROM zaj1;
 
-:download:`Wynik zapytania </wyklad1/data/select-zagadka.html>`
+`Wynik zapytania <downloads/wyklad1/data/select-zagadka.html>`__
 
 Możemy też wykonywać zapytania wybierające dane z wielu kolumn:
 
@@ -300,7 +306,7 @@ Możemy też wykonywać zapytania wybierające dane z wielu kolumn:
 
      SELECT no_2 + pm_10 AS fizycznego_sensu_to_nie_ma AS to_też FROM zaj1;
 
-:download:`Wynik zapytania </wyklad1/data/select-nonsense.html>`
+`Wynik zapytania <downloads/wyklad1/data/select-nonsense.html>`__
 
 W tym zapytaniu użyto również klauzuli ``AS``, która pozwala
 wyrażeniu (lub kolumnie) nadać określoną nazwę w zbiorze wynikowym.
@@ -324,8 +330,8 @@ order by:
 
     SELECT * FROM zaj1 ORDER BY date desc;
 
-:download:`Wyniki zapytania </wyklad1/data/selectorder.html>`, proszę porównać z
-:download:`tym samym zapytaniem bez klauzuli order by </wyklad1/data/selectstar.html>`
+`Wyniki zapytania <downloads/wyklad1/data/selectorder.html>`__, proszę porównać z
+`tym samym zapytaniem bez klauzuli order by <downloads/wyklad1/data/selectstar.html>`__
 
 Słowo ``desc`` (skrót ot *descending*) oznacza kierunek sortowania od wartości największej do najmniejszej.
 Przy uznaniu co oznacza wartość *największa* i *najmniejsza* można kierować
@@ -341,7 +347,7 @@ Proszę poprzednie zapytanie z:
 
     SELECT date, wind_dir, pm_10 FROM zaj1 ORDER by wind_dir;
 
-:download:`Wynik zapytania </wyklad1/data/selectordermany-compare.html>`
+`Wynik zapytania <downloads/wyklad1/data/selectordermany-compare.html>`__
 
 Możemy też sortować względem wyrażenia:
 
@@ -349,10 +355,10 @@ Możemy też sortować względem wyrażenia:
 
     SELECT date, sin(radians(wind_dir)) FROM zaj1 ORDER by sin(radians(wind_dir));
 
-:download:`Wynik zapytania </wyklad1/data/selectorderexpression.html>`
+`Wynik zapytania <downloads/wyklad1/data/selectorderexpression.html>`__
 
-Funkcje agregujące
-^^^^^^^^^^^^^^^^^^
+Funkcje agregujące (opcjonalne -- nie będzie na zajęciach)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Ilość analiz jakie możemy zrobić za pomocą operacji na pojedyńczych wierszach
 jest ograniczona.
@@ -364,7 +370,7 @@ danych:
 
     SELECT AVG(pm_10), AVG(NO_2) FROM zaj1;
 
-:download:`Wynik zapytania </wyklad1/data/selectavg.html>`.
+`Wynik zapytania <downloads/wyklad1/data/selectavg.html>`__.
 
 Proszę zauważyć że klauzula ``AVG`` oraz inne funkcje agregujące
 (*z. ang* aggregate functions) całkiem zmienia nam wybrany zestaw danych!
@@ -377,7 +383,7 @@ dodać klauzulę ``where``
 
     SELECT AVG(pm_10) FROM zaj1 WHERE date BETWEEN '2012-01-01' AND '2012-01-31';
 
-:download:`Wynik zapytania </wyklad1/data/selectavg-where.html>`
+`Wynik zapytania <downloads/wyklad1/data/selectavg-where.html>`__
 
 Przykłady funkcji agregujących:
 
@@ -410,7 +416,7 @@ podgrup oddzielnie.
 
     SELECT AVG(wind_speed), pm_10 > 50 as przekroczenie FROM zaj1 GROUP BY pm_10 > 50;
 
-:download:`Wynik zapytania </wyklad1/data/selectavg-group-by.html>`
+`Wynik zapytania <downloads/wyklad1/data/selectavg-group-by.html>`__
 
 W tym wypadk dzielimy zbiór danych na dwa podzbiory: w pierwszym
 nastąpiło przekroczenie dopuszczalnego dziennego poziomu pyłu zawieszonego
@@ -420,7 +426,7 @@ nastąpiło przekroczenie dopuszczalnego dziennego poziomu pyłu zawieszonego
 
     SELECT AVG(wind_speed), wind_dir, COUNT(*) FROM zaj1 GROUP BY wind_dir ORDER BY wind_dir;
 
-:download:`Wynik zapytania </wyklad1/data/selectavg-group-by-2.html>`
+`Wynik zapytania <downloads/wyklad1/data/selectavg-group-by-2.html>`__
 
 Teraz grup mamy 360 (tyle ile jest różnych wartości kierunku wiatru).
 
@@ -458,7 +464,7 @@ Proszę zastanowić się dlaczego takie zapytanie jest poprawne:
 
     SELECT AVG(pm_10), AVG(NO_2), sin(radians(wind_speed)) FROM zaj1 GROUP BY wind_speed;
 
-:download:`Wynik zapytania: </wyklad1/data/select-group-by-ciekawostka-1.html>`
+`Wynik zapytania: <downloads/wyklad1/data/select-group-by-ciekawostka-1.html>`__
 
 
 A takie nie:
@@ -494,7 +500,7 @@ należy wykonać zapytanie:
 
     SELECT AVG(pm_10), date_trunc('day', date) FROM zaj1 GROUP BY date_trunc('day', date) HAVING AVG(pm_10) > 50 ORDER BY date_trunc('day', date);
 
-:download:`Wynik zapytania </wyklad1/data/selectavg-group-by-having.html>`
+`Wynik zapytania <downloads/wyklad1/data/selectavg-group-by-having.html>`__
 
 Wyrażenie having, pozwala filtrować zbiór danych pod względem wyrażeń
 zawierających funkcje agregujące.
