@@ -1,5 +1,5 @@
-Zajęcia 1: Zadania
-==================
+Zajęcia 1: Zadania (Work in progress)
+=====================================
 
 :date: 2015-10-01
 :tags: zaj1, zadania
@@ -165,7 +165,7 @@ być posortowany po wartości `przekroczenie`.
 
 
 Zadanie 10: GROUP BY 2
------------------------
+----------------------
 
 Proszę opracować zapytanie zwracające dwie kolumny: ``day`` oraz ``pm_10`` (kolumy
 są w tej kolejności). W kolumnie ``day`` umieszczamy konkretną datę, a w kolumnie

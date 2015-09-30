@@ -1,11 +1,12 @@
-Wykład 1
-========
+Zajęcia 1: Wykład (Work in progress)
+====================================
 
 
 :date: 2015-10-01
 :tags: zaj1, wykład
 :category: organizacja
 
+.. contents:: Spis treści
 
 Rodzaje baz danych
 ------------------
@@ -358,7 +359,7 @@ Możemy też sortować względem wyrażenia:
 `Wynik zapytania <downloads/wyklad1/data/selectorderexpression.html>`__
 
 Funkcje agregujące (opcjonalne -- nie będzie na zajęciach)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------------------------------
 
 Ilość analiz jakie możemy zrobić za pomocą operacji na pojedyńczych wierszach
 jest ograniczona.

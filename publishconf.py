@@ -17,7 +17,7 @@ from pelicanconf import *
 STATCOUNTER_ID = "10639558"
 STATCOUNTER_SECURITY = "7126f868"
 
-SITEURL = 'g'
+SITEURL = 'http://db.fizyka.pw.edu.pl/webaplikacje'
 RELATIVE_URLS = False
 
 FEED_ALL_ATOM = 'feeds/all.atom.xml'

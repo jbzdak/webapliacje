@@ -14,9 +14,8 @@ FTP_TARGET_DIR=/
 
 SSH_HOST=db.fizyka.pw.edu.pl
 SSH_PORT=22
-SSH_USER=jbzdak
-SSH_TARGET_DIR=/var/www
-
+SSH_USER=bzdak
+SSH_TARGET_DIR=/home/bzdak/public_html/webaplikacje
 S3_BUCKET=my_s3_bucket
 
 CLOUDFILES_USERNAME=my_rackspace_username
