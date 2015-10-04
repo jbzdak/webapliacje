@@ -6,6 +6,14 @@ Zajęcia 1: Wykład (Work in progress)
 :tags: zaj1, wykład, materiały
 :category: materiały
 
+.. note::
+
+  Wykład do pobrania również w wersji PDF.
+
+  .. raw:: html
+
+     <a href="/downloads/pdfs/wyk1.pdf">Wersja pdf tutaj</a>
+
 .. contents:: Spis treści
 
 Rodzaje baz danych

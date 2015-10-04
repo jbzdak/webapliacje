@@ -61,6 +61,7 @@ help:
 	@echo '                                                                          '
 
 html:
+	$(BASEDIR)/generate_pdfs.sh
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
 
 clean:
