@@ -72,7 +72,7 @@ NoSQL.
 Przykład schematu relacyjnego
 -----------------------------
 
-.. figure:: /downloads/wyklad1/data/relacja.png
+.. figure:: downloads/wyklad1/data/relacja.png
 
     Przykład schematu relacyjnego
 
@@ -181,7 +181,7 @@ Jedynym problemem, jaki mogą Państwo mieć jest to, by w łączeniu
 do lokalnego komputera pole host zostawić puste.
 Słowem  konfiguracja serwera powinna być taka:
 
-.. figure:: /downloads/wyklad1/data/postgres-add-database.png
+.. figure:: downloads/wyklad1/data/postgres-add-database.png
 
     Poprawna konfiguracja postgresql
 
@@ -215,7 +215,7 @@ ze wszystkich kolumn i wszystkich wierszy tabeli.
 
 Na pierwszych zajęciach będziemy pracowali na takiej tabeli:
 
-.. figure:: /downloads/wyklad1/data/zaj1.schema.png
+.. figure:: downloads/wyklad1/data/zaj1-schema.png
 
     Schemat do pierwszych zajęć
 
@@ -389,12 +389,19 @@ dodać klauzulę ``where``
 Przykłady funkcji agregujących:
 
 ``COUNT``
+
     Zwraca ilość wierszy w zestawie danych
+
 ``STDDEV``
+
     Zwraca odchylenie standardowe
+
 ``AVG``
+
     Zwraca średnią
+
 ``MAX``
+
     Zwraca największą wartość z zestawu danych
 
 `Więcej funkcji agregujących
