@@ -63,13 +63,13 @@
   \urlstyle{same} % normal text font (alternatives: tt, rm, sf)
 }{}
 \hypersetup{
-  pdftitle={Zajęcia 1: Wykład (Work in progress)},
+  pdftitle={Zajęcia 1: Wykład},
 }
 
 %%% Title Data
 \title{\phantomsection%
-  Zajęcia 1: Wykład (Work in progress)%
-  \label{zajecia-1-wyklad-work-in-progress}}
+  Zajęcia 1: Wykład%
+  \label{zajecia-1-wyklad}}
 \author{}
 \date{}
 
@@ -104,6 +104,38 @@ Wykład do pobrania również~w wersji PDF.
 
 
 
+\section{Po co uczymy się o SQL%
+  \label{po-co-uczymy-sie-o-sql}%
+}
+
+SQL jest używany w większości webaplikacji (nawet tych największych), i mimo
+rozlicznych wad relacyjnych baz danych, nie stworzono do tej pory lepszego
+rozwiązania.
+
+Podczas tworzenia webaplikacji zasadniczo rzadko pisze się~czysty kod SQL,
+jednak:
+%
+\begin{itemize}
+
+\item W każdej (nietrywialnej) aplikacji musiałem napisać jakiś~kod SQL.
+
+\item Zrozumienie podstaw SQL ułatwi np. rozumienie generowanego kodu SQL.
+
+\end{itemize}
+
+\DUadmonition[note]{
+\DUtitle[note]{Note}
+
+Głównym problemem z bazami SQL jest ich skalowalnośc, tj: \textbf{trudno} jest
+stworzyć system który ma rozmiar Twittera czy Facebooka i przechowuje dane
+w bazie danych SQL.
+
+Odpowiedzią na te problemy miały być bazy danych NoSQL, które zasadniczo
+lepiej się~skalują, jednak najczęściej bazy NoSQL wykorzystywane są \textbf{dodatkowo}
+jako wsparcie baz relacyjnych.
+}
+
+
 \section{Rodzaje baz danych%
   \label{rodzaje-baz-danych}%
 }
@@ -112,8 +144,7 @@ Relacyjne (z ang. relational)
 %
 \begin{quote}
 
-podstawą są tabele, czasem nazywane
-relacjami oraz więzi
+podstawą są tabele, czasem nazywane relacjami oraz więzi
 (inaczej ograniczenia) między nimi.
 
 \end{quote}
@@ -122,10 +153,11 @@ Klucz-wartość (z ang. key-value)
 %
 \begin{quote}
 
-pozwalają zapisywać
-przypisywać do kluczy (będących dowolnym ciągiem znaków) wartości.
-Przykładowo system plików przypisuje kluczom (nazwom plików)
-wartości (zawartość plików).
+pozwalają przypisywać do kluczy (będących dowolnym ciągiem znaków) wartości.
+
+Przykładem takiej bazy danych może być~system plików:
+przypisuje on ściećkom plików (czyli kluczom), wartość czyli zawartość
+plików.
 
 \end{quote}
 
@@ -134,7 +166,7 @@ Dokumentowe
 \begin{quote}
 
 służą do przechowywania dokumentów, mają dużo
-słabsze ograniczenia na spójność danych, ponieważ dokumenty,
+słabsze ograniczenia na spójność danych, ponieważ dokumenty
 mogą się zmieniać.
 
 \end{quote}
@@ -153,7 +185,7 @@ Grafowe (z ang. graph)
 %
 \begin{quote}
 
-przechowują grafy danych.
+przechowują grafy
 
 \end{quote}
 
@@ -174,16 +206,16 @@ relacyjnych, jako wyroczni. Od tych ogólnych zasad są wyjątki!
 %
 \begin{itemize}
 
-\item Na etapie konstrukcji bazy danych nie musimy wiedzieć jakie
-rodzaje zapytań będą wykonywane na bazie danych (nie jest to
-prawda dla nierelacyjnych baz danych).
-
-\item Na etapie konstruowania zapytania nie musimy myśleć o tym,
-jak zostanie wykonane (jest to prawda również dla innych systemów)
-
 \item Gwarantują spójność danych.
 
 \item Gwarantują zachowanie tranzakcji w systemie.
+
+\item Na etapie konstrukcji bazy danych nie musimy wiedzieć jakie
+rodzaje zapytań będą wykonywane na bazie danych (nie jest to
+prawda dla wszystkich baz \texttt{NoSQL}).
+
+\item Na etapie konstruowania zapytania nie musimy myśleć o tym,
+jak zostanie wykonane (jest to prawda również dla niektórych systemów NoSQL)
 
 \item Model relacyjny ma solidne podstawy i aksjomatyzację matematyczną, co
 znacznie ułatwia opisywanie zachowania baz danych, optymalizację schematu
@@ -244,13 +276,12 @@ schematem (z ang. database schema).
 }
 
 Wartość \texttt{NULL} reprezentuje informację o tym, że dana wartość jest niedostępna.
-Jeśli w kolumnie 'ocena' zawarta jest wartość \texttt{NULL} oznacza to, że system nie posiada
+Jeśli w kolumnie \texttt{ocena} zawarta jest wartość \texttt{NULL} oznacza to, że system nie posiada
 informacji o danej ocenie.
 
 Wprowadzenie wartości \texttt{NULL} jest ważne ponieważ pozwala ona jasno i jednoznacznie
 powiedzieć: tej informacji nie mamy oraz żadna poprawna wartość w żadnej kolumnie
-nigdy nie będzie równa NULL. Bez wartości \texttt{NULL} musielibyśmy uznać, że np. ocena
-\texttt{-1} oznacza, że dany ocena nie jest dostępna, co jest mniej oczywiste.
+nigdy nie będzie równa \texttt{NULL}.
 
 
 \subsection{Ograniczenia w bazie danych%
@@ -258,7 +289,7 @@ nigdy nie będzie równa NULL. Bez wartości \texttt{NULL} musielibyśmy uznać,
 }
 
 Systemy relacyjne pozwalają nakładać na schemat pewne ograniczenia albo inaczej
-więzy (\emph{z ang.} constraints) przykłady klasy ograniczeń zawartych w przykładzie:
+więzy (\emph{z ang.} constraints) przykłady ograniczeń zawartych w przykładzie:
 
 klucz główny \emph{z ang.} primary key
 %
@@ -266,7 +297,7 @@ klucz główny \emph{z ang.} primary key
 
 Kolumna \texttt{id} tabeli student jest unikalna (dwóm wierszom nie może być
 przypisana taka sama wartość w tej kolumnie) oraz nie może przyjmować
-wartości pustej. Klucz główny jednoznacznie definiuje dany wiersz w tabeli.
+wartości pustej. Klucz główny jednoznacznie identyfikuje dany wiersz w tabeli.
 
 \end{quote}
 
@@ -274,7 +305,8 @@ nie pustość \emph{z ang.} non null
 %
 \begin{quote}
 
-Kolumny \texttt{imie} oraz \texttt{nazwisko} nie mogą zawierać wartości pustej \texttt{NULL}
+Kolumny \texttt{imie} oraz \texttt{nazwisko} nie mogą zawierać wartości pustej
+(czuli \texttt{NULL})
 
 \end{quote}
 
@@ -291,12 +323,21 @@ klucz obcy \emph{z ang.} foreign key
 %
 \begin{quote}
 
-Jeśli w tabeli \texttt{ocena} w kolumnie \texttt{pk\_studenta} będzie
+Klucz onbcy pozwala na definiowanie zależności między tabelami mówimy, że
+ocena A jest oceną studenta B jeśli w kolumnie 'pk\_studenta' tabeli 'ocena' jest
+identyfikator studenta A.
+
+Klucz obcy pełni takie funkcje:
+%
+\begin{itemize}
+
+\item Informuje użytkownika o występowaniu takiej relacji.
+
+\item Gwarantuje, że wiersz do którego odnosi się klucz obcy istnieje w drugiej
+tabeli. Tj. jeśli w tabeli \texttt{ocena} w kolumnie \texttt{pk\_studenta} będzie
 wartość X, to istnieje student o \texttt{id} równym X.
 
-To ograniczenie pozwala definiować zależności między tabelami mówimy, że
-ocena A jest oceną studenta B jeśli w kolumnie 'pk\_studenta' jest
-identyfikator studenta A.
+\end{itemize}
 
 \end{quote}
 
@@ -331,7 +372,7 @@ ze standardem SQL.
 }
 
 Polecenie to pozwala na interakcje z bazą danych za pomocą
-konsoli. Zasadniczo ma ono wszystkie możliwości klientów
+konsoli. Ma ono wszystkie możliwości klientów
 graficznych.
 
 Podstawowa składania polecenia to:
@@ -380,8 +421,7 @@ Proszę nie myśleć o poleceniu \texttt{SELECT},
 jako o metodzie na wybieranie danych, ale raczej jako o metodzie
 opisywania danych, które chcemy pobrać.
 
-Opis ten jest oderwany
-od tego w jaki sposób to zapytanie należy wykonać -{}-{}-
+Opis ten jest oderwany od tego w jaki sposób to zapytanie należy wykonać -{}-{}-
 o to martwi się serwer baz danych.
 }
 
@@ -444,10 +484,13 @@ SELECT * FROM zaj1 WHERE date
 Poza klauzulą where mamy tutaj kilka cech języka postgresql. Za pomocą
 znaków \texttt{'} oznaczamy stałe określające ciągi znaków.
 
-\emph{Poboczna uwaga}: to że
-podałem datę jako ciąg znaków, nie oznacza, że w ten sposób daty są
+\DUadmonition[note]{
+\DUtitle[note]{Note}
+
+Podałem datę jako ciąg znaków, co nie oznacza, że w ten sposób daty są
 przechowywane w bazie danych (jest to wydajniejszy format), po prostu
 postgres umie rzutować ciągi znaków w dobrym formacie na datę.
+}
 }
 
 Klauzula \texttt{WHERE} przyjmuje dowolne wyrażenie logiczne, w tym zapytaniu wybieramy
@@ -571,8 +614,8 @@ SELECT date, sin(radians(wind_dir)) FROM zaj1
 \attachfile{downloads/wyklad1/data/selectorderexpression.html}{Wynik zapytania}
 
 
-\section{Funkcje agregujące (opcjonalne -{}- nie będzie na zajęciach)%
-  \label{funkcje-agregujace-opcjonalne-nie-bedzie-na-zajeciach}%
+\section{Funkcje agregujące%
+  \label{funkcje-agregujace}%
 }
 
 Ilość analiz jakie możemy zrobić za pomocą operacji na pojedyńczych wierszach

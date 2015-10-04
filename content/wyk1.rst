@@ -1,5 +1,5 @@
-Zajęcia 1: Wykład (Work in progress)
-====================================
+Zajęcia 1: Wykład
+=================
 
 
 :date: 2015-10-01
@@ -16,26 +16,51 @@ Zajęcia 1: Wykład (Work in progress)
 
 .. contents:: Spis treści
 
+
+Po co uczymy się o SQL
+----------------------
+
+SQL jest używany w większości webaplikacji (nawet tych największych), i mimo
+rozlicznych wad relacyjnych baz danych, nie stworzono do tej pory lepszego
+rozwiązania.
+
+Podczas tworzenia webaplikacji zasadniczo rzadko pisze się czysty kod SQL,
+jednak:
+
+* W każdej (nietrywialnej) aplikacji musiałem napisać jakiś kod SQL.
+* Zrozumienie podstaw SQL ułatwi np. rozumienie generowanego kodu SQL.
+
+.. note::
+
+  Głównym problemem z bazami SQL jest ich skalowalnośc, tj: **trudno** jest
+  stworzyć system który ma rozmiar Twittera czy Facebooka i przechowuje dane
+  w bazie danych SQL.
+
+  Odpowiedzią na te problemy miały być bazy danych NoSQL, które zasadniczo
+  lepiej się skalują, jednak najczęściej bazy NoSQL wykorzystywane są **dodatkowo**
+  jako wsparcie baz relacyjnych.
+
+
 Rodzaje baz danych
 ------------------
 
 Relacyjne (z ang. relational)
 
-    podstawą są tabele, czasem nazywane
-    relacjami oraz więzi
+    podstawą są tabele, czasem nazywane relacjami oraz więzi
     (inaczej ograniczenia) między nimi.
 
 Klucz-wartość (z ang. key-value)
 
-    pozwalają zapisywać
-    przypisywać do kluczy (będących dowolnym ciągiem znaków) wartości.
-    Przykładowo system plików przypisuje kluczom (nazwom plików)
-    wartości (zawartość plików).
+    pozwalają przypisywać do kluczy (będących dowolnym ciągiem znaków) wartości.
+
+    Przykładem takiej bazy danych może być system plików:
+    przypisuje on ściećkom plików (czyli kluczom), wartość czyli zawartość
+    plików.
 
 Dokumentowe
 
     służą do przechowywania dokumentów, mają dużo
-    słabsze ograniczenia na spójność danych, ponieważ dokumenty,
+    słabsze ograniczenia na spójność danych, ponieważ dokumenty
     mogą się zmieniać.
 
 Kolumnowe
@@ -46,7 +71,7 @@ Kolumnowe
 
 Grafowe (z ang. graph)
 
-    przechowują grafy danych.
+    przechowują grafy
 
 Bazy danych, które nie są relacyjne często określa się terminem
 NoSQL.
@@ -59,13 +84,13 @@ Zalety systemów relacyjnych
     Proszę nie traktować rzeczy podanych w zaletach i wadach systemów
     relacyjnych, jako wyroczni. Od tych ogólnych zasad są wyjątki!
 
-* Na etapie konstrukcji bazy danych nie musimy wiedzieć jakie
-  rodzaje zapytań będą wykonywane na bazie danych (nie jest to
-  prawda dla nierelacyjnych baz danych).
-* Na etapie konstruowania zapytania nie musimy myśleć o tym,
-  jak zostanie wykonane (jest to prawda również dla innych systemów)
 * Gwarantują spójność danych.
 * Gwarantują zachowanie tranzakcji w systemie.
+* Na etapie konstrukcji bazy danych nie musimy wiedzieć jakie
+  rodzaje zapytań będą wykonywane na bazie danych (nie jest to
+  prawda dla wszystkich baz ``NoSQL``).
+* Na etapie konstruowania zapytania nie musimy myśleć o tym,
+  jak zostanie wykonane (jest to prawda również dla niektórych systemów NoSQL)
 * Model relacyjny ma solidne podstawy i aksjomatyzację matematyczną, co
   znacznie ułatwia opisywanie zachowania baz danych, optymalizację schematu
   itp.
@@ -105,30 +130,29 @@ Wartość NULL
 ^^^^^^^^^^^^
 
 Wartość ``NULL`` reprezentuje informację o tym, że dana wartość jest niedostępna.
-Jeśli w kolumnie 'ocena' zawarta jest wartość ``NULL`` oznacza to, że system nie posiada
+Jeśli w kolumnie ``ocena`` zawarta jest wartość ``NULL`` oznacza to, że system nie posiada
 informacji o danej ocenie.
 
 Wprowadzenie wartości ``NULL`` jest ważne ponieważ pozwala ona jasno i jednoznacznie
 powiedzieć: tej informacji nie mamy oraz żadna poprawna wartość w żadnej kolumnie
-nigdy nie będzie równa NULL. Bez wartości ``NULL`` musielibyśmy uznać, że np. ocena
-``-1`` oznacza, że dany ocena nie jest dostępna, co jest mniej oczywiste.
-
+nigdy nie będzie równa ``NULL``.
 
 Ograniczenia w bazie danych
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Systemy relacyjne pozwalają nakładać na schemat pewne ograniczenia albo inaczej
-więzy (*z ang.* constraints) przykłady klasy ograniczeń zawartych w przykładzie:
+więzy (*z ang.* constraints) przykłady ograniczeń zawartych w przykładzie:
 
 klucz główny *z ang.* primary key
 
     Kolumna ``id`` tabeli student jest unikalna (dwóm wierszom nie może być
     przypisana taka sama wartość w tej kolumnie) oraz nie może przyjmować
-    wartości pustej. Klucz główny jednoznacznie definiuje dany wiersz w tabeli.
+    wartości pustej. Klucz główny jednoznacznie identyfikuje dany wiersz w tabeli.
 
 nie pustość *z ang.* non null
 
-    Kolumny ``imie`` oraz ``nazwisko`` nie mogą zawierać wartości pustej ``NULL``
+    Kolumny ``imie`` oraz ``nazwisko`` nie mogą zawierać wartości pustej
+    (czuli ``NULL``)
 
 sprawdzenie *z ang.* check constraint
 
@@ -137,12 +161,16 @@ sprawdzenie *z ang.* check constraint
 
 klucz obcy *z ang.* foreign key
 
-    Jeśli w tabeli ``ocena`` w kolumnie ``pk_studenta`` będzie
-    wartość X, to istnieje student o ``id`` równym X.
-
-    To ograniczenie pozwala definiować zależności między tabelami mówimy, że
-    ocena A jest oceną studenta B jeśli w kolumnie 'pk_studenta' jest
+    Klucz onbcy pozwala na definiowanie zależności między tabelami mówimy, że
+    ocena A jest oceną studenta B jeśli w kolumnie 'pk_studenta' tabeli 'ocena' jest
     identyfikator studenta A.
+
+    Klucz obcy pełni takie funkcje:
+
+    * Informuje użytkownika o występowaniu takiej relacji.
+    * Gwarantuje, że wiersz do którego odnosi się klucz obcy istnieje w drugiej
+      tabeli. Tj. jeśli w tabeli ``ocena`` w kolumnie ``pk_studenta`` będzie
+      wartość X, to istnieje student o ``id`` równym X.
 
 Spójność danych
 ^^^^^^^^^^^^^^^
@@ -166,7 +194,7 @@ Polecenie konsolowe ``psql``
 ****************************
 
 Polecenie to pozwala na interakcje z bazą danych za pomocą
-konsoli. Zasadniczo ma ono wszystkie możliwości klientów
+konsoli. Ma ono wszystkie możliwości klientów
 graficznych.
 
 Podstawowa składania polecenia to:
@@ -200,17 +228,17 @@ Słowem  konfiguracja serwera powinna być taka:
     Poprawna konfiguracja postgresql
 
 Wybieranie danych
--------------------
+-----------------
 
 Do pobierania danych z bazy dancyh służy polecenie ``SELECT``
 
 .. note::
+
     Proszę nie myśleć o poleceniu ``SELECT``,
     jako o metodzie na wybieranie danych, ale raczej jako o metodzie
     opisywania danych, które chcemy pobrać.
 
-    Opis ten jest oderwany
-    od tego w jaki sposób to zapytanie należy wykonać ---
+    Opis ten jest oderwany od tego w jaki sposób to zapytanie należy wykonać ---
     o to martwi się serwer baz danych.
 
 Składnia polecenia SELECT
@@ -263,10 +291,10 @@ Powiedzmy, że chcemy wybrać dane ze stycznia 2012 roku.
       Poza klauzulą where mamy tutaj kilka cech języka postgresql. Za pomocą
       znaków ``'`` oznaczamy stałe określające ciągi znaków.
 
-      *Poboczna uwaga*: to że
-      podałem datę jako ciąg znaków, nie oznacza, że w ten sposób daty są
-      przechowywane w bazie danych (jest to wydajniejszy format), po prostu
-      postgres umie rzutować ciągi znaków w dobrym formacie na datę.
+      .. note::
+        Podałem datę jako ciąg znaków, co nie oznacza, że w ten sposób daty są
+        przechowywane w bazie danych (jest to wydajniejszy format), po prostu
+        postgres umie rzutować ciągi znaków w dobrym formacie na datę.
 
 
 Klauzula ``WHERE`` przyjmuje dowolne wyrażenie logiczne, w tym zapytaniu wybieramy
@@ -296,7 +324,7 @@ określają poszczególne kolumny wybranego zbioru danych:
 
 .. code-block:: sql
 
-        SELECT date, wind_dir FROM zaj1;
+  SELECT date, wind_dir FROM zaj1;
 
 `Wynik zapytania <downloads/wyklad1/data/selectcolumn.html>`__
 
@@ -334,6 +362,7 @@ Dodatkowe informacje:
 
 Sortowanie danych
 ^^^^^^^^^^^^^^^^^
+
 Domyślnie dane dane wybierane z zestawu danych, nie są sortowane,
 albo inaczej: *są wybierane w takiej kolejności w jakiej serwerowi wygodnie*
 Przy prostych zapytaniach jest to kolejność, w których dane leżą na dysku, a
@@ -376,8 +405,8 @@ Możemy też sortować względem wyrażenia:
 
 `Wynik zapytania <downloads/wyklad1/data/selectorderexpression.html>`__
 
-Funkcje agregujące (opcjonalne -- nie będzie na zajęciach)
-----------------------------------------------------------
+Funkcje agregujące
+------------------
 
 Ilość analiz jakie możemy zrobić za pomocą operacji na pojedyńczych wierszach
 jest ograniczona.
@@ -542,6 +571,11 @@ zawierających funkcje agregujące.
 
 Proszę zastanowić się czym różni się klauzula ``WHERE`` od klauzuli ``HAVING``.
 
+Rzeczy do zapamiętania
+----------------------
+
+Najważniejszą rzeczą, którą powinniście wynieść z zajęć jest praktyczna
+umiejętność wykonywania prostych zapytań SQL.
 
 
 
