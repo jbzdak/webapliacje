@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 import os, sys
 import pathlib
+from tweaked_html_writer.writer import EnchancedRstReader
 
 DIRNAME = os.path.dirname(__file__)
 
@@ -51,6 +52,10 @@ SOCIAL = (('You can add links in your config file', '#'),
 
 DEFAULT_PAGINATION = False
 
+READERS = {
+  'rst': EnchancedRstReader,
+  'html': None
+}
 
 JINJA_EXTENSIONS = [
     'jinja2.ext.with_'

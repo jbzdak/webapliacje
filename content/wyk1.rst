@@ -3,8 +3,8 @@ Zajęcia 1: Wykład (Work in progress)
 
 
 :date: 2015-10-01
-:tags: zaj1, wykład
-:category: organizacja
+:tags: zaj1, wykład, materiały
+:category: materiały
 
 .. contents:: Spis treści
 
@@ -43,7 +43,8 @@ Grafowe (z ang. graph)
 Bazy danych, które nie są relacyjne często określa się terminem
 NoSQL.
 
-**Zalety systemów relacyjnych**:
+Zalety systemów relacyjnych
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
 
@@ -56,16 +57,19 @@ NoSQL.
 * Na etapie konstruowania zapytania nie musimy myśleć o tym,
   jak zostanie wykonane (jest to prawda również dla innych systemów)
 * Gwarantują spójność danych.
-
 * Gwarantują zachowanie tranzakcji w systemie.
+* Model relacyjny ma solidne podstawy i aksjomatyzację matematyczną, co
+  znacznie ułatwia opisywanie zachowania baz danych, optymalizację schematu
+  itp.
 
-**Wady systemów relacyjnych**
+Wady systemów relacyjnych
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Systemy ``NoSQL`` zasadniczo lepiej się skalują, tj. łatwiej jest wykonać
   system składający się z kilkuset fizycznych serwerów ``NoSQL`` działających razem,
   niż system kilkudziesięciu serwerów relacyjnych działających razem.
 * Specjalistyczne (czyli takie, które są w stanie przechowywać tylko pewien
-* rodzaj danych: na przykład grafowe, dokumentowe, klucz-wartość) systemy ``NoSQL``,
+  rodzaj danych: na przykład grafowe, dokumentowe, klucz-wartość) systemy ``NoSQL``,
   są w stanie wydajniej i wygodniej przechowywać ten rodzaj danych, niż systemy
   relacyjne.
 
@@ -73,6 +77,7 @@ Przykład schematu relacyjnego
 -----------------------------
 
 .. figure:: downloads/wyklad1/data/relacja.png
+    :width: 100%
 
     Przykład schematu relacyjnego
 
@@ -169,7 +174,7 @@ Możemy też zmusić go do przetworzenia pliku wejściowego:
 
 .. code-block:: bash
 
-    psql -f [ścieżka do pliku] [baza danych]
+    psql -f [plik] [baza danych]
 
 Pełny opis polecenia: http://www.postgresql.org/docs/9.2/static/app-psql.html.
 
@@ -182,6 +187,7 @@ do lokalnego komputera pole host zostawić puste.
 Słowem  konfiguracja serwera powinna być taka:
 
 .. figure:: downloads/wyklad1/data/postgres-add-database.png
+    :width: 100%
 
     Poprawna konfiguracja postgresql
 
@@ -216,6 +222,7 @@ ze wszystkich kolumn i wszystkich wierszy tabeli.
 Na pierwszych zajęciach będziemy pracowali na takiej tabeli:
 
 .. figure:: downloads/wyklad1/data/zaj1-schema.png
+    :width: 30%
 
     Schemat do pierwszych zajęć
 
@@ -238,7 +245,8 @@ Powiedzmy, że chcemy wybrać dane ze stycznia 2012 roku.
 
 .. code-block:: sql
 
-    SELECT * FROM zaj1 WHERE date BETWEEN '2012-01-01' AND '2012-01-31';
+    SELECT * FROM zaj1 WHERE date
+      BETWEEN '2012-01-01' AND '2012-01-31';
 
 `Wyniki zapytania <downloads/wyklad1/data/selectwhere.html>`__
 
@@ -305,7 +313,7 @@ Możemy też wykonywać zapytania wybierające dane z wielu kolumn:
 
 .. code-block:: sql
 
-     SELECT no_2 + pm_10 AS fizycznego_sensu_to_nie_ma AS to_też FROM zaj1;
+     SELECT no_2 + pm_10 AS nonsens FROM zaj1;
 
 `Wynik zapytania <downloads/wyklad1/data/select-nonsense.html>`__
 
@@ -346,7 +354,8 @@ Proszę poprzednie zapytanie z:
 
 .. code-block:: sql
 
-    SELECT date, wind_dir, pm_10 FROM zaj1 ORDER by wind_dir;
+    SELECT date, wind_dir, pm_10 FROM zaj1
+      ORDER by wind_dir;
 
 `Wynik zapytania <downloads/wyklad1/data/selectordermany-compare.html>`__
 
@@ -354,7 +363,8 @@ Możemy też sortować względem wyrażenia:
 
 .. code-block:: sql
 
-    SELECT date, sin(radians(wind_dir)) FROM zaj1 ORDER by sin(radians(wind_dir));
+    SELECT date, sin(radians(wind_dir)) FROM zaj1
+      ORDER by sin(radians(wind_dir));
 
 `Wynik zapytania <downloads/wyklad1/data/selectorderexpression.html>`__
 
@@ -382,7 +392,8 @@ dodać klauzulę ``where``
 
 .. code-block:: sql
 
-    SELECT AVG(pm_10) FROM zaj1 WHERE date BETWEEN '2012-01-01' AND '2012-01-31';
+    SELECT AVG(pm_10) FROM zaj1
+      WHERE date BETWEEN '2012-01-01' AND '2012-01-31';
 
 `Wynik zapytania <downloads/wyklad1/data/selectavg-where.html>`__
 
@@ -422,7 +433,8 @@ podgrup oddzielnie.
 
 .. code-block:: sql
 
-    SELECT AVG(wind_speed), pm_10 > 50 as przekroczenie FROM zaj1 GROUP BY pm_10 > 50;
+    SELECT AVG(wind_speed), pm_10 > 50 as przekroczenie
+    FROM zaj1 GROUP BY pm_10 > 50;
 
 `Wynik zapytania <downloads/wyklad1/data/selectavg-group-by.html>`__
 
@@ -432,7 +444,8 @@ nastąpiło przekroczenie dopuszczalnego dziennego poziomu pyłu zawieszonego
 
 .. code-block:: sql
 
-    SELECT AVG(wind_speed), wind_dir, COUNT(*) FROM zaj1 GROUP BY wind_dir ORDER BY wind_dir;
+    SELECT AVG(wind_speed), wind_dir, COUNT(*)
+    FROM zaj1 GROUP BY wind_dir ORDER BY wind_dir;
 
 `Wynik zapytania <downloads/wyklad1/data/selectavg-group-by-2.html>`__
 
@@ -470,7 +483,8 @@ Proszę zastanowić się dlaczego takie zapytanie jest poprawne:
 
 .. code-block:: sql
 
-    SELECT AVG(pm_10), AVG(NO_2), sin(radians(wind_speed)) FROM zaj1 GROUP BY wind_speed;
+    SELECT AVG(pm_10), AVG(NO_2), sin(radians(wind_speed))
+      FROM zaj1 GROUP BY wind_speed;
 
 `Wynik zapytania: <downloads/wyklad1/data/select-group-by-ciekawostka-1.html>`__
 
@@ -479,7 +493,9 @@ A takie nie:
 
 .. code-block:: sql
 
-    SELECT AVG(pm_10), AVG(NO_2), wind_speed FROM zaj1 GROUP BY sin(radians(wind_speed));
+    SELECT AVG(pm_10), AVG(NO_2), wind_speed
+      FROM zaj1
+      GROUP BY sin(radians(wind_speed));
 
 
 Dodatnowe przykłady:
@@ -506,7 +522,10 @@ należy wykonać zapytanie:
 
 .. code-block:: sql
 
-    SELECT AVG(pm_10), date_trunc('day', date) FROM zaj1 GROUP BY date_trunc('day', date) HAVING AVG(pm_10) > 50 ORDER BY date_trunc('day', date);
+    SELECT AVG(pm_10), date_trunc('day', date)
+      FROM zaj1
+      GROUP BY date_trunc('day', date)
+      HAVING AVG(pm_10) > 50 ORDER BY date_trunc('day', date);
 
 `Wynik zapytania <downloads/wyklad1/data/selectavg-group-by-having.html>`__
 
