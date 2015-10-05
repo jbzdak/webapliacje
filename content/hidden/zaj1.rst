@@ -5,6 +5,7 @@ Zajęcia 1: Zadania (Work in progress)
 :tags: zaj1, zadania
 :category: organizacja
 
+
 Informacje ogólne
 -----------------
 
@@ -20,13 +21,22 @@ dane:
 
     Dane do ponfiguracji połączenia z ``pgAdminIII``
 
-Jak działają skrypty sprawdzające
----------------------------------
 
-Skrypty sprawdzające porównują wynik zapytania wprowadzonego przez Państwa
-oraz zapytania modelowego. Proszę więc dołożyć szczególnej uwagi, by
-Państwa zapytania spełniały wszystkie wymogi opisane w zapytaniu
-(np. sortowanie, nazwy kolumn).
+Kryteria oceny
+--------------
+
+Na zajęciach możecie dowolnie prosić o pomoc. Nie będę odpowiadał na pytanie:
+"czy rozwiązanie jest poprawne" itp.
+
+Przed końcem zajęć poproszę o oddanie kart odpowiedzi, w uzasadnionych
+przypadkach możliwe będzie oddanie ich do rozpoczęcia następnych zajęć.
+
+Każde zadanie jest oceniane w następującej skali:
+
+* 0pkt brak odpowiedzi / zła odpowiedź 
+* 1-2pkt odpowiedź niepoprawna ale rokująca
+* 3pkt odpowiedź prawie poprawna, której brakuje drobnej poprawki do ``4pkt``.
+* 4pkt poprawna odpowiedź 
 
 Zadanie 1: Korzystanie z polecenia ``psql`` i przekierowanie wyników zapytań do plików.
 ---------------------------------------------------------------------------------------
@@ -47,7 +57,7 @@ Polecenia
 
 1. Proszę wykonać zapytanie ``SELECT pm_10 FROM zaj1 ORDER BY date;``
 2. Proszę zapisać wynik zapytania do pliku
-3. Proszę wysłać plik na serwer
+3. Proszę wysłać pokazać plik prowadzącemu
 
 Zadanie 2 Korzystanie z programu `pgAdminIII` i eksport wyników zapytań
 -----------------------------------------------------------------------
@@ -67,7 +77,7 @@ Należy wykonać zapytanie pobierające poziomy zanieczyszczeń
 
     Uwaga nazwa kolumny z :math:`SO_2` zawiera specjalne znaki,
     więc należy ją umieścić wewnątrz podwójnych cudzysłowiów,
-    tj. ``"SO2;WATAR``.
+    tj. ``"SO2;WATAR"``.
 
 By wyeksportować wyniki zapytania należy (po jego wykonaniu)
 wykonać ``File -> Export``.
@@ -81,9 +91,10 @@ Polecenia
 1. Proszę uruchomić program ``pgAdminIII``
 2. Proszę wykonać zadane zapytanie
 3. Proszę wyeksportować wyniki
-4. Wygenerowany plik proszę wysłać na serwer
+4. Wygenerowany plik proszę pokazać prowadzącemu
 
 Zadanie 3: Wyrażenia w podzapytaniach
+-------------------------------------
 
 Proszę wykonać zapytanie które spełnia następujące warunki:
 
@@ -94,7 +105,7 @@ Proszę wykonać zapytanie które spełnia następujące warunki:
    współrzędnych kartezjańskich.
 3. Wyniki są sortowane po dacie.
 
-Treść zapytania SQL proszę wysłać na serwer.
+Treść zapytania SQL proszę zapisać na karcie odpowiedzi.
 
 Zadanie 4: Wyrażenia w klauzuli WHERE
 -------------------------------------
@@ -110,7 +121,7 @@ następujące warunki:
 
 Wyniki sortowane są po dacie.
 
-Treść zapytania SQL proszę wysłać na serwer.
+Treść zapytania SQL proszę zapisać na karcie odpowiedzi.
 
 Zadanie 5: ORDER BY desc
 ------------------------
@@ -119,7 +130,7 @@ Proszę opracować zapytanie wybierające poziom
 :math:`PM_{10}` posortowany względem zawartości kolumny ``date``
 od wartości najwyższej do najniższej.
 
-Treść zapytania SQL proszę wysłać na serwer.
+Treść zapytania SQL proszę zapisać na karcie odpowiedzi.
 
 Zadanie 6: Wyznaczanie średniej
 -------------------------------
@@ -128,7 +139,7 @@ Proszę opracować zapytanie wyznaczające średnią prędkość wiatru
 z całego zestawu danych (zapytanie zwraca jeden wiersz, proszę nie używać klauzuli
 ``AS``).
 
-Treść zapytania SQL proszę wysłać na serwer.
+Treść zapytania SQL proszę zapisać na karcie odpowiedzi.
 
 Zadanie 7: Wyznaczanie średniej 2
 ---------------------------------
@@ -136,7 +147,7 @@ Proszę opracować zapytanie wyznaczające średnią prędkość wiatru,
 w marcu 2012 roku (zapytanie zwraca jeden wiersz, proszę nie używać klauzuli
 ``AS``).
 
-Treść zapytania SQL proszę wysłać na serwer.
+Treść zapytania SQL proszę zapisać na karcie odpowiedzi.
 
 Zadanie 8: Wyznaczanie średniej 3
 ---------------------------------
@@ -163,6 +174,7 @@ Zapytanie powinno zwracać dwie kolumny: średnią predkość oraz
 wartość kolumny przekroczenie, dla której ją wyznaczono, wynik powinien
 być posortowany po wartości `przekroczenie`.
 
+Treść zapytania SQL proszę zapisać na karcie odpowiedzi.
 
 Zadanie 10: GROUP BY 2
 ----------------------
@@ -172,7 +184,7 @@ są w tej kolejności). W kolumnie ``day`` umieszczamy konkretną datę, a w kol
 ``pm_10`` umieszczamy średni poziom :math:`PM_{10}` dla danego dnia.
 Wyniki proszę sortować po dniu pomiaru.
 
-Treść zapytania SQL proszę wysłać na serwer.
+Treść zapytania SQL proszę zapisać na karcie odpowiedzi.
 
 .. note::
 

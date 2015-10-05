@@ -1,5 +1,5 @@
-Zajęcia 1: Wykład
-=================
+Zajęcia 1: Wykład (SQL cz. 1)
+=============================
 
 
 :date: 2015-10-01
@@ -12,7 +12,7 @@ Zajęcia 1: Wykład
 
   .. raw:: html
 
-     <a href="/downloads/pdfs/wyk1.pdf">Wersja pdf tutaj</a>
+     <a href="downloads/pdfs/wyk1.pdf">Wersja pdf tutaj</a>
 
 .. contents:: Spis treści
 
