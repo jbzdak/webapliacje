@@ -1,10 +1,12 @@
-Zajęcia 1: Zadania (Work in progress)
-=====================================
+Zajęcia 1: Zadania
+==================
 
 :date: 2015-10-01
 :tags: zaj1, zadania
 :category: organizacja
 
+
+.. contents:: Spis treści
 
 Informacje ogólne
 -----------------

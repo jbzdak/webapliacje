@@ -5,6 +5,7 @@ Zajęcia 2: Wykład (SQL cz. 2)
 :date: 2015-10-04
 :tags: zaj1, wykład, materiały
 :category: materiały
+:status: draft
 
 Relacje w relacyjnej bazie danych
 ---------------------------------
