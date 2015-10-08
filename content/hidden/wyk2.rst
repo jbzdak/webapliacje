@@ -37,16 +37,16 @@ głownego.
 Relacja jeden-do-wielu
 ----------------------
 
-Powiedzmy, że mamy w bazie danych tabelę ``STUDENT``, która zawiera syntetyczny
+Powiedzmy, że mamy w bazie danych tabelę ``student``, która zawiera syntetyczny
 klucz główny w kolumnie ``id``. Chcemy do tej bazy danych dodać informację o
 ocenach studentów.
 
 Tabela student wygląda tak:
 
 ======== ==============
-   **STUDENT**
+   **student**
 -----------------------
-   id      Nazwa
+   id      name
 ======== ==============
    1      Jan Kowalski
    2      Józef Nowak
@@ -58,32 +58,32 @@ Pierwszy pomysł jest taki, stwóżmy tabelę ``OCENA`` która wygląda tak:
 ======== ============== ===========
      **OCENA**
 -----------------------------------
-   id     id_studenta   Ocena
+   id     student_id     mark
 ======== ============== ===========
    1      1               2
    2      1               3
    3      2               4
 ======== ============== ===========
 
-Kolumna ``id_studenta`` oznacza identyfikator studenta, który otrzymał daną
+Kolumna ``student_id`` oznacza identyfikator studenta, który otrzymał daną
 ocenę, relatywnie łatwo jest budować zapytania do takiego schematu
 (o tym jak się to robi powiem później).
 
 Zasadniczo jest jeden problem z takim schematem, co się stanie jeśli ktoś wprowadzi
-do kolumny ``id_studenta`` wartość np. 500 (której nie ma w kolumnie ``id``
-tabeli ``STUDENT``)? Jeśli pojawi się taka wartość wiele zapytań nie będzie
+do kolumny ``student_id`` wartość np. 500 (której nie ma w kolumnie ``id``
+tabeli ``student``)? Jeśli pojawi się taka wartość wiele zapytań nie będzie
 działać poprawnie.
 
 By zapobiec temu problemowi można wprowadzić do bazy danych ograniczenie
 zwane ``kluczem obcym``, ograniczenie to gwarantuje że jeśli w kolumnie
-``id_studenta`` jest wartość X to istnieje wiersz w tabeli ``STUDENT`` o
+``student_id`` jest wartość X to istnieje wiersz w tabeli ``student`` o
 ``id`` równym X.
 
 Klucz obcy robi dwie rzeczy:
 
-* Nie uda się umieścić w tabeli ``OCENA`` wiersza o ``id_studenta`` łamiącym
+* Nie uda się umieścić w tabeli ``OCENA`` wiersza o ``student_id`` łamiącym
   ograniczenie.
-* Przy usuwaniu/zmianie wierszy z tabeli ``STUDENT`` domyślnie baza danych usunie
+* Przy usuwaniu/zmianie wierszy z tabeli ``student`` domyślnie baza danych usunie
   wszystkie odpowiadające danemu studentowi oceny (zachowanie to jest
   konfigurowalne).
 
@@ -136,9 +136,9 @@ relacji nie da się zaimplementować za pomocą pojedyńczego klucza obcego.
 Tabela student wygląda tak:
 
 ======== ==============
-   **STUDENT**
+   **student**
 -----------------------
-   id      Nazwa
+   id      name
 ======== ==============
    1      Jan Kowalski
    2      Józef Nowak
@@ -148,9 +148,9 @@ Tabela student wygląda tak:
 Tabela kurs wygląda tak:
 
 ======== ==========================
-   **KURS**
+   **course**
 -----------------------------------
-   id      Nazwa
+   id      name
 ======== ==========================
    1      Programowanie
    2      Fizyka
@@ -158,13 +158,13 @@ Tabela kurs wygląda tak:
 ======== ==========================
 
 By zaimplementować relację wiele-do-wielu między tymi tabelami, musimy stworzyć
-nową tabelę ``UCZESTNICY_KURSOW``, tabela ta będzie miała klucze obce, zarówno
-do tabeli ``KURS`` jak i do tabeli ``STUDENT``.
+nową tabelę ``student_course``, tabela ta będzie miała klucze obce, zarówno
+do tabeli ``course`` jak i do tabeli ``student``.
 
 ============ ======================
-  **UCZESTNICY_KURSOW**
+  **student_course**
 -----------------------------------
-id_studenta  id_kursu
+student_id   course_id
 ============ ======================
 1            1
 1            2
@@ -173,13 +173,13 @@ id_studenta  id_kursu
 ============ ======================
 
 Student o ``id`` 1 uczestniczy w kursie o id ``2`` jeśli w tabeli
-``UCZESTNICY_KURSOW`` jest wiersz o wartości ``id_studenta`` równej 1 oraz
-``id_kursu`` równej 2.
+``student_course`` jest wiersz o wartości ``student_id`` równej 1 oraz
+``course_id`` równej 2.
 
 .. note::
 
-  Kolumna ``id_studenta`` jest kluczem obcym to tabeli ``STUDENT``,
-  a kolumna ``id_kursu`` kluczem obcym to tabeli ``KURS``.
+  Kolumna ``student_id`` jest kluczem obcym to tabeli ``student``,
+  a kolumna ``course_id`` kluczem obcym to tabeli ``course``.
 
   Dodatkowo
 
@@ -192,9 +192,9 @@ Rozważmy tabelę:
 Tabela student wygląda tak:
 
 ======== ==============
-   **STUDENT**
+   **student**
 -----------------------
-   id      Nazwa
+   id      name
 ======== ==============
    15     Jan Kowal
    1      Jan Kowalski
@@ -259,11 +259,223 @@ do tabeli.
 
   Istnieją też indeksy obejmujące wiele kolumn.
 
+.. warning::
+
+  Indeksy nie są za darmo, jeśli mamy tabelę z kolumnami ``a``, ``b`` i ``c``,
+  to bez indeksów:
+
+  * Przeszukanie (np. za pomocą ``SELECt * FROM T WHERE a=3``) tabeli, będzie
+    wymagało odczytania całej tabeli, więc ma zlożoność ``O(n)``.
+  * Dodanie wiersza do tabeli zajmie zawsze tyle samo czasu ``O(1)``.
+
+  Jeśli dodamy indeks na kolumnie ``a``, to:
+
+  * Przeszukanie zajmie nam ``O(log(n))``.
+  * Dodanie wiersza zajmie również ``O(log(n))``.
+
+
 Jeśli w tabeli ``T`` kolumna ``id`` jest kluczem głownym baza danych Posgresql
 tworzy na niej indeks automatycznie.
 
+Wybieranie daych o relacjach
+----------------------------
+
+Aliasy
+******
+
+Przy wybieraniu danych z tabeli możemy nadać tabeli alias, tj zamiast napisać:
+
+.. code-block:: sql
+
+  SELECT id from student;
+
+możemy napisać:
+
+.. code-block:: sql
+
+  SELECT s.id FROm student AS s;
+
+Sformuowanie ``student AS s`` oznacza, że w dalszej części zapytania do tabelki
+``student`` można odwoływać się poprzez alias ``s``, a wyrażenie ``s.id``
+oznacza kolumnę ``id`` z tabeli student.
+
+Wybieranie danych z wielu tabel
+*******************************
+
+Gdy na liście ``FROM`` zapytania jest wiele tabel powoduje to wybranie danych
+z **kartezjańskiego produktu** wierszy tych tabel.
+
+Jeśli mam tabele:
+
+======== ==============
+   **student**
+-----------------------
+   id      name
+======== ==============
+   1      Jan Kowalski
+   2      Józef Nowak
+   3      Karol Alfons
+======== ==============
+
+oraz:
+
+======== ==========================
+   **course**
+-----------------------------------
+   id      name
+======== ==========================
+   1      Programowanie
+   2      Fizyka
+   3      Underwater basket weaving
+======== ==========================
+
+Zapytanie:
+
+.. code-block:: sql
+
+  SELECT s.id, c.id from student AS s, course AS c;
+
+zwróci taki zestaw danych:
+
+======== ==========================
+
+ s.id      c.id
+======== ==========================
+   1      1
+   2      1
+   3      1
+   1      2
+   2      2
+   3      2
+   1      3
+   2      3
+   3      3
+======== ==========================
 
 
+.. note::
+
+  Oczywiście dla dużych tabel nikt nie wybiera takiego kartezjańskiego produktu,
+  ale bardzo łatwo jest z takiego zestawu za pomocą odpowiedniej klauzuli
+  ``WHERE`` wybrać np. kursy danego studenta.
+
+By wybrać informację o średniej dla każdego studenta możemy wykonać takie
+zapytanie:
+
+.. code-block:: sql
+
+  SELECT s.id, AVG(m.mark)
+    FROM
+      student as s,
+      mark as m
+    WHERE s.id = m.student_id
+    GROUP BY s.id
+    ORDER BY s.id;
+
+W zapytaniu tym:
+
+* Wybieramy dane z dwóch tabeli ``student`` oraz ``mark``, dodatkowo dodajemy
+  do tych tabeli aliasy.
+* Za pomocą klauzuli WHERE do wybieramy tylko oceny dla danego studenta.
+* Wybieramy średnią ocenę dla każdego studenta.
+
+Wybieranie danych za pomocą operatora ``JOIN``
+**********************************************
+
+Bardzo podobne efekty można uzyskać za pomocą operatora ``JOIN``, poniższy
+przykład będzie dawał dokładnie te same wyniki co poprzedni:
+
+.. code-block::
+
+  SELECT s.id, AVG(m.mark)
+    FROM
+      student as s
+    JOIN mark as m ON s.id = m.student_id
+    GROUP BY s.id
+    ORDER BY s.id;
+
+Rozważmy jeszcze jeden problem: powiedzmy że chcemy wypisać listę studentów,
+oraz ich średnią, *ale część studentów nie posiada jeszcze żadnych ocen*
+w takim wypadku powyższe zapytanie ich pominie, co w naszym przypadku jest
+niepożądane.
+
+Rodzaje JOINÓW
+**************
+
+W postgresql jest kilka rodzajów ``JOIN``ów:
+
+* Zwykły join ``INNER JOIN``, ``CROSS JOIN``, ``JOIN``, jest równoważny wyrażeniu
+  ``FROM table1, table2``, wybiera kartezjański produkt wierszy z obydwu tabel
+  ograniczony pewnymi warunkami.
+* ``LEFT OUTER JOIN`` podobnie jak join samo jak ``JOIN``, ale gwarantuje że
+  w wyniku zapytania będzie obecny każdy wiersz z tabeli
+  *po lewej stronie operatora JOIN*
+
+  Implementacja ``LEFT OUTER JOIN`` działa następująco: jeśli jakiś wiersz
+  z lewej tabeli byłby usunięty z tego powodu, że nie ma odpowiadających
+  mu wierszy tabeli z prawej strony, to i tak jest dodawany do zbioru wynikowego,
+  ale przypisuje zakładamy że wszystkie kolumny tabeli z prawej strony przypisane
+  do tego wiersza będą miały wartość ``NULL``.
+
+  .. note::
+
+    W zapytaniu:
+
+    .. code-block::
+
+      SELECT s.id, AVG(m.mark)
+        FROM student as s LEFT OUTER JOIN mark as m ON s.id = m.student_id
+        GROUP BY s.id
+        ORDER BY s.id;
+
+    tabelą "po lewej stronie operatora join" jest tabela ``student``.
+
+* ``RIGHT OUTER JOIN`` działa tak samo jak ``LEFT OUTER JOIN``, ale dla tabeli
+  *po prawej stronie operatora join*.
+* ``OUTER JOIN`` działą tak samo jak ``LEFT OUTER JOIN``, ale dla obydwu tabel.
+
+By wyświetlić również wiersze dla studentów bez ocen, należy zatem wykonać
+zapytanie:
+
+.. code-block::
+
+  SELECT s.id, AVG(m.mark)
+    FROM student as s LEFT OUTER JOIN mark as m ON s.id = m.student_id
+    GROUP BY s.id
+    ORDER BY s.id;
 
 Tworzenie schematu bazy danych (opcjonalne)
 -------------------------------------------
+
+Pojęcie bazy danych
+*******************
+
+System zarządzania bazami danych Postgresql, pozwala na jednym komputerze
+zarządzać wieloma bazami danych, do tworzenia baz danych można użyć
+programu ``pgadminIII``, albo polecenia
+`CREATE DATABASE <http://www.postgresql.org/docs/9.4/static/sql-createdatabase.html>`__.
+
+Bazy danych są od siebie całkowicie odseparowane, "nie widzą" swoich tabel itp.
+
+Dobrą praktyką jest trzymanie oddzielnych projektów (u nas: każdych zajęć) w
+oddzielnej bazie danych.
+
+Użytkownicy w bazie dancyh postgresql
+*************************************
+
+Domyślnie w bazie danych postgresql zainstalowany jest jeden użytkownik
+super-administrator o nazwie ``postgres``.
+
+By stworzyć nowego użytkownika należy wykonać polecenie:
+`CREATE USER <http://www.postgresql.org/docs/9.4/static/sql-createuser.html>`__,
+lub za pomocą ``pgAdminIII``
+
+.. note::
+
+  Na Windowsie użytkownikowi należy podać hasło, na Linuksie można skorzystać
+  z ``peer authentication``, w której użytkownik zalogowany w systemie operacyjnym
+  jako użytkownik ``foo`` zostanie zalogowany jako użykownik ``foo`` w bazie
+  danycy (jeśli użytkownik o takiej nazwie w bazie danych istnieje).
+
+
+

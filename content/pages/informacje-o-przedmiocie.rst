@@ -59,7 +59,7 @@ za pomocą managera paczek PIP, oraz narzędzi setuptools.
 Blok 3: Podstawy webaplikacji Django
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Blok ten będzie trwał cztery zajęcia.
+Blok ten będzie trwał trzy zajęcia.
 
 **Cel:** Studenci zapoznają się z:
 
@@ -133,4 +133,3 @@ Ponieważ wymuszenie pracy w parach może być niespotykane, szbkie wyjaśnieni
   więcej czasu na trudniejsze problemy.
 * Jeśli ktoś się nie przygotował na zajęcia, jest szansa że druga osoba go
   wspomoże.
-
