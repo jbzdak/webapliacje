@@ -45,12 +45,10 @@ Rodzaje baz danych
 ------------------
 
 Relacyjne (z ang. relational)
-
     podstawą są tabele, czasem nazywane relacjami oraz więzi
     (inaczej ograniczenia) między nimi.
 
 Klucz-wartość (z ang. key-value)
-
     pozwalają przypisywać do kluczy (będących dowolnym ciągiem znaków) wartości.
 
     Przykładem takiej bazy danych może być system plików:
@@ -58,19 +56,16 @@ Klucz-wartość (z ang. key-value)
     plików.
 
 Dokumentowe
-
     służą do przechowywania dokumentów, mają dużo
     słabsze ograniczenia na spójność danych, ponieważ dokumenty
     mogą się zmieniać.
 
 Kolumnowe
-
     W bazach typowych relacyjnych na dysku, dane o jednym
     rzędzie w tabeli przechowywane są razem. W bazach kolumnowych
     razem przechowujemy dane o kolumnie.
 
 Grafowe (z ang. graph)
-
     przechowują grafy
 
 Bazy danych, które nie są relacyjne często określa się terminem

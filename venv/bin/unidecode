@@ -1,4 +1,4 @@
-#!/home/jb/dydakyka/web-aplikacje/venv/bin/python3.5
+#!/home/jb/dydaktyka/web-aplikacje/venv/bin/python3.5
 # EASY-INSTALL-ENTRY-SCRIPT: 'Unidecode==0.4.18','console_scripts','unidecode'
 __requires__ = 'Unidecode==0.4.18'
 import sys

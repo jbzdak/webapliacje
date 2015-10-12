@@ -2,10 +2,33 @@ Zajęcia 2: Wykład (SQL cz. 2)
 =============================
 
 
-:date: 2015-10-04
+:date: 2015-10-08
 :tags: zaj1, wykład, materiały
 :category: materiały
-:status: draft
+
+.. note::
+
+  Wykład do pobrania również w wersji PDF.
+
+  .. raw:: html
+
+     <a href="downloads/pdfs/wyk2.pdf">Wersja pdf tutaj</a>
+
+.. contents:: Spis treści
+
+Rzeczy do zapamiętania
+----------------------
+
+
+W praktyce (poza zapytaniami ``SELECT``) bardzo rzadko ręcznie pisze się kod
+SQL. Istnieją narzędzia które automatyzują wszystkie żmudne zadania związane
+z bazą danych, jednak bardzo przydatną umiejętnością jest **czytanie** kodu SQL,
+znacznie ułatwia ono np. poszukiwanie błędów.
+
+Celem tych zajęć jest to żebyście **z grubsza** umieli przeczytać kod SQL
+generowany przez Django, nie oczekuje że napiszecie w trakcie tych
+zajęć jedno polecenie ``CREATE TABLE``.
+
 
 Relacje w relacyjnej bazie danych
 ---------------------------------
@@ -273,6 +296,9 @@ do tabeli.
   * Przeszukanie zajmie nam ``O(log(n))``.
   * Dodanie wiersza zajmie również ``O(log(n))``.
 
+  Dodatkowo indeksy powodują, że rozmiar tabeli rośnie, indeks na kolumnie
+  ``a`` ma rozmiar rzędu rozmiaru kolumny ``a``.
+
 
 Jeśli w tabeli ``T`` kolumna ``id`` jest kluczem głownym baza danych Posgresql
 tworzy na niej indeks automatycznie.
@@ -385,7 +411,7 @@ Wybieranie danych za pomocą operatora ``JOIN``
 Bardzo podobne efekty można uzyskać za pomocą operatora ``JOIN``, poniższy
 przykład będzie dawał dokładnie te same wyniki co poprzedni:
 
-.. code-block::
+.. code-block:: sql
 
   SELECT s.id, AVG(m.mark)
     FROM
@@ -402,7 +428,7 @@ niepożądane.
 Rodzaje JOINÓW
 **************
 
-W postgresql jest kilka rodzajów ``JOIN``ów:
+W postgresql jest kilka rodzajów ``JOIN`` ów:
 
 * Zwykły join ``INNER JOIN``, ``CROSS JOIN``, ``JOIN``, jest równoważny wyrażeniu
   ``FROM table1, table2``, wybiera kartezjański produkt wierszy z obydwu tabel
@@ -419,15 +445,7 @@ W postgresql jest kilka rodzajów ``JOIN``ów:
 
   .. note::
 
-    W zapytaniu:
-
-    .. code-block::
-
-      SELECT s.id, AVG(m.mark)
-        FROM student as s LEFT OUTER JOIN mark as m ON s.id = m.student_id
-        GROUP BY s.id
-        ORDER BY s.id;
-
+    W zapytaniu zawierającym: ``SELECT * FROM student as s LEFT OUTER JOIN mark...``
     tabelą "po lewej stronie operatora join" jest tabela ``student``.
 
 * ``RIGHT OUTER JOIN`` działa tak samo jak ``LEFT OUTER JOIN``, ale dla tabeli
@@ -437,7 +455,7 @@ W postgresql jest kilka rodzajów ``JOIN``ów:
 By wyświetlić również wiersze dla studentów bez ocen, należy zatem wykonać
 zapytanie:
 
-.. code-block::
+.. code-block:: sql
 
   SELECT s.id, AVG(m.mark)
     FROM student as s LEFT OUTER JOIN mark as m ON s.id = m.student_id
@@ -475,7 +493,275 @@ lub za pomocą ``pgAdminIII``
   Na Windowsie użytkownikowi należy podać hasło, na Linuksie można skorzystać
   z ``peer authentication``, w której użytkownik zalogowany w systemie operacyjnym
   jako użytkownik ``foo`` zostanie zalogowany jako użykownik ``foo`` w bazie
-  danycy (jeśli użytkownik o takiej nazwie w bazie danych istnieje).
+  danych (jeśli użytkownik o takiej nazwie w bazie danych istnieje).
+
+
+Tworzenie tabel
+---------------
+
+.. note::
+
+  Celem tych zajęć jest to żebyście **z grubsza** umieli przeczytać kod SQL
+  generowany przez Django, nie oczekuje że napiszecie w trakcie tych
+  zajęć jedno polecenie ``CREATE TABLE``.
+
+.. note::
+
+    Polecam tworzyć tabele za pomocą interfejsu administracyjnego
+    ``pgadmin3``. Jest szybciej niż przez konsolę.
+
+Definicja tabeli w postgresql składa się z:
+
+* Listy kolumn
+* Ograniczeń
+* Indeksów
+* triggerów (o tym nie powiemy)
+* Zasad (o tym nie powiemy)
+* Uprawnień (o tym nie powiemy)
+* i innych rzeczy
+
+Do tworzenia tabel służy klauzula:
+
+.. code-block:: sql
+
+    CREATE TABLE "FOO"
+    (
+        [lista kolumn, indeksów, ograniczeń i triggerów , może być pusta]
+
+    );
+
+Typy kolumn
+***********
+
+``character varying``
+    Ciąg znaków o zmiennej długości. Uwaga: większość baz danych wymaga
+    podania maksymalnej ilości znaków w takim typie, postgres natomiast
+    `tego nie wymaga <http://www.postgresql.org/docs/9.2/static/datatype-character.html>`_.
+
+``TEXT``
+    Praktycznie odpowiednik ``character varying``.
+
+``smallint, integer, and bigint``
+    Liczby całkowite różnych rozmiarów
+
+``real, double precision``
+     Liczba zmiennoprzecinkowa o ustalonej dokładności 64bity. Dokładność
+     tych liczb jest taka jak systemu operacyjnego.
+
+``numeric``
+    Liczba stałoprzecinkowa.
+
+    W telegraficznym
+    skrócie: *zwykłe* liczby zmiennoprzecinkowe mają pewne niedokładności,
+    a pewne cechy ich zachowania nie są do końca określone (zależą od
+    infrastruktury procesora).
+
+    Przykładowo dla liczb zmiennoprzecinkowych (``floating point`` możliwe jest takie działanie:
+
+    .. code-block:: python
+
+        >>> 0.2 + 0.1
+        0.30000000000000004
+
+    (wynika to z problemów zaokrągleń). Liczby stałoprzecinkowe mają dobrze
+    zdefiniowane zasady zaokrąglania, co jest przydatne w bazach danych będących
+    backendem np. do systemów księgowych.
+
+    Dokładne
+    wyjaśnienie na `na wikipedii <http://en.wikipedia.org/w/index.php?title=Fixed-point_arithmetic&oldid=568726823>`_
+    oraz `w podręczniku postgresql <http://www.postgresql.org/docs/9.2/static/datatype-numeric.html#DATATYPE-NUMERIC-DECIMAL>`_.
+
+``date``
+    Dzień, miesiąc i rok.
+
+    `Umieszczanie dat <http://www.postgresql.org/docs/9.1/static/functions-datetime.html>`_:
+
+     .. code-block:: sql
+
+        date '2001-09-28'
+
+``time``
+    Czas (minuta i godzina) z dokładnością do milisekundy
+
+``timestamp``
+    Data i godzina (dokładność do milisekundy)
+
+``timestamp with timezone``
+    Data i godzina (dokładność do milisekundy), z określeniem strefy czasowej.
+
+``serial``
+  Wartości sztucznych kluczy głównych muszą być generowane przez
+  bazę danych.
+
+  Najprostszą metodą generowania kluczy głównych jest użycie typu
+  ``SERIAL`` do kolumny oznaczającej klucz główny:
+
+
+  .. code-block:: sql
+
+      CREATE TABLE "STUDENT_2"
+      (
+          id serial NOT NULL,
+          CONSTRAINT "STUDENT_2_pkey" PRIMARY KEY (id )
+      )
+
+  Teraz kolejnym wstawianym wierszom kolumny ``id`` będą automatcznie
+  przypisywane kolejne liczby naturalne.
+
+
+Definiowanie kolumn
+*******************
+
+Definicja kolumny w najprostszej postaci jest taka:
+
+.. code-block:: sql
+
+    nazwa_kolumny typ;
+
+Na przykład:
+
+.. code-block:: sql
+
+    CREATE TABLE "FOO"
+    (
+        pk integer
+    );
+
+.. code-block:: sql
+
+    ALTER TABLE "FOO" ADD COLUMN pk integer;
+
+Dodawanie kolumn
+****************
+
+.. code-block:: sql
+
+    ALTER TABLE "FOO" ADD COLUMN ....;
+    ALTER TABLE "FOO" DROP COLUMN nazwa;
+    ALTER TABLE "FOO" RENAME COLUMN nazwa1 TO nazwa2;
+
+Usuwanie tabel
+**************
+
+.. code-block:: sql
+
+    DROP TABLE "FOO":
+
+
+Domyślne wartości
+*****************
+
+Do każdej kolumny możemy dodać domyślną wartość, tj. wartość która
+będzie przypisana do kolumny, jeśli w poleceniu ``INSERT``
+dana kolumna nie będzie określona.
+
+Klauzula default może określać wartość domyślną jako stałą, lub np.
+wynik wywołania funkcji.
+
+Klauzula default nie umożliwia odnoszenia się do pozostałych kolumn
+w danym wierszu (taka funkcjonalność możliwa jest do osiągnięcia
+za pomocą triggera).
+
+.. code-block:: sql
+
+    CREATE TABLE products (
+        product_no integer DEFAULT nextval('products_product_no_seq'), -- default jako funkcja
+        name text,
+        price numeric DEFAULT 9.99 -- stałe default
+    );
 
 
 
+Klucze obce
+-----------
+
+By jedna tabela odnosiła się do innej musimy dodać kolejne
+ograniczenie, tzw. klucz obcy.
+
+Powiedzmy że tabele ``student`` oraz ``mark`` mają następującą definicję:
+
+
+.. code-block:: sql
+
+    CREATE TABLE student
+    (
+      id integer NOT NULL DEFAULT nextval('zaj2_schema_app_student_id_seq'::regclass),
+      name character varying(100) NOT NULL,
+      CONSTRAINT zaj2_schema_app_student_pkey PRIMARY KEY (id)
+    )
+
+    CREATE TABLE mark
+    (
+      id integer NOT NULL DEFAULT nextval('zaj2_schema_app_mark_id_seq'::regclass),
+      mark smallint NOT NULL,
+      course_id integer NOT NULL,
+      student_id integer NOT NULL,
+      CONSTRAINT zaj2_schema_app_mark_pkey PRIMARY KEY (id)
+    )
+
+By poinformować silnik bazy danych o tym, że kolumna ``student_id`` jest kluczem
+obcym do tabeli student należy wykonać:
+
+.. code-block:: sql
+
+
+  ALTER TABLE ADD CONSTRAINT 'student_fk' FOREIGN KEY (student_id)
+      REFERENCES student (id);
+
+Cascade (opcjonalne)
+********************
+
+Silnik bazy danych nie pozwoli na wstawienie rzędu danych do tabeli
+``mark``, jeśli w tym rzędzie będzie odniesienie
+do nieistniejącego studenta. Jednak co się stanie jeśli już po
+utworzeniu wiersza w tabeli ``mark`` usuniemy
+studenta, do którego dany wiersz się odnosi?
+
+Ponieważ serwer wymusza prawdziwość ograniczeń zawsze,
+pod koniec transakcji (czym są transakcje powiemy później)
+baza danych zgłosi wyjątek, że ograniczenie jest niespełnione i zmiany
+zostaną wycofane.
+
+W dalszej cześci zakładamy że usuwamy rząd z tabeli ``student`` do którego donosi
+się jakiś wiersz z tabeli: ``mark``.
+
+Zachowanie to można konfigurować, by zobaczyć jak można to zrobić, poażę 
+pełną składnię tworzenia klucza obcego:
+
+.. code-block:: sql
+
+  ALTER TABLE ADD CONSTRAINT 'student_fk' FOREIGN KEY (student_id)
+      REFERENCES student (id)
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+Dokładniej rozszyfrujmy linijkę:
+
+.. code-block:: sql
+
+    ON UPDATE NO ACTION ON DELETE NO ACTION.
+
+Linia ta pozwala wybrać akcję do wykonania przez serwer, gdy
+zdalny wiersz (w naszym przykładzie zdalny rząd to wiersz z tabeli ``student``
+do którego odnosi się jakaś ``mark``), danych jest usuwany (``ON DELETE``) bądź
+zmieniany (``ON UPDATE``).
+
+Akcje do wybrania są takie:
+
+``NO ACTION``
+    spowoduje nie wykonanie żadnej akcji,
+    co może spowodować wyrzucenie wyjątku podczas zamykania transakcji
+    (nie spowoduje go jeśli potem usuniemy również wiersz ze wszystkuch tabel
+    posiadających klucz obcy do tego wiersza).
+``RESTRICT``
+    spowoduje wyrzucenie wyjątku od razu!
+``SET NULL``
+    spowoduje ustawienie wartości NULL w
+    kolumnach odnoszących się do kasowanego lub zmienianego wiersza.
+``SET DEFAULT``
+    spowoduje ustawienie domyślnej wartości
+    w kolumnach odnoszących się do kasowanego lub zmienianego wiersza
+``CASCADE``
+    jeśli zdalny wiersz jest kasowany spowoduje
+    skasowanie wierszy, które się do niego odnoszą, jeśli jest
+    zmieniany spowoduje zmianę wartości w tej tabeli by ciągle
+    odnosiły się do tego samego wiersza.

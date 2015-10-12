@@ -1,4 +1,4 @@
-#!/home/jb/dydakyka/web-aplikacje/venv/bin/python3.5
+#!/home/jb/dydaktyka/web-aplikacje/venv/bin/python3.5
 
 # $Id: rst2odt_prepstyles.py 5839 2009-01-07 19:09:28Z dkuhlman $
 # Author: Dave Kuhlman <dkuhlman@rexx.com>

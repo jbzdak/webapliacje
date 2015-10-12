@@ -1,4 +1,4 @@
-#!/home/jb/dydakyka/web-aplikacje/venv/bin/python3.5
+#!/home/jb/dydaktyka/web-aplikacje/venv/bin/python3.5
 
 # $Id: rst2latex.py 5905 2009-04-16 12:04:49Z milde $
 # Author: David Goodger <goodger@python.org>

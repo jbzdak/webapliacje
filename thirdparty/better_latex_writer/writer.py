@@ -11,7 +11,7 @@ from docutils.writers.latex2e import Writer as LatexWriter, LaTeXTranslator, \
 class TweakedLatexWriter(LatexWriter):
 
   def __init__(self):
-    super().__init__()
+    super(TweakedLatexWriter, self).__init__()
     self.translator_class = TweakedTranslator
 
 
@@ -23,7 +23,7 @@ class TweakedTranslator(LaTeXTranslator):
 
 
   def __init__(self, document, babel_class=Babel):
-    super().__init__(document, babel_class)
+    super(TweakedTranslator, self).__init__(document, babel_class)
     self.latex_preamble.append(r"\setlength{\parindent}{0em}")
     # self.latex_preamble.append("\setlength{\parskip}{1em}")
     self.latex_preamble.append(r"\usepackage{parskip}")
@@ -48,7 +48,7 @@ class TweakedTranslator(LaTeXTranslator):
       if not re.match("https?://.*", href):
         return self.__visit_reference_attach(node, href)
 
-    return super().visit_reference(node)
+    return super(TweakedTranslator, self).visit_reference(node)
 
   def visit_literal_block(self, node):
     if 'code' in node.attributes['classes']:
@@ -58,6 +58,6 @@ class TweakedTranslator(LaTeXTranslator):
       self.requirements['upquote'] = '\\usepackage{upquote}'
       self.out.append('\n\\begin{verbatim}\n%s\n\\end{verbatim}\n' % node.astext())
       raise nodes.SkipNode
-    super().visit_literal_block(node)
+    super(TweakedTranslator, self).visit_literal_block(node)
 
 

@@ -1,4 +1,4 @@
-#!/home/jb/dydakyka/web-aplikacje/venv/bin/python3.5
+#!/home/jb/dydaktyka/web-aplikacje/venv/bin/python3.5
 
 # $Id: rst2xml.py 4564 2006-05-21 20:44:42Z wiemann $
 # Author: David Goodger <goodger@python.org>

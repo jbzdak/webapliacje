@@ -1,4 +1,4 @@
-#!/home/jb/dydakyka/web-aplikacje/venv/bin/python3.5
+#!/home/jb/dydaktyka/web-aplikacje/venv/bin/python3.5
 
 # $Id: rst2xetex.py 7038 2011-05-19 09:12:02Z milde $
 # Author: Guenter Milde
