@@ -97,6 +97,7 @@ stopserver:
 	@echo 'Stopped Pelican and SimpleHTTPServer processes running in background.'
 
 publish:
+	$(BASEDIR)/venv/bin/python $(BASEDIR)/wyniki/convert_xls.py
 	$(BASEDIR)/generate_pdfs.sh
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
 
