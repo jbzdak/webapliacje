@@ -5,6 +5,42 @@ Zajęcia 2: Zadania
 :tags: zaj2, zadania
 :category: zadania
 
+Opis schematu
+-------------
+
+W schemacie mamy takie tabele:
+
+* ``student`` (reprezentuje studentów)
+* ``mark`` (reprezentuje ocene)
+* ``course``  (reprezentuje kurs akademicki)
+* ``lecturer`` (reprezentuje nauczyciela)
+* ``room`` (reprezentuje salę zajęciową)
+
+Mamy takie relacje:
+
+* studenta i ocenę łączy relacja 1 do wielu.
+* studenta i kurs łączy relacja wiele do wielu
+* kurs, pokój i prowadzącego łączy relacja wiele do wielu, poprzez tabelkę
+  ``course_instance``, która reprezentuje zajęcia w określonej godzinie
+  z określonego przedmiotu.
+
+Tabelka ``course_instance`` określa cykliczne zajęcia określając następujące
+parametry zajęć:
+
+* Rok w którym odbywają się zajęcia
+* Godzine rozpoczęcia i zakończenia zajęć 
+* Dzień tygodnia zajęć
+
+.. note::
+
+  Ten model nie modeluje wszystkich detali działania uczelni wyższej, miał on
+  być możliwie prosty
+
+
+.. figure:: zaj2/zaj2-schema.svg
+
+  Schamat bazy danych
+
 Zadanie 1a
 ----------
 
@@ -128,6 +164,8 @@ Zadanie 9
 
 Narysować schemat tabeli w systemie blogowym, blog posty mają treść,
 autora, datę dodania, kategorię, tagi i komentarze.
+
+W ``pgadmin3`` stworzyć w nowej bazie danych, schemat reprezentujący Wasz pomysł.
 
 .. note::
 

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>210</x>
+      <y>130</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Table 
+STUDENT
+--
+- id: Long
+- name: Varchar(200) 
+- ...
+--
+Constraints
+- id PRIMARY KEY</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>80</x>
+      <y>440</y>
+      <w>260</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>Table
+OCENA
+--
+- id: Long
+- student_id: Long
+- course_id: Long
+- ocena: Long
+--
+Constraints
+- id PRIMARY KEY
+- student_id FOREIGN KEY to 
+  STUDENT.id
+- course_id FOREIGN KEY to 
+  COURSE.id
+- ocena CHECK 
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>100</x>
+      <y>270</y>
+      <w>120</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=[student_id]-&gt;[id]
+m2=0..1
+m1=0..n
+</panel_attributes>
+    <additional_attributes>40.0;160.0;40.0;10.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>680</x>
+      <y>450</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Table 
+COURSE
+--
+- id: Long
+- name: Varchar(200) 
+- ...
+--
+Constraints
+- id PRIMARY KEY</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>480</y>
+      <w>360</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=[student_id]-&gt;[id]
+m2=0..1
+m1=0..n
+</panel_attributes>
+    <additional_attributes>40.0;20.0;340.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>640</x>
+      <y>130</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>ENROLMENT
+--
+- student
+_-ClassAttribute: Long_
+--
+#Operation(i: int): int
+/+AbstractOperation()/
+--
+Responsibilities
+-- Resp1
+-- Resp2</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

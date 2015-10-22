@@ -8,7 +8,7 @@ __pycache__/
 .venv
 .idea
 
-/venv
+venv
 /output
 /pelican-plugins
 
