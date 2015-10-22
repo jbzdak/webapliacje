@@ -5,6 +5,14 @@ Zajęcia 2: Zadania
 :tags: zaj2, zadania
 :category: zadania
 
+.. note::
+
+  Zajęcia do pobrania również w wersji PDF.
+
+  .. raw:: html
+
+     <a href="downloads/pdfs/zaj2.pdf">Wersja pdf tutaj</a>
+
 Opis schematu
 -------------
 
@@ -37,9 +45,12 @@ parametry zajęć:
   być możliwie prosty
 
 
-.. figure:: zaj2/zaj2-schema.svg
+.. figure:: static/zaj2/zaj2-schema.png
+  :width: 100%
 
   Schamat bazy danych
+
+Plik ze `schematem do pobrania <static/zaj2/zaj2-schema.sql>`_.
 
 Zadanie 1a
 ----------
@@ -178,9 +189,6 @@ W ``pgadmin3`` stworzyć w nowej bazie danych, schemat reprezentujący Wasz pom
   Przykładowo: pole ``adres`` nie jest znormalizowane, by je znormalizować
   należałoby je rozbić na następujące pola: ``Ulica``, ``nr. domu``,
   ``kod pocztowy`` (itp.)
-
-
-
 
 
 Challenge 1
