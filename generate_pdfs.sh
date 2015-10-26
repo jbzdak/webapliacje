@@ -27,13 +27,15 @@ function generate_ipynb {
     ipython nbconvert --to html ${file_base}.ipynb
     ipython nbconvert --to latex ${file_base}.ipynb
     sed '-i.back' 's/\\documentclass{article}/\\documentclass{article}\\usepackage[T1]{fontenc}/' "${file_base}.tex"
-    sed 's/\\usepackage{booktabs}/\\usepackage{booktabs}\\usepackage{upquote}/' "${file_base}.tex"
+    sed -i 's/\\usepackage{booktabs}/\\usepackage{booktabs}\\usepackage{upquote}/' "${file_base}.tex"
+    sed -i 's/\\usepackage{booktabs}/\\usepackage{booktabs}\\usepackage{textcomp}/' "${file_base}.tex"
     pdflatex -output-directory ${output_dir} ${file_base}.tex
     pdflatex -output-directory ${output_dir} ${file_base}.tex
     pdflatex -output-directory ${output_dir} ${file_base}.tex # Regeneate latex so references are OK
     cp "${output_dir}/${file_base}.pdf" "${ROOT}/content/downloads/pdfs"
   fi
 };
+
 
 source source.me
 
@@ -52,3 +54,6 @@ cd content/static/zaj3
 
 generate_ipynb zaj1-blok1
 generate_ipynb zaj1-blok2
+generate_ipynb zaj1-blok3
+generate_ipynb zaj1-blok4
+generate_ipynb zaj3-blok4

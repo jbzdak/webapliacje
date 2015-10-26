@@ -3,7 +3,7 @@ Zajęcia 2: Wykład (SQL cz. 2)
 
 
 :date: 2015-10-08
-:tags: zaj1, wykład, materiały
+:tags: zaj2, wykład, materiały
 :category: materiały
 
 .. note::
