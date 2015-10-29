@@ -5,6 +5,15 @@ Zajęcia 2: Zadania
 :tags: zaj2, zadania
 :category: zadania
 
+
+.. warning::
+
+  Informuję że do oceny z zajęć będzie brane 6 najlepiej wykonanych zadań z
+  zakresu ze zbioru wykonanych zadań o numerach 1, 2, 4, 5, 6, 7, 8
+  (jedno z zadań możecie sobie "odpuścić").
+
+  Zachęcam do obejrzenia Waszych prac w trakcie zajęc, lub konsultacji.
+
 .. note::
 
   Zajęcia do pobrania również w wersji PDF.
@@ -12,6 +21,7 @@ Zajęcia 2: Zadania
   .. raw:: html
 
      <a href="downloads/pdfs/zaj2.pdf">Wersja pdf tutaj</a>
+
 
 Opis schematu
 -------------
