@@ -47,6 +47,7 @@ mkdir -p downloads/pdfs
 
 generate wyk1
 generate wyk2
+generate wyk4
 generate zaj2
 
 cd ${ROOT}

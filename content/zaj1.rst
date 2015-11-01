@@ -8,6 +8,10 @@ Zajęcia 1: Zadania
 
 .. contents:: Spis treści
 
+.. note::
+
+    Uwaga dla JB: większość studentów zrobiła zadania przed czasem.
+
 Informacje ogólne
 -----------------
 

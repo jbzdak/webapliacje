@@ -6,6 +6,10 @@ Zajęcia 2: Zadania
 :category: zadania
 
 
+.. note::
+
+    Uwaga dla JB: większość studentów zrobiła zadania do 5-6.
+
 .. warning::
 
   Informuję że do oceny z zajęć będzie brane 6 najlepiej wykonanych zadań z
