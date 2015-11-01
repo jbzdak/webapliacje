@@ -45,6 +45,20 @@ def zad3_arange(start, stop, step):
   """
   return None
 
+ZAD3_DATA  = None
+"""
+Podmień definicję zmiennej DATA tak by:
+
+Była to lista słowników, każdy słownik reprezentuje jedno zwierze.
+Lista powinna mieć 5 elementów, a każde zwierze przynajmniej atrybuty
+3 w tym imię.
+
+Do pobrania imienia trzeciego zwierzęcia powinno mi starczyć 
+wywołania data[2]['imie'].
+"""
+
+
+
 #### TESTY
 
 class TestBlok1Zaj1(unittest.TestCase):
@@ -61,7 +75,7 @@ class TestBlok1Zaj2(unittest.TestCase):
     self.assertAlmostEqual(zad2(), 0)
 
   def test_sin(self):
-    self.assertIn("sin(", helper_getsource(zad2))
+    self.assertIn("sin", helper_getsource(zad2))
 
   def test_for(self):
     self.assertIn("for", helper_getsource(zad2))
@@ -82,6 +96,21 @@ class TestBlok1Zaj3(unittest.TestCase):
       with self.subTest("Element {}".format(ii)):
         self.assertAlmostEqual(left,right)
 
+class TestBlok1Zad4(unittest.TestCase):
+
+  def test_result_type(self):
+    self.assertIsInstance(ZAD3_DATA, list)
+
+  def test_contents_type(self):
+    for e in ZAD3_DATA:
+      self.assertIsInstance(e, dict)
+
+  def test_keys(self):
+    for e in ZAD3_DATA:
+      self.assertIn('imie', e)
+
+  def test_len(self):
+    self.assertEqual(5, len(ZAD3_DATA))
 
 
 def helper_getsource(func):
@@ -95,8 +124,3 @@ def helper_getsource(func):
       var+=1
   code = "\n".join(lines)
   return re.sub('"""(^["])+"""', '', code, flags=re.MULTILINE)
-
-
-if __name__ == '__main__':
-
-  print(helper_getsource(zad1))
