@@ -25,7 +25,7 @@ Protokół ``HTTP``
 .. note::
 
   Będę mówił o protokole ``HTTP`` w wersji ``1.1``, jest nowy protokół
-  ``HTTP/2``, który rozwiązuje wiele probemów które ``HTTP/1.1`` miał.
+  ``HTTP/2``, który rozwiązuje wiele probemów, które ``HTTP/1.1`` miał.
 
   Zasadniczo ``HTTP/2`` nie zmienia semantyki ``HTTP/1.1``, zmienia tylko
   formaty wysyłanych danych (np. jest binarny), tym co jest dla Was ważne
@@ -34,7 +34,7 @@ Protokół ``HTTP``
 
 By zadać pobrać dane z serwera należy:
 
-1. Otworzyć połączenie ``TCP`` do serwera na port na którym nasłuchuje
+1. Otworzyć połączenie ``TCP`` do serwera na port, na którym nasłuchuje
    serwer (domyślnie ``80``).
 2. Wysłać treść zapytania.
 3. Odczytać odpowiedź.
@@ -49,7 +49,7 @@ Przykładowa treść zapytania (uwaga na dole są dwie puste linie)::
 
   W drugiej linicje podaje nagłowek ``Host`` informujący serwer HTTP, że łączę 
   się z hostem o nazwie: ``db.fizyka.pw.edu.pl``. Muszę podać ów nagłowek,
-  ponieważ na poziomie warstwy TCP łączę się już nie z domeną (nie z ``db.fizyka.pw.edu.pl``)
+  ponieważ na poziomie warstwy TCP łączę się już nie z domeną (nie z ``db.fizyka.pw.edu.pl``),
   a z konkretnym adresem IP (``194.29.174.28``), jeden adres IP może obsługiwać
   wiele domen, więc w takim wypadku należy serwerowi powiedzieć: "łączę się z
   taką domeną).
@@ -82,7 +82,7 @@ Ogólnie zapytanie ma następującą strukturę::
   <<Opcjonalnie treść>>
 
 * ``METHOD`` to tzw. ``metoda``, która określa **co serwer ma zrobić**,
-* ``PATH`` definiuje **zasób** na którym zostanie wykonana operacja
+* ``PATH`` definiuje **zasób**, na którym zostanie wykonana operacja
 * Nagłówki pozwalają np. na negocjacje języka strony
 * Treść zapytania pozwala przesłać dane do serwera.
 
@@ -101,13 +101,13 @@ Działanie metod
 
 ``OPTIONS``
 
-  Działa jak ``GET`` ale serwer nie zwraca treści (zwraca same nagłowki),
-  może być to ważne kiedy szukamy informacji w nagłowkach, ale nie chcemy
+  Działa jak ``GET``, ale serwer nie zwraca treści (zwraca same nagłowki),
+  może być to ważne, kiedy szukamy informacji w nagłowkach, ale nie chcemy
   pobierać całego dokumentu.
 
 ``PUT``
 
-  Prosi serwer by umieścić dane przesłane w treści zapytania pod daną ścieżką.
+  Prosi serwer, by umieścić dane przesłane w treści zapytania pod daną ścieżką.
 
 
 ``DELETE``
@@ -125,7 +125,7 @@ Działanie metod
     1. Kiedy chcę wysłać obrazek na serwer, tak by był on widoczny na ścieżce
        ``/foo``, wysyłam zapytanie ``PUT`` (oczywiście serwer powinien sprawdzić
        czy mam prawa dostępu).
-    2. Kiedy chcę się zalogować wysyłam zapytania ``POST`` prosząc by program
+    2. Kiedy chcę się zalogować wysyłam zapytania ``POST`` prosząc, by program
        skojarzony ze ścieżką ``/login`` przetworzył moje zapytanie.
 
 Zapytania bez skutków ubocznych
@@ -135,17 +135,17 @@ Zapytania ``GET`` i ``OPTIONS`` nie powinny mieć skutków ubocznych, tj.
 ich przetworzenie nie powinno zmieniać stanu serwera.
 
 Zapytania ``PUT`` oraz ``DELETE`` powinny być idempotentne, tj. stan serwera
-po przetworzeniu jednego zapytania powinien być taki sam jak po przetworzeniu
+po przetworzeniu jednego zapytania powinien być taki sam, jak po przetworzeniu
 wielu tych samych zapytań (np. po wysłaniu zapytania ``DELETE`` zasób jest
-kasowany więc nie ma go na serwerze, ponowienie tego zapytania nie powinno
+kasowany, więc nie ma go na serwerze, ponowienie tego zapytania nie powinno
 już w żaden sposób zmienić stanu serwera). ``GET`` oraz ``OPTIONS`` również 
 powinny być idempotentne.
 
 .. note::
 
   Powyższe dwa warunki (brak skutków ubocznych i idempotentność) są dość ważne,
-  w szczególności ważne jest by: **Wykonanie zapytania GET nie powinno mieć 
-  skutków ubocznych**. Różne części infrasktuktury mogą mieć zakładać że
+  w szczególności ważne jest, by: **Wykonanie zapytania GET nie powinno mieć 
+  skutków ubocznych**. Różne części infrasktuktury mogą mieć zakładać, że
   wykonanie zapytania ``GET`` nie zmienia stanu serwera, np:
 
   * Wynik zapytania ``GET`` może zostać zapamiętabny przez przeglądarkę,
@@ -162,7 +162,7 @@ Nagłówki
 
 Nagłówki mają sporo zastosowań, ogólnie określają metadane zapytania, np:
 
-1. Służą do negocjacji języka
+1. Służą do negocjacji języka.
 2. Służą do negocjacji formatu danych który wyśle serwer (serwer czasem może wysać
    te same dane w kilku formatach).
 3. Pobierania fragmentu żądanego zasobu.
@@ -196,7 +196,7 @@ Lista klas jest następująca:
 
 ``3XX``
 
-  Serwer informuje użytkownika że musi wykonać dodatkową czynność by zakończyć 
+  Serwer informuje użytkownika, że musi wykonać dodatkową czynność, by zakończyć 
   przetwarzanie. Np. przejść na kolejną stronę (która jest wskazana w nagłowkach
   odpowiedzi)
 
@@ -281,7 +281,7 @@ CGI działa mniej więcej tak:
    przez program CGI.
 2. Serwer wykonuje pewien program umieszczaj¡c wcze±niej
    parametry zapytania w jako zmienne ±rodowiskowe.
-3. Program na swoje standardowe wyj±cie zwraca odpowied1 dla
+3. Program na swoje standardowe wyjście zwraca odpowied1 dla
    użytkownika.
 
 Zalety CGI
@@ -301,7 +301,7 @@ Wady CGI
 .. note::
 
   Przeciętna aplikacja w Django ładuje się 1sek (tj. jest to czas między
-  uruchomieniem aplikacji a przetworzeniem pierwszego zapytania), CGI spowodowałoby
+  uruchomieniem aplikacji, a przetworzeniem pierwszego zapytania), CGI spowodowałoby
   Django powoduje że czas obsłużenia danego wydłuża się o jedną sekundę (do każdego
   zapytania uruchamiamy Django "od zera").
 
@@ -314,10 +314,10 @@ Jak nie CGI to co
 Każdy język ma swoje rozwiązania, które zastępują CGI, każde z tych rozwiązań
 działa podobnie:
 
-* Utrzymywana jest pula wątków (i procesów) z których każdy wątek jest w stanie
+* Utrzymywana jest pula wątków (i procesów), z których każdy wątek jest w stanie
   wykonywać zapytania.
 * Gdy serwer HTTP otrzyma zapytanie przekaże je do wykonania do
-  jednego z wątków z puli. Jeśli wszystkie wątki będą zajęte, serwer poczeka aż
+  jednego z wątków z puli. Jeśli wszystkie wątki będą zajęte, serwer poczeka, aż
   któryś się nie zwolni.
 
 .. note::
@@ -328,10 +328,10 @@ działa podobnie:
 HTML
 ----
 
-HTML (Hyper Text Markup Language) jest językiem w którym dostarczana jest
+HTML (Hyper Text Markup Language) jest językiem, w którym dostarczana jest
 większość zawartości w sieci WWW.
 
-Zakładam że Państwo znacie jakieś tam podstawy HTML.
+Zakładam, że Państwo znacie podstawy HTML.
 
 Najprostsza strona HTML wygląda następująco:
 
@@ -351,7 +351,7 @@ Ważne elementy:
 
 ``<!DOCTYPE html>``
 
-  Deklaracja typu, mówi przeglądarce że dokument jest w HTML w wersji 5.
+  Deklaracja typu, mówi przeglądarce, że dokument jest w HTML w wersji 5.
 
 ``head``
 
@@ -451,7 +451,7 @@ Django posługuje się wzorcem Model-View-Template, gdzie:
 
 ``Template``
 
-  Jest to warstwa która służy do generowania plików HTML.
+  Jest to warstwa, która służy do generowania plików HTML.
 
 W tym tygodniu zajmiemy się tylko Widokami.
 
@@ -473,7 +473,7 @@ by w aktyalnym katalogu stworzyć projekt należy napisać 
 ``django-admin startproject <<nazwa>>``, np: ``django-admin startproject zaj3``.
 
 Wewnątrz katalogu zaj3 znajduje się szkielet projektu, zawiera on między innymi
-skrypt ``./manage.py`` który służy do zarządzania projektem, zawiera np.
+skrypt ``./manage.py``, który służy do zarządzania projektem, zawiera np.
 serwer deweloperski Django. By go uruchomić należy wpisać ``./manage.py runserver``,
 a następnie otworzyć stronę ``http://localhost:8000/``.
 
@@ -511,7 +511,7 @@ odwzorowanie.
 .. note::
 
   Ogólnie: w każdym projekcie Django jest "root urlconf", głowny plik
-  definuje to które widoki są przypisane do jakich ścieżek, z reguły plik ten
+  definuje to, które widoki są przypisane do jakich ścieżek, z reguły plik ten
   zawiera odwołania do plików ``urls.py`` z poszczególnych aplikacji,
   to który plik pełni funkcję "root urlconf" jest konfigurowalne.
 
@@ -572,7 +572,7 @@ zawierającego formularz z pytaniem o imie.
 .. note::
 
   Oczywiście w poważnych aplikacjach Django kod HTML nie jest wklejany jako
-  stała do pliku z widokami, na kolejnych zajęciach pokażę jak się pracuje
+  stała do pliku z widokami, na kolejnych zajęciach pokażę, jak się pracuje
   z szablonami Django.
 
 Drugi widok jest ciekawszy: pobiera on parametr zapytania przesłany
