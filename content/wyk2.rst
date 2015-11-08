@@ -16,6 +16,20 @@ Zajęcia 2: Wykład (SQL cz. 2)
 
 .. contents:: Spis treści
 
+
+Uzupełnienie: Moduły, paczki
+----------------------------
+
+Wersja `html <{filename}/static/zaj3/zaj1-blok4.html>`__,
+`pdf <{filename}/downloads/pdfs/zaj1-blok4.pdf>`__.
+
+
+Uzupełnienie: Kompilacja Pythona, wirtualne środowiska, etc
+-----------------------------------------------------------
+
+Wersja `html <{filename}/static/zaj3/zaj3-blok4.html>`__,
+`pdf <{filename}/downloads/pdfs/zaj3-blok4.pdf>`__.
+
 Rzeczy do zapamiętania
 ----------------------
 

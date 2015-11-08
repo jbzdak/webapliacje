@@ -32,7 +32,6 @@ class Mark(models.Model):
 
   mark = models.PositiveSmallIntegerField(null=False)
 
-
   class Meta:
 
     db_table='mark'

@@ -16,6 +16,8 @@ Wykład 4: Podstawy protokołu ``HTTP`` i Django
 
 .. contents:: Spis treści
 
+
+
 Protokół ``HTTP``
 -----------------
 

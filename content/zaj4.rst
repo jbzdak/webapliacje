@@ -4,7 +4,6 @@ Zajęcia 4: Zadania
 :date: 2015-11-6
 :tags: zaj3, zadania
 :category: zadania
-:status: draft
 
 Do przygotowania przed zajęciami (jeśli macie własny komputer)
 --------------------------------------------------------------
