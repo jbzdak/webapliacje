@@ -1,28 +1,28 @@
-,Grupa ,Numer,Nr indeksu ,Zaj 1,Zaj 1 ob,Zaj 2 ob,Zaj 2 ,Unnamed: 8
-0,rano,1.0,237995,40,ob,,11,
-1,rano ,1.0,245263,40,ob,,11,
-2,rano,2.0,245349,40,ob,,22,(gratulacje!)
-3,rano,2.0,245352,40,ob,,22,(gratulacje!)
-4,rano,3.0,,,-,,21,(gratulacje!)
-5,rano,,,,,,,
-6,rano,4.0,245251,39,ob,,22,(gratulacje!)
-7,rano,4.0,245370,39,ob,,22,(gratulacje!) 
-8,rano,5.0,245262,38,ob,,12,
-9,rano,5.0,245244,38,ob,,12,
-10,rano,6.0,261632,40,ob,,10.5,
-11,rano,6.0,261553,40,ob,,10.5,
-12,rano,7.0,,,-,,Proszę przesłać prace!,
-13,rano,7.0,251728,40,ob,,Proszę przesłać prace!,
-14,wieczór,1.0,251812,40,ob,,9,
-15,wieczór,1.0,251817,40,ob,,9,
-16,wieczór,2.0,251775,39,ob,,12,
-17,wieczór,2.0,238010,39,ob,nb,,
-18,wieczór,3.0,245339,40,ob,,8,
-19,wieczór,3.0,245357,40,ob,,8,
-20,wieczór,4.0,251790,40,ob,,16,
-21,wieczór,4.0,251777,40,ob,,16,
-22,wieczór,5.0,TS – proszę podać nr. Indeksu,40,,,12,
-23,wieczur,6.0,MK – proszę podać nr. Indeksu,,,,12,
-24,wieczor,7.0,RK– proszę podać nr. Indeksu,,,,14,
-25,wieczor,7.0,RS – proszę podać nr. Indeksu,,,,14,
-26,,,,note: maksimum to 40 pkt,,,,
+;Grupa ;Numer;Nr indeksu ;Zaj 1;Zaj 1 ob;Zaj 2 ob;Zaj 2 ;Unnamed: 8
+0;rano;1.0;237995;40;ob;;11;
+1;rano ;1.0;245263;40;ob;;11;
+2;rano;2.0;245349;40;ob;;22;(gratulacje!)
+3;rano;2.0;245352;40;ob;;22;(gratulacje!)
+4;rano;3.0;;;-;;21;(gratulacje!)
+5;rano;;;;;;;
+6;rano;4.0;245251;39;ob;;22;(gratulacje!)
+7;rano;4.0;245370;39;ob;;22;(gratulacje!) 
+8;rano;5.0;245262;38;ob;;12;
+9;rano;5.0;245244;38;ob;;12;
+10;rano;6.0;261632;40;ob;;10.5;
+11;rano;6.0;261553;40;ob;;10.5;
+12;rano;7.0;251792;;-;;Proszę przesłać prace!;
+13;rano;7.0;251728;40;ob;;Proszę przesłać prace!;
+14;wieczór;1.0;251812;40;ob;;9;
+15;wieczór;1.0;251817;40;ob;;9;
+16;wieczór;2.0;251775;39;ob;;12;
+17;wieczór;2.0;238010;39;ob;nb;;
+18;wieczór;3.0;245339;40;ob;;8;
+19;wieczór;3.0;245357;40;ob;;8;
+20;wieczór;4.0;251790;40;ob;;16;
+21;wieczór;4.0;251777;40;ob;;16;
+22;wieczór;5.0;TS – proszę podać nr. Indeksu;40;;;12;
+23;wieczur;6.0;MK – proszę podać nr. Indeksu;;;;12;
+24;wieczor;7.0;RK– proszę podać nr. Indeksu;;;;14;
+25;wieczor;7.0;RS – proszę podać nr. Indeksu;;;;14;
+26;;;;note: maksimum to 40 pkt;;;;

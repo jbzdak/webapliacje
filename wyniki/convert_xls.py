@@ -12,7 +12,7 @@ TARGET = DIR.parent / 'content' / 'static' / 'data'
 def save_csv():
     df = pd.read_excel(str(DIR / "oceny.xls"), sheetname='oceny')
 
-    df.iloc[:,1:].to_csv(str(TARGET / 'wyniki.csv'))
+    df.iloc[:,1:].to_csv(str(TARGET / 'wyniki.csv'), sep=';')
 
 
 save_csv()

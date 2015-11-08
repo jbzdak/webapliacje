@@ -1,0 +1,221 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+
+\usepackage[space]{grffile}\usepackage{latexsym}\usepackage{amsfonts}\usepackage{url}\usepackage{fancyref}
+\usepackage{longtable}
+\end_preamble
+\options number
+\use_default_options false
+\maintain_unincluded_children false
+\language polish
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman bookman
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family rmdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref section
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry false
+\use_package amsmath 0
+\use_package amssymb 0
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 1
+\use_package mhchem 0
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1cm
+\topmargin 1cm
+\rightmargin 1cm
+\bottommargin 1cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language polish
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Kolokwium 1
+\end_layout
+
+\begin_layout Subsection
+Zadanie 1
+\end_layout
+
+\begin_layout Standard
+Mając schemat załączony na obrazku, proszę wybrać: 
+\end_layout
+
+\begin_layout Enumerate
+Zadanie a: Wszystkie strony przypisane do kategorii
+\end_layout
+
+\begin_layout Enumerate
+Zadanie b: Wszystkie tagi przypisane do strony
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename kol1.svg
+	width 100text%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Schemat 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Zadanie 2
+\end_layout
+
+\begin_layout Standard
+Znajdź i opisz błędy w poniższych zapytaniach
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Zapytanie zwraca ilość komentarzy przypisanych do każdej strony
+\end_layout
+
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Uwaga: kolumna name w tabeli PAGE nie jest unikalna.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+SELECT page.name, COUNT(*) as comment_count
+\end_layout
+
+\begin_layout LyX-Code
+FROM WEBPAGE  page 
+\end_layout
+
+\begin_layout LyX-Code
+LEFT JOIN COMMENT comment ON (page.id = comment.webpage_id)
+\end_layout
+
+\begin_layout LyX-Code
+GROUP BY page.name;
+\end_layout
+
+\begin_layout Standard
+Zapytanie 2
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Zapytanie zwraca pary tag-strona
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout LyX-Code
+SELECT page.name, tag.name
+\end_layout
+
+\begin_layout LyX-Code
+FROM WEBPAGE page 
+\end_layout
+
+\begin_layout LyX-Code
+LEFT JOIN WEBPAGE_TAG wptag ON (wptag.webpage_id=page.id)
+\end_layout
+
+\begin_layout LyX-Code
+JOIN TAG ON (wptag.tag_id=page.id);
+\end_layout
+
+\end_body
+\end_document

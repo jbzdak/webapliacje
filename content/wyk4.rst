@@ -155,8 +155,6 @@ powinny być idempotentne.
     były rozwiązania implementujące taką funkcjonalność).
 
 
-
-
 Nagłówki
 ********
 
@@ -246,6 +244,8 @@ Zalogowanie się do serwera:
 .. note::
 
   Jak działa mechanizm logowania wyjaśnię na kolejnych zajęciach.
+
+
 
 Serwowanie dynamicznej zawartości
 ---------------------------------
@@ -384,8 +384,12 @@ danych do serwera.
 .. code-block:: html
 
   <form action='/foo' method='POST'>
-    <input name='username' type='text' placeholder='Username'/> <br/>
-    <input name='password' type='password' placeholder='Password'/>
+    <label>
+      Username: <input name='username' type='text' placeholder='Username'/> <br/>
+    </label>
+    <label>
+      Password: <input name='password' type='password' placeholder='Password'/>
+    </label>
     <button>Submit</button>
   </form>
 
@@ -431,7 +435,13 @@ następujące informacje:
 
       **Nigdy nie ufajcie danych pochodzącym od użytkownika**.
 
+Tagi ``label`` służą do dodania opisów do pól formularza.
 
+Linki
+*****
+
+Do stworzenia łącza do innego zasobu służy tag ``<a href="adres">Opis</a>``,
+tag ten spowoduje wysłanie przez przeglądarkę zapytania ``GET``.
 
 Django
 ------
@@ -561,9 +571,13 @@ By to zrobić trzeba wykonać dwa widoki:
   """
 
   def get_name(request):
+    if request.method != 'GET': # Jeśli zapytanie nie używa GET
+      return HttpResponse(status=405) # Zwracamy błąd użycia niedozwolonej metody
     return HttpResponse(content=ASK_TEMPLATE)
 
   def greet_by_name(request):
+    if request.method != 'GET':
+        return HttpResponse(status=405)
     return HttpResponse(content="Witaj {}!".format(request.GET['name']))
 
 Pierwszy widok (``get_name``) po prostu zwraca zawsze tego samego HTML
@@ -581,7 +595,7 @@ odwzorowuje on wszystkie własności zapytania HTTP, np. metoda zapytania
 jest dostępna za pomocą atrybutu: ``request.method``.
 
 Parametry zapytania ``GET`` dostępne są w słowniku ``request.GET`` a
-parametry zapytania ``POST`` dostępne są w słowniku ``request.POST``.
+parametry zapytania ``POST`` dostępne są w słowniku ``request.POST``
 
 
 
