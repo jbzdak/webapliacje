@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Index</title>
+</head>
+<body>
+<ul>
+{% for post in posts %}
+    <li>
+        <h1>Posted at: {{ post.posted_at }}</h1>
+        <p>{{post.text}}</p>
+        <p><a href="/post?post_id={{ post.id }}">Edit post</a></p>
+    </li>
+{% empty %}
+    <li>
+        No posts to show
+    </li>
+{% endfor %}
+
+<p><a href="/post">Add post </a></p>
+
+</ul>
+</body>
+</html>

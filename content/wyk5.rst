@@ -13,7 +13,7 @@ Projekty django mają określoną strukturę, zawierają przynajmniej takie pl
 ``settings.py``
 
   Jest to moduł Pythona zawierający wszystkie ustawienia projektu Django,
-  takie jak: domyślny język, lista zainstalowanych aplikacji (i wiele innych).
+  takie jak: domyślny język, lista zainstalowanych aplikacji (i wiele innych)
   Plik ``settings.py`` zawiera również ustawienia zależne od konkretnego
   środowiska wdrożeniowego, takie jak: adres bazy danych, adres usługi
   cache itp, ścieżka do przechowywania plików.
@@ -21,7 +21,7 @@ Projekty django mają określoną strukturę, zawierają przynajmniej takie pl
 ``manage.py``
 
   Skrypt służący do zarządzania projektem Django, pozwalającym na wykonywanie
-  rożnych operacji takich jak: zarządzanie wersją schematu bazy danych,
+  rożnych operacji, takich jak: zarządzanie wersją schematu bazy danych,
   tworzenie administratorów, uruchamianie testów itp.
 
 ``wsgi.py``
@@ -41,7 +41,7 @@ Do tego w projekcie znajduje się kilka aplikacji, aplikacja zawiera takie plik
 
 ``views.py``
 
-  Zawiera widoki --- czyli klasy i funkcje odpowiedzianle za odpowiadanie
+  Zawiera widoki, --- czyli klasy i funkcje odpowiedzianle za odpowiadanie
   na zapytania HTTP.
 
 ``tests.py``
@@ -73,10 +73,10 @@ stosowany z takich powodów:
   .. note::
 
     Niekompatybilności mogą być drobne, np. w postgresql do generowania
-    systetycznych kluczy służą sekwencje, a w mysql nalezy używać kolumn
+    systetycznych kluczy służą sekwencje, a w mysql należy używać kolumn
     auto increment.
 
-    Jednak już kilka takich niekompatybilności powoduje że utrzymanie aplikacji,
+    Jednak już kilka takich niekompatybilności powoduje, że utrzymanie aplikacji,
     która komunikuje się z kilkoma bazami danych jest uciążliwe (bez użycia ORM)
 
 * Powoduje, że nie trzeba pisać ręcznie 99% zapytań SQL.
@@ -87,7 +87,7 @@ stosowany z takich powodów:
 
   Przenośność aplikacji między bazami danych jest rzeczą cenną i przydatną,
   ale nie zawsze jest grą wartą świeczki. Część operacji łatwiej jest wykonać 
-  na poziomie bazy danych niż w aplikacji, skorzystanie z funkcjonalności
+  na poziomie bazy danych, niż w aplikacji, skorzystanie z funkcjonalności
   dostępnych w jednej bazie danych oczywiście uniemożliwia przenośność na inne.
 
   W praktyce przenośność między bazami danych ważna jest tylko dla
@@ -116,7 +116,7 @@ Domyślnie wygląda ono tak:
       }
   }
 
-Definiuje ono że Django korzysta z jednej bazy danych, w tym wypadku jest to
+Definiuje ono, że Django korzysta z jednej bazy danych, w tym wypadku jest to
 baza danych ``sqlite`` (nie poleca się korzystania z ``sqlite`` w środowisku
 produkcyjnym).
 
@@ -130,7 +130,7 @@ pod kluczem ``default``.
 
 
 Rodzaj bazy danych definiuje klucz ``ENGINE``, dla bazy danych postgresql
-jest to ``'django.db.backends.postgresql_psycopg2``.
+jest to ``django.db.backends.postgresql_psycopg2``.
 
 By podłączyć się do lokalnej bazy danych można zastosować taką definicję 
 bazy danych:
@@ -139,13 +139,14 @@ bazy danych:
 
   DATABASES = {
       'default': {
-          'ENGINE': 'django.db.backends.postgresql_psycopg2',
+          'ENGINE':
+            'django.db.backends.postgresql_psycopg2',
           'NAME': 'zaj4-rano', # Nazwa bazy danych
       }
   }
 
 Tak potraktowane Django spróbuje podłączyć się do bazy danych za pomocą gniazd
-linuksa na **na użytkownika o tej samej nazwie, jak użytkownik OS który
+linuksa na **na użytkownika o tej samej nazwie, jak użytkownik OS, który
 włącza Django**.
 
 Jeśli chcecie się połączyć do bazy danych na innym komputerze, należy:
@@ -154,8 +155,9 @@ Jeśli chcecie się połączyć do bazy danych na innym komputerze, należy:
 
   DATABASES = {
       'default': {
-          'ENGINE': 'django.db.backends.postgresql_psycopg2',
-           'NAME': 'mydatabase',
+          'ENGINE':
+            'django.db.backends.postgresql_psycopg2',
+          'NAME': 'mydatabase',
           'USER': 'mydatabaseuser',
           'PASSWORD': 'mypassword',
           'HOST': '127.0.0.1',
@@ -203,8 +205,10 @@ Modele umieszczamy (zwykle) w pliku ``models.py``. Przykład (części) pliku
 
     name = models.CharField(max_length=100)
 
-    lecturers = models.ManyToManyField("Course", through="CourseInstance", related_name="courses")
-    rooms = models.ManyToManyField("Room", through="CourseInstance", related_name="rooms")
+    lecturers = models.ManyToManyField(
+      "Course", through="CourseInstance", related_name="courses")
+    rooms = models.ManyToManyField(
+      "Room", through="CourseInstance", related_name="rooms")
 
 
     class Meta:
@@ -242,17 +246,17 @@ w bazie danych.
 
 .. note::
 
-  Mechanizm którego Django używa do odczytiwania kolumn z modeli i generowania
+  Mechanizm, którego Django używa do odczytiwania kolumn z modeli i generowania
   wszystkich metod modelu (o tym dokładnie jakie metody są generowane powiem
   w dalszej części wykładu), jest bardzo ciekawy, jednak dość zaawansowany
-  (i słabo udokumentowany, najlepsza dokumentacja procesu --- którą znam
+  (i słabo udokumentowany, najlepsza dokumentacja procesu, --- którą znam
   to książka `"The Django Book" <http://www.djangobook.com/en/2.0/index.html>`__,
-  która jednak dotyczy django ``1.0``. czyli bardzo starego.
+  która jednak dotyczy django ``1.0``. Czyli bardzo starego.
 
   Generalnie mechanizm ten używa metaklas, które pozwalają na zmiane zawartości
   typu przed jego zdefiniowaniem.
 
-  W innych językach by osiągnąc tego typu rozwiązania po prostu pisze się
+  W innych językach by osiągnąc tego typu rozwiązania, po prostu pisze się
   generatory kodu (np. JPA w Javie SE potrzebowała generatorów kodu dla
   bardziej zaawansowanych zastosowań).
 
@@ -269,7 +273,7 @@ Django ewoluuje bazę danych za pomocą migracji, migracje to specjalne pliki
 Pythona, które opisują stan tabel powiązanych z daną aplikacją,
 w jakiejś chwili czasu (modele opisują stan bazy danych **w chwili aktualnej**).
 
-Django zapamiętuje która wersja aplikacji jest zainstalowana w danej bazie danych,
+Django zapamiętuje, która wersja aplikacji jest zainstalowana w danej bazie danych,
 i może zmigrować dane z bazy danych do wersji najnowszej.
 
 Tworzenie migracji
@@ -297,14 +301,18 @@ Z zawartością podobną do:
         migrations.CreateModel(
             name='Course',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
+                ('id', models.AutoField(
+                  verbose_name='ID', auto_created=True,
+                  serialize=False, primary_key=True)),
                 ('name', models.CharField(max_length=100)),
             ],
         ),
         migrations.CreateModel(
             name='Mark',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
+                ('id', models.AutoField(
+                  verbose_name='ID', auto_created=True,
+                  serialize=False, primary_key=True)),
                 ('mark', models.PositiveSmallIntegerField()),
                 ('course', models.ForeignKey(to='zaj2_schema_app.Course')),
             ],
@@ -312,9 +320,12 @@ Z zawartością podobną do:
         migrations.CreateModel(
             name='Student',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
+                ('id', models.AutoField(
+                  verbose_name='ID', auto_created=True,
+                    serialize=False, primary_key=True)),
                 ('name', models.CharField(max_length=100)),
-                ('courses', models.ManyToManyField(db_table='student_course', to='zaj2_schema_app.Course')),
+                ('courses', models.ManyToManyField(
+                db_table='student_course', to='zaj2_schema_app.Course')),
             ],
         ),
         migrations.AddField(
@@ -357,20 +368,20 @@ nazwy tabel, mighracja może wyglądać tak:
       ]
 
 Tutaj proszę zwrócić uwagę na pole ``dependencies``, określa ono porządek
-migracji, tj. mówi że przed wgraniem danej migracji wgrana musi być migracja
+migracji, tj. mówi, że przed wgraniem danej migracji wgrana musi być migracja
 o nazwie: ``0001_initial`` z aplikacji: ``zaj2_schema_app``.
 
 .. note::
 
-  Migracje mogą służyć do **fajniejszych** rzeczy niż wgrywanie zmian
+  Migracje mogą służyć do **fajniejszych** rzeczy, niż wgrywanie zmian
   generowanych z plików ``models.py``, mogą na przykład wygrywać napisany
   przez Was kod SQL, który definiuje dodatkowe funkcjonalności w bazie danych.
 
 Wgrywanie migracji do bazy danych
 *********************************
 
-Samo stworzenie migracji, również, nie spowoduje że nowy schemat automagicznie
-pojawi się a bazie danych, w tym celu należy wydać polecenie:
+Samo stworzenie migracji, również, nie spowoduje, że nowy schemat automagicznie
+pojawi się, a bazie danych, w tym celu należy wydać polecenie:
 
 .. code-block:: bash
 
@@ -382,10 +393,10 @@ Wykonywanie zapytań z Django ORM
 Dodawanie danych
 ----------------
 
-By dodać dane do bazy danych należy stworzyć instancję modelu a następnie
+By dodać dane do bazy danych należy stworzyć instancję modelu, a następnie
 wywołać na niej funkcje save.
 
-.. code-block:: python:
+.. code-block:: python
 
   >>> s = Student()
   >>> s.name="foo"
@@ -435,7 +446,7 @@ Zauważcie, że zapytanie to zwraca obiekty typu student.
 
   Faktycznie quersyet jest obiektem **leniwym**, tj. w chwili wywołania
   ``studenci = Student.objects.all()`` żadne zapytanie nie trafi do bazy danych,
-  zapytanie trafi do bazy danych kiedy odczytuje się dane z QuerySeta.
+  zapytanie trafi do bazy danych, kiedy odczytuje się dane z QuerySeta.
 
   Dokładne zasady ewaluowania querysetów `opisane są tutaj
   <https://docs.djangoproject.com/en/1.8/ref/models/querysets/#when-querysets-are-evaluated>`__.
@@ -483,6 +494,8 @@ Szablony Django
   zaliczenia następnych zajęć. Ale może to zaliczenie znacznie ulatwić,
   poniważ za pomocą szablonów django **łatwiej** będzie Wam pisać kod html.
 
+  Jak będziecie mieli więcej czasu to `zapraszam do lektury <https://docs.djangoproject.com/en/1.8/ref/templates/language/>`__.
+
 Filozofia szablonów Django
 **************************
 
@@ -491,8 +504,8 @@ problemach z innymi silnikami szablonów: ``JSP`` i ``PHP``.
 
 JSP i PHP pozwalało na umieszczanie wewnątrz szablonow dowolnego kodu,
 JSP pozwalało na wykonywanie kodu Javy, a PHP na wykonywanie kodu PHP.
-Programiści Django stwierdzili że nie jest to najlepsze rozwiązanie, ponieważ
-powoduje że w szablonach zaczyna pojawiać się **logika** aplikacji, co jest
+Programiści Django stwierdzili, że nie jest to najlepsze rozwiązanie, ponieważ
+powoduje, że w szablonach zaczyna pojawiać się **logika** aplikacji, co jest
 niepożądane.
 
 Kod szablonów nie powinien:

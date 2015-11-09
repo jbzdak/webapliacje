@@ -1,7 +1,7 @@
 ;Grupa ;Numer;Nr indeksu ;Zaj 1 (max 40);Zaj 1 ob;Zaj 2 ob;Zaj 2 (max 22) – uwaga ocena niepełna ;Unnamed: 8;Zaj 3 (max 40 --- 10 punktów za każdy plik);Unnamed: 10;Kol 1: SQL ;Kol 1 Max 
 0;rano;1.0;237995;40;ob;;11;;(nie dostałem zadań? – proszę przesłać ponownie);;16.0;30.0
 1;rano ;1.0;245263;40;ob;;11;;(nie dostałem zadań? – proszę przesłać ponownie);;26.0;30.0
-2;rano;2.0;245349;40;ob;;22;(gratulacje!);(nie dostałem zadań? – proszę przesłać ponownie);;21.0;30.0
+2;rano;2.0;245349;40;ob;;22;(gratulacje!);10;;21.0;30.0
 3;rano;2.0;245352;40;ob;;22;(gratulacje!);(nie dostałem zadań? – proszę przesłać ponownie);;16.0;30.0
 4;rano;3.0;;;-;;21;(gratulacje!);(nie dostałem zadań? – proszę przesłać ponownie);;;
 5;rano;;;;;;;;;;;
@@ -15,7 +15,7 @@
 13;rano;7.0;251728;40;ob;;Proszę przesłać prace!;;18;"(w string2 jest problem --- nie działą w pythonie3, ponieważ tam ½ daje floata; zapraszam na konsultacje)";18.0;30.0
 14;wieczór;1.0;251812;40;ob;;9;;12;"(w string2 jest problem --- nie działą w pythonie3, ponieważ tam ½ daje floata; zapraszam na konsultacje)";22.0;40.0
 15;wieczór;1.0;251817;40;ob;;9;;12;;36.0;40.0
-16;wieczór;2.0;251775;39;ob;;12;;40;(gratulacje!) ;;
+16;wieczór;2.0;251775;39;ob;;12;;40;(gratulacje!) ;12.0;40.0
 17;wieczór;2.0;238010;39;ob;nb;;;;;;
 18;wieczór;3.0;245339;40;ob;;8;;30;(brak blok1);36.0;40.0
 19;wieczór;3.0;245357;40;ob;;8;;30;;38.0;40.0

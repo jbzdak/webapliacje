@@ -14,7 +14,12 @@ Do przygotowania przed zajęciami (jeśli macie własny komputer)
 Zadanie na zajęcia
 ------------------
 
-Kod statrowy do pobrania TODO.
+Kod statrowy do pobrania ``/downloads/calculator.zip``.
+
+.. note::
+
+  Aplikacja będzie testowana **automatycznie**, więc wszystkie instrukcje jakie
+  podaje należy wypełniaź **dokładnie** :)
 
 Korzystając z udostępnionego kodu stworzyć serwis mający prostą funkcjonalność:
 

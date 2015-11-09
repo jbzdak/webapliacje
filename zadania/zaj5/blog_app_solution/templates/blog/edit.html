@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form method="POST">
+    {{ form_errors }}
+    {% if post.id %}
+        <input type="hidden" name="post_id" value="{{ post.id}}"/>
+    {% endif %}
+    <label>Text:
+        <textarea name="text">{{ post.text }}</textarea>
+    </label>
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
