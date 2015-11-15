@@ -22,8 +22,9 @@ Aplikacja spełnia następujące kryteria
       stworzyć mozna skorzystać z atrybutu ``auto_now_add`` konstruktora pola
       ``DateTimeField``, który powoduje że dane pole przy pierwszym zapisie
       do bazy danych otrzymuje wartość równą aktualnej dacie.
-2. Na urlu ``/index`` wyświetla listę postów, oraz link do dodawania postów.
-3. Jeśli nie ma postów do wyświetlenia na stronie musi pojawiać się napis:
+
+3. Na urlu ``/index`` wyświetla listę postów, oraz link do dodawania postów.
+4. Jeśli nie ma postów do wyświetlenia na stronie musi pojawiać się napis:
    ``No posts to show``
 5. Posty są wyświetlane od najnowszego do najstarszego.
 6. Po wysłania zapytania ``GET`` na adres ``/edit`` pojawia się formularz

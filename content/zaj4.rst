@@ -2,7 +2,7 @@ Zajęcia 4: Zadania
 ==================
 
 :date: 2015-11-6
-:tags: zaj3, zadania
+:tags: zaj4, zadania
 :category: zadania
 
 Do przygotowania przed zajęciami (jeśli macie własny komputer)
@@ -14,7 +14,7 @@ Do przygotowania przed zajęciami (jeśli macie własny komputer)
 Zadanie na zajęcia
 ------------------
 
-Kod statrowy do pobrania ``/downloads/calculator.zip``.
+Kod statrowy do pobrania `stąd <downloads/calculator.zip>`__.
 
 .. note::
 
@@ -28,11 +28,11 @@ Korzystając z udostępnionego kodu stworzyć serwis mający prostą funkcjonaln
    liczbę, ``operation`` natomiast znak (jeden z: ``+``, ``-``, ``*``, ``/``, ``//``).
 
    Formularz wysyła zapytanie ``POST`` na adres ``/calculate``, zapytanie zawiera
-   trzy parametry: x, y, z.
+   trzy parametry: x, y, operation.
 2. Jeśli zapytanie ``POST`` zawiera błąd (brak parametru, niepoprawna wartość)
    powinien się wyświetlić pusty formularz i wiadomość: "Zła wartość parametru".
 3. Jeśli zapytanie ``POST`` jest poprawne system powinien zwrócić stronę z
-   informacją: ``Result of {x}{op}{y} is {res}``, na przykład:
+   informacją: ``Result of {x}{operation}{y} is {res}``, na przykład:
    ``Result of 3+3 is 6``.
 4. We wszystkich powyższych przypadkach serwer powinien zwracać status ``200``.
 

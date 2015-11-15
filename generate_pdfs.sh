@@ -49,9 +49,12 @@ generate wyk1
 generate wyk2
 generate wyk4
 generate wyk5
+generate wyk6
+
 generate zaj2
 generate zaj3
 generate zaj4
+# {#generate zaj5##}
 
 cd ${ROOT}
 cd content/static/zaj3

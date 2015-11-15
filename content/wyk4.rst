@@ -16,6 +16,20 @@ Wykład 4: Podstawy protokołu ``HTTP`` i Django
 
 .. contents:: Spis treści
 
+Uzupełnienie 1: Moduły, paczki
+------------------------------
+
+Wersja `html <{filename}/static/zaj3/zaj1-blok4.html>`__,
+`pdf <{filename}/downloads/pdfs/zaj1-blok4.pdf>`__.
+
+
+Uzupełnienie 2: Kompilacja Pythona, wirtualne środowiska, etc
+-------------------------------------------------------------
+
+Wersja `html <{filename}/static/zaj3/zaj3-blok4.html>`__,
+`pdf <{filename}/downloads/pdfs/zaj3-blok4.pdf>`__.
+
+
 
 
 Protokół ``HTTP``

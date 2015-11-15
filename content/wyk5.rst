@@ -1,9 +1,19 @@
-Wykład 5: Interakcja z bazą danych w Django (draft)
-===================================================
+Wykład 5: Interakcja z bazą danych w Django
+===========================================
 
 :date: 2015-11-08
 :tags: zaj5, wykład, materiały
 :category: materiały
+
+
+.. note::
+
+  Wykład do pobrania również w wersji PDF.
+
+  .. raw:: html
+
+     <a href="downloads/pdfs/wyk5.pdf">Wersja pdf tutaj</a>
+
 
 Struktura projektu Django
 -------------------------
@@ -190,6 +200,8 @@ Modele umieszczamy (zwykle) w pliku ``models.py``. Przykład (części) pliku
 ``models.py`` z aplikacji która wygenerowała mi dane na zajęcia 2.
 
 .. code-block:: python
+
+  from django.db import models
 
   class Student(models.Model):
 
