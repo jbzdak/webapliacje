@@ -1,0 +1,73 @@
+--	ZAD 1A 
+--select year, weekday, time_from, time_to 
+--from course_instance
+--where year = 2015 AND course_id = 55;
+
+--	ZAD 1B
+--select year, course_id, weekday, time_from, time_to
+--from course_instance as cs
+--join course as kurs on cs.course_id = kurs.id
+--where kurs.name = 'Projektowanie Webaplikacji 8';
+
+--	ZAD 2
+--select cs.id, weekday, time_from, time_to, 
+--	pokoj.room_name, kurs.name, psor.name
+--from course_instance as cs
+--join room as pokoj on pokoj.id = cs.room_id
+--join course as kurs on kurs.id = cs.course_id
+--join lecturer as psor on psor.id = cs.lecturer_id
+--order by cs.weekday, cs.time_from, pokoj.room_name;
+
+--	ZAD 3
+--select  psor.name, kurs.name
+--from course_instance as cs
+--join lecturer as psor on psor.id = cs.lecturer_id
+--join course as kurs on kurs.id = cs.course_id
+--order by psor.name, kurs.name;
+
+--	ZAD 4
+--SELECT s.id, s.name, kurs.id, kurs.name, AVG(m.mark)
+--FROM student as s 
+--LEFT OUTER JOIN mark as m ON s.id = m.student_id
+--join course as kurs on kurs.id = m.course_id
+--group by s.id, kurs.name, kurs.id
+--ORDER BY s.name, kurs.name;
+
+--	ZAD 5
+select cs1.weekday, cs1.time_from, cs1.time_to, cs2.time_from, cs2.time_to, cs1.room_id, cs1.year, cs1.id, cs2.id
+from course_instance as cs1
+join course_instance as cs2 on (cs1.weekday = cs2.weekday and cs1.room_id = cs2.room_id and  cs1.year = cs2.year and cs1.id != cs2.id and ((cs1.time_from>=cs2.time_from and cs1.time_from<cs2.time_to) or (cs1.time_to>cs2.time_from and cs1.time_to<=cs2.time_to)))
+order by cs1.weekday, cs1.time_from, cs1.room_id;
+
+--	ZAD 6
+select l.name, kurs.name, 15*extract(hour from sum(ci.time_to - ci.time_from)) as "ilosc_godzin"
+from lecturer as l
+left outer join course_instance as ci on ci.lecturer_id = l.id and ci.year = '2014'
+left outer join course as kurs on kurs.id = ci.course_id
+group by l.name, kurs.name
+order by l.name, kurs.name;
+
+--	ZAD 7
+select l.name, 15*extract(hour from sum(ci.time_to - ci.time_from)) as "ilosc_godzin"
+from lecturer as l
+left outer join course_instance as ci on ci.lecturer_id = l.id and ci.year = '2014'
+group by l.name
+order by l.name;
+
+--	ZAD 8
+select s.name, l.name, ci.weekday, ci.time_from, ci.time_to
+from student as s
+left outer join student_course as sc on s.id = sc.student_id
+join course_instance as ci on ci.course_id = sc.course_id
+join lecturer as l on l.id = ci.lecturer_id
+group by s.name, l.name, ci.weekday, ci.time_from, ci.time_to
+order by s.name, ci.weekday, ci.time_from;
+
+
+--	Challenge 1
+select l.name, coalesce(15*extract(hour from sum(ci.time_to - ci.time_from)), 0) as "ilosc_godzin"
+from lecturer as l
+left outer join course_instance as ci on ci.lecturer_id = l.id and ci.year = '2014'
+group by l.name
+order by l.name;
+
