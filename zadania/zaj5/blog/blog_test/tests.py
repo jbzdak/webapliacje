@@ -9,10 +9,10 @@ def get_blogpost_model():
   from django.apps import apps
   try:
     blog_app = apps.get_app_config("blog_app_solution")
-  except ImproperlyConfigured:
+  except LookupError:
     try:
       blog_app = apps.get_app_config("blog_app")
-    except ImproperlyConfigured:
+    except LookupError:
       raise AssertionError("Nie ma aplikacji 'blog_app'")
 
   try:

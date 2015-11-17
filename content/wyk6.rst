@@ -2,6 +2,11 @@ Formularze w Django i obsługa sesji w HTTP
 ==========================================
 
 
+:date: 2015-11-16
+:tags: zaj6, wykład, materiały
+:category: materiały
+
+
 .. note::
 
   Wykład do pobrania również w wersji PDF.
@@ -13,7 +18,7 @@ Formularze w Django i obsługa sesji w HTTP
 
 .. note::
 
-  Przykłady pożyczone z `dokumentacji django <https://docs.djangoproject.com/en/1.8/topics/forms/>`__
+  Niektóre przykłady zapożyczone z `dokumentacji django <https://docs.djangoproject.com/en/1.8/topics/forms/>`__
   (tak w ogóle dokumentacja Django jest wyjątkowo dobra, więc polecam).
 
 
@@ -46,7 +51,7 @@ Najprostszy formularz Django:
   class NameForm(forms.Form):
       your_name = forms.CharField(label='Your name', max_length=100)
 
-Składnia jest **prawie taka sama** jak modeli (potem pokażę jak automatycznie
+Składnia jest **prawie taka sama**, jak modeli (potem pokażę jak automatycznie
 tworzyć formularze z modeli).
 
 .. note::
@@ -66,7 +71,7 @@ Typowy widok w Django wygląda tak (przeczytajcie komentarze!):
                                    # próbujemy przetworzyć dane z od użytkownika
           form = Form(request.POST) # Tworzymy formularz
           if form.is_valid(): # Jeśli jest poprawny
-              # Tu jest kod który coś robi z formularzem
+              # Tu jest kod, który coś robi z formularzem
               return HttpResponseRedirect('/thanks/') # Przekierowanie
       elif request.method == 'GET':
           form = NameForm() # Zapytanie jest GET więc tworzymy formularz
@@ -83,21 +88,20 @@ Typowy widok w Django wygląda tak (przeczytajcie komentarze!):
   Django nie lubi duplikacji kodu (zasada `DRY <https://en.wikipedia.org/w/index.php?title=Don%27t_repeat_yourself&oldid=675733638>`__),
   a taki schemat ma 90% widoków w Django, dostarcza się więc
   `Class Based Views <https://docs.djangoproject.com/en/1.8/topics/class-based-views/>`__
-  oraz `Class Based Generic Views <https://docs.djangoproject.com/en/1.8/topics/class-based-views/generic-display/>`__.
-
-  Które pozwalają oprogramować widok nie w postaci funkcji, a w postaci **typu**,
+  oraz `Class Based Generic Views <https://docs.djangoproject.com/en/1.8/topics/class-based-views/generic-display/>`__,
+  które pozwalają oprogramować widok nie w postaci funkcji, a w postaci **typu**,
   dodatowo dostarczane są generyczne widoki, które zawierają wzorce jak
   ten powyżej.
 
-  Na razie nie będziemy ich używać (nie wiem czy w ogóle), bo ich użycie jest
-  *na początku* trudniejsze niż funkcyjnych. Jednak jeśli kiedyś zajmiecie
+  Na razie nie będziemy ich używać (nie wiem czy w ogóle), bo użycie widoków klasowych
+  *na początku* jest trudniejsze niż funkcyjnych. Jednak jeśli kiedyś zajmiecie
   się Django na poważnie, bardzo polecam ich używanie.
 
 Umieszczanie formularzy w szablonie
 ***********************************
 
 Formularz potrafi wyświetlić pola i ew. błędy walidacji. Nie wyświetla natomiast
-samego tagu ``<form>>`` oraz guzika submit.
+samego tagu ``<form>`` oraz guzika submit.
 
 .. code-block:: html
 
@@ -108,8 +112,8 @@ samego tagu ``<form>>`` oraz guzika submit.
   </form>
 
 Instrukcja ``{{ form }}`` wyświetla zawartość formularza, do tego musicie stworzyć 
-tag ``<form>`` oraz guzik. Pojawia się również magiczny tag ``{% csrf_token %}``,
-jest to tag który implementuje zabezpieczenie przed (bardzo poważnym atakiem
+tag ``<form>`` oraz guzik. Pojawia się również "magiczny" tag ``{% csrf_token %}``,
+jest to tag który implementuje zabezpieczenie przed (bardzo poważnym) atakiem
 ``Cross Site Request Forgery``, który zostanie wyjaśniony pod koniec zajęć.
 
 Pobieranie danych z formularza
@@ -136,10 +140,10 @@ Przyjrzyjmy się jeszcze raz fukcji widoku:
       return render(request, 'name.html', {'form': form})
 
 
-Obsługa błędów w formularzach
-*****************************
+Obsługa walidacji w formularzach
+********************************
 
-Formularze django posiadają funkcjonalność walidacji danych przychodzących od
+Formularze Django posiadają funkcjonalność walidacji danych przychodzących od
 użytkownika. Błędy są automatycznie wyświetlane pod polem (walidacja
 ma miejsce po stronie serwera, więc błędy pojawią się dopiero po wysłaniu
 danych).
@@ -183,13 +187,13 @@ Dwie ważne uwagi:
 Sprawdzanie zależności między polami
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Powiedzmy, że piszemy widok w którym (pośród innych pól) są dwa pola: jedno
+Powiedzmy, że piszemy widok, w którym (pośród innych pól) są dwa pola: jedno
 jest chekboxem: ``Proszę o przesłanie potwierdzenia``, drugie zawiera adres
 ``e-mail`` do przesłania potwierdzenia. Adres ``e-mail`` nie jest wymagany,
-chyba że użytkownik chce dostać informacje o potwierdzeniu.
+chyba, że użytkownik chce dostać informacje o potwierdzeniu.
 
 Takiej relacji nie da się zaprogramować stosując walidatory. W takim
-przypadku należy nadpisać funkcję clean w modelu:
+przypadku należy nadpisać funkcję ``clean`` w modelu:
 
 .. code-block:: python
 
@@ -226,24 +230,24 @@ w `hierarchii Chomskyego <https://en.wikipedia.org/w/index.php?title=Chomsky_hie
 
 .. note::
 
-  Ogólno rozwojowo polecam Państwu poczytanie o Chomskym i jego poglądach,
-  twierdzi on np. że język jest (a dokładnie umiejętność tworzenia i poznawania
-  języków) jest jedną z naturalnych funkcji mózgu człowieka --- inaczej mówiąc
+  Ogólnorozwojowo polecam Państwu poczytanie o Chomskym i jego poglądach,
+  twierdzi on np., że język jest (a dokładnie umiejętność tworzenia i poznawania
+  języków) jedną z naturalnych funkcji mózgu człowieka --- inaczej mówiąc,
   język jest organem, podobnie jak wątroba (tylko zapewnia inne funkcje
   zwiększające szanse przeżycia).
 
-Języki regularne są bardzo prymitywne, następujące "języki" nie mogą być
+Języki regularne są bardzo prymitywne, następujące języki nie mogą być
 opisane wyrażeniem regularnym
 
 * Wszystkie nieegzotyczne języki programowania: C, C++, Java, Python
 * Języki składu tekstu: Latex, `HTML <http://stackoverflow.com/a/1732454/7918>`__, XML
 * Adresu e-mail (bo `poprawnym adresem e-mial  <https://www.ietf.org/rfc/rfc5322.txt>`__
-  jest np.: `"foo@bar"+"tag foo bar"@gmail.com`)
+  jest np.: ``"foo@bar"+"tag foo bar"@gmail.com``)
 
 Nadają się natomiast do:
 
-* Parsowania wszystikich tych języków w zastoswaniach w których nie zależy nam
-  na wydajności ani na 100% poprawności. Można parsować "znany podzbiór" HTML
+* Parsowania wszystikich tych języków w zastoswaniach, w których nie zależy nam
+  na wydajności, ani na 100% poprawności. Można parsować "znany podzbiór" HTML
   za pomocą wyrażeń regularnych (lepiej użyć `parsera HTML <https://docs.python.org/3.5/library/html.parser.html>`__
   wbudowanego w bibliotekę Pythona).
 * Parsowania URL na stronie.
@@ -297,7 +301,7 @@ Zasady przetwarzania adresów url są proste.
 
 * Django po kolei próbuje dopasować adres URL do wszystkich wzorców
 * Jeśli nie uda się to zwraca błąd: ``404``
-* Jeśli się uda to zwraca wynik wywołania odpowiednej funkcji.
+* Jeśli się uda to zwraca wynik wywołania odpowiednego widoku
 
 Nazwane grupy w konfiguracji URL
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -321,16 +325,16 @@ I taką konfigurację URL:
       url('^/login/(?P<username>\w+)/?$', views.login, name="login")
     ]
 
-Jeśli w takiej konfiguracji użytkownik wejdzie na adres ``/login/jb`` to jako
+Jeśli w takiej konfiguracji użytkownik wejdzie na adres ``/login/jb``, to jako
 parametr ``username`` widoku zostanie przesłana grupa o nazwie ``username``
 czyli wartość ``jb``.
 
 Odwracanie adresów url
 **********************
 
-Django stosuje zasadę DRY, i adres danej strony winien być zdefiniowany
+Django stosuje zasadę DRY i adres danej strony winien być zdefiniowany
 dokładnie w jednym miejscu: w konfiguracji url. Jeśli adres strony potrzebny
-jest w innym miejscu można go uzyskać za pomocą **odwracania**  adresów url.
+jest w innym miejscu, można go uzyskać za pomocą **odwracania**  adresów url.
 
 By dokonać tego w Pythonie należy:
 
@@ -340,7 +344,7 @@ By dokonać tego w Pythonie należy:
 
   reverse('login', kwargs={"username": "jb"})
 
-Pierwszym argumentem tej funkcji jest **nazwa** urla który odwracamy. Za
+Pierwszym argumentem tej funkcji jest **nazwa** urla, który odwracamy. Za
 pomocą kwargs przekazujemy słownik zawierający wartości wszystkich zdefiniowanych
 grup.
 
@@ -358,12 +362,12 @@ HTTP Basic Auth
 ***************
 
 Funkcjonalność sesji  zasadniczo nie jest konieczna do zapewnienia możliwości zalogowania
-się użytkownika, pierwszym standardem który umożliwiał logowanie do usług był
+się użytkownika, najprostszym standardem, który umożliwiał logowanie do usług był
 standard HTTP Basic authentication.
 
 Działanie tego protokołu jest bardzo proste:
 
-* Użykownik próbuje wykonać akcję do której nie ma uprawnień.
+* Użykownik próbuje wykonać akcję, do której nie ma uprawnień.
 * Serwer odpowiada ze stanem ``401`` (który oznacza brak autoryzacji), oraz
   załącza do odpowiedzi nagłowek o treści: ``WWW-Authenticate: Basic realm="domena"``.
 
@@ -381,10 +385,10 @@ bezpośrednio przeglądarka).
 
 .. note::
 
-  HTTP Basic Auth **nie zapewnia żadnego bezpieczeństwa**, hasło jest w łatwej
-  do odzyskania formie załączane do każdego zapytania.
+  HTTP Basic Auth **nie zapewnia żadnego bezpieczeństwa**, hasło jest załączane
+  w prostej do odzyskania formie do każdego zapytania.
 
-  Czasem standard ten stosowany jest w sieciach wewnętrznych (zakładamy że
+  Czasem standard ten stosowany jest w sieciach wewnętrznych (zakładamy, że
   tam sieć jest zaufana). Nie powinno się go stosować bez równoległego
   szyfrowania całej komunikacji (protokół TLS).
 
@@ -395,11 +399,11 @@ Ciastka
 ^^^^^^^
 
 Sesje HTTP mogą być zaimplementowane za pomocą rozszerzenia, czyli ``ciastek``.
-Ciastka to specjalne nagłowki HTTP które wysyła serwer i które oznaczają:
+Ciastka to specjalne nagłowki HTTP, które wysyła serwer i które oznaczają:
 "Droga przeglądarko tutaj masz ciąg znaków który powinnaś odsyłać do każdego
 kolejnego zapytania, które dodatkowo spełnia pełne warunki".
 
-By poprosić ciastko o ustawienie ciastka przeglądarka wysyła nagłowek o treści::
+By poprosić przeglądarkę o ustawienie ciastka serwer wysyła nagłowek o treści::
 
   Set-Cookie: sessionToken=abc123; Expires=Wed, 09 Jun 2021 10:18:14 GMT
 
@@ -409,7 +413,7 @@ Przeglądarka powinna odsyłać nagłowek o treści::
 
 Aż do dnia: Wed, 09 Jun 2021 10:18:14 GMT.
 
-Jedno ciastko jest odwzorowaniem ``klucz=wartość``, tj. przeglądarka która otrzyma::
+Jedno ciastko jest odwzorowaniem ``klucz=wartość``, tj. przeglądarka, która otrzyma::
 
     Set-Cookie: sessionToken=abc123; Expires=Wed, 09 Jun 2021 10:18:14 GMT
 
@@ -422,13 +426,13 @@ Ograniczenia ciastek
 Serwer może określić:
 
 * Maksymalny wiek ciastka
-* Domenę dla której ciastko jest ustawione (Domena ``foo.com`` może ustawić
+* Domenę, dla której ciastko jest ustawione (Domena ``foo.com`` może ustawić
   ciastko dla domeny ``*.foo.com``, nie może dla ``com`` oraz ``bar.com``).
 * Ścieżkę dla której ciastko jest ustawione (jeśli ciastko jest ustawione na
   ścieżkę: ``/path`` to tylko zapytania na ścieżki zaczynające się od ``/path``
   będą zawierać dane ciastko.
-* To że ciastko może być wysyłane tylko dla połączeń HTTPS.
-* To że ciastko może nie jest widoczne dla kodu Javascript.
+* To, że ciastko może być wysyłane tylko dla połączeń HTTPS.
+* To, że ciastko może nie jest widoczne dla kodu Javascript.
 
 
 Implementacja sesji za pomocą ciastek
@@ -440,7 +444,7 @@ Sesja trzymana po stronie serwera
 .. note::
 
   W 99% przypadków prawidłowym rozwiązaniem jest trzymanie sesji po stronie
-  serwera. Proszę używać tej metody o ile nie macie ważnego powodu.
+  serwera. Proszę używać tej metody, o ile nie macie ważnego powodu.
 
 Użytkownik wchodzi na stronę logowania i wprowadza poprawne dane logowania.
 Serwer generuje dla niego **losowy** "identyfikator sesji". Następnie zapisuje
@@ -454,7 +458,7 @@ Autoryzacja użykownika następuje za pomocą identyfikatora sesji.
 
 .. note::
 
-  Identyfikator sesji stanowi informację za pomocą której można *podszyć się za danego
+  Identyfikator sesji stanowi informację za pomocą, której można *podszyć się za danego
   użytkownika*. Kiedy jestem w stanie **zgadnąć** czyjś identyfikator sesji
   mogę wykonywać zapytania tak jakbym był tą osobą.
 
@@ -495,8 +499,8 @@ Wady sesji trzymanej po stronie użytkownika:
 * Ciastko jest przesyłane z każdym zapytaniem. Jeśli jest ono duże może powodować to
   spowolnienie działania strony dla innych użytkowników.
 * Nie ma możliwości **wygaśnięcia** sesji przed czasem. Ciastko to musi jeszcze
-  zawierać (w części która jest podpisana!) datę wygaśnięcia, niestety nie ma
-  możliwości spowodowania by taka sesja szybciej wygasła.
+  zawierać (w części, która jest podpisana!) datę wygaśnięcia, niestety nie ma
+  możliwości spowodowania, by taka sesja szybciej wygasła.
 
 Implementacja sesji trzymanej w bazie danych
 --------------------------------------------
@@ -523,7 +527,7 @@ By go deserializować::
   Pythona i jest rozsądnie szybki. Jednak **nie wolno odczytywać danych
   pochodzących z niezaufanego źródła**. Odpowiednio stworzony strumień danych
   pickle może podczas deserializacji wykonać **dowolne polecenia z uprawnieniami
-  danego użytkownika**.
+  danego użytkownika**, w szczególności **może wywołać** ``rm -rf``.
 
   Pickle nie wspiera również szyfrowania danych! Dane są bezpośrednio czytelne
   w zapisanym strumieniu::
@@ -565,7 +569,7 @@ Nadanie sesji:
 Zalogowanie użytkownika
 
 1. Sprawdzamy czy użytkownik ma już istniejącą sesję, jeśli nie tworzymy ją.
-2. Dodajemy do sesji informację o tym że użytkownik się zalogował
+2. Dodajemy do sesji informację o tym, że użytkownik się zalogował
 
 Wylogowanie użytkownika
 
@@ -601,7 +605,7 @@ tej zapisanej w bazie danych.
 
 .. note::
 
-  Funkcja skrótu to funkcja która przekształca ciąg N bitów w ciąg M bitów,
+  Funkcja skrótu to funkcja, która przekształca ciąg N bitów w ciąg M bitów,
   gdzie M jest stałe a N dowolne. Ma dodatkowo nastepujące cechy:
 
   * Statystycznie zmiana jednego bitu w ciągu wejściowym powoduje zmianę
@@ -631,7 +635,7 @@ korzystają z kryptograficznego generatora wbudowanego w system operacyjny.
   na starcie systemu.
 
   W skrócie: dwie takie same maszyny wirtualne mają też bardzo podobne ziarna
-  losowe dla generatora wbudowanego w system, co powoduje że da się przewidzieć
+  losowe dla generatora wbudowanego w system, co powoduje, że da się przewidzieć
   wygenerowane tak liczby losowe.
 
 Same Origin Policy
@@ -640,7 +644,7 @@ Same Origin Policy
 Single Origin Policy to podstawa modelu bezpieczeństwa współczesnych przeglądarek
 internetowych.
 
-Oznacza ona że serwer skojarzony z domeną A widzi ciastka przesłane przez serwer
+Oznacza ona, że serwer skojarzony z domeną A widzi ciastka przesłane przez serwer
 skojrzaony z domeną B. Tylko wtedy gdy B==A lub B jest subdomeną A.
 
 Prostymi słowy oznacza to, ciastko sesji z Waszego banku jest przesyłane tylko
@@ -673,10 +677,10 @@ Umieszczam teraz na mojej stronie(!) następujący formularz:
     <submit> Wyślij Komentarz </submit>
   </form>
 
-Użytkownik widzi pole tekstowe, oraz guzik z napisem "Wyślij komentarz".
+Użytkownik widzi pole tekstowe oraz guzik z napisem "Wyślij komentarz".
 
 Użytkownik dodatkowo jest w innym oknie przeglądarki zalogowany do swojego banku,
-dodatkowo wpisuje komentarz i klika wyślij.
+wpisuje komentarz i klika wyślij.
 
 Przeglądarka wysyła zapytanie POST na serwer ``wasz.bank.com``, załącza do niego
 również wszystkie ciastka z tej domeny (co jest zgodne z SOP). W wyniku tego
@@ -690,6 +694,6 @@ By zabezpieczyć się przed CSRF należy:
 1. Do każdego formularza POST dodać ukryte pole z losową wartością.
 2. Przy przetwarzaniu formularza POST sprawdzać wartośc w tym polu.
 
-W django takie pole dodaje tag ``{% csrf_token %}``, a sprawdzanie jest
+W Django takie pole dodaje tag ``{% csrf_token %}``, a sprawdzanie jest
 automatyczne.
 

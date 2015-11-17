@@ -27,10 +27,12 @@ def zad2():
   start = 0
   end = math.pi*2
   sum = 0
-  ran = 10000000
+  ran = 100000
+  step = (end-start)/ran
+  f = math.sin
   for i in range(ran):
-    sum += math.sin(i/end)
-  return sum * end/ran
+    sum += f(i*step)
+  return sum * step
 
 
 def zad3_arange(start, stop, step):
@@ -50,9 +52,39 @@ def zad3_arange(start, stop, step):
   Np. zad3_arange(0, 5, 1) zwraca: [0, 1, 2, 3, 4]
   zad3_arange(0, 5, .1) zwraca: [0, .1, .2 ..., 3, ... 4.9]
   """
-  return None
+  ran = []
+  while start < stop:
+    ran.append(start)
+    start += step
+  return ran
 
-ZAD3_DATA  = None
+ZAD3_DATA  = [
+  {
+    "imie": "Ziemniak",
+    "rasa": "Pies",
+    "wiek": 5
+  },
+  {
+    "imie": "Marchewka",
+    "rasa": "Kot",
+    "wiek": 3
+  },
+  {
+    "imie": "Seler",
+    "rasa": "Chomik",
+    "wiek": 0.5
+  },
+  {
+    "imie": "Brokuł",
+    "rasa": "Pająk",
+    "wiek": 25
+  },
+  {
+    "imie": "Szpinak nowozelandzki",
+    "rasa": "Gżegżółka",
+    "wiek": 1
+  },
+]
 """
 Podmień definicję zmiennej DATA tak by:
 

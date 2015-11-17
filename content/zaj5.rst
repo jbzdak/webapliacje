@@ -1,10 +1,11 @@
-Zajęcia 4: Zadania
+Zajęcia 5: Zadania
 ==================
 
 :date: 2015-11-9
 :tags: zaj5, zadania
 :category: zadania
-:status: draft
+
+Kod statrowy do pobrania `stąd <downloads/blog.zip>`__.
 
 Zadanie polega na stworzeniu prostej aplikacji do blogowania.
 
