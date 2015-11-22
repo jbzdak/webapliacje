@@ -5,3 +5,4 @@ Zajęcia 6: Zadania
 :tags: zaj6, zadania
 :category: zadania
 :status: draft
+
