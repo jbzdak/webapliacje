@@ -1,28 +1,28 @@
-;Grupa ;Numer;Nr indeksu ;Zaj 1 (max 40);Zaj 1 ob;Zaj 2 ob;Zaj 2 (max 22) – uwaga ocena niepełna ;Unnamed: 8;Zaj 3 (max 40 --- 10 punktów za każdy plik);Unnamed: 10;Kol 1: SQL ;Kol 1 Max ;Zaj 4 ob;Zaj 4
-0;rano;1.0;237995;40;ob;;16.0;;40.0;;16.0;30.0;;
-1;rano ;1.0;245263;40;ob;;16.0;;40.0;;26.0;30.0;;
-2;rano;2.0;245352;40;ob;;22.0;(gratulacje!);40.0;;21.0;30.0;;5.0
-3;rano;2.0;245349;40;ob;;22.0;(gratulacje!);40.0;;16.0;30.0;;5.0
-4;rano;3.0;;;-;;21.0;;;;;;;
-5;rano;;;;;;;;;;;;;
-6;rano;4.0;245251;39;ob;;22.0;(gratulacje!);12.0;(string1 zrobiony, string2 częsciowo);15.0;30.0;;5.0
-7;rano;4.0;245370;39;ob;;22.0;(gratulacje!) ;12.0;;18.0;30.0;;5.0
-8;rano;5.0;245262;38;ob;;19.0;;40.0;(string1 zrobiony, string2 częsciowo);5.0;30.0;nb ;
-9;rano;5.0;245244;38;ob;;19.0;;40.0;;26.0;30.0;;
-10;rano;6.0;261632;40;ob;;16.5;;25.0;"(w string2 jest problem --- nie działą w pythonie3, ponieważ tam ½ daje floata; zapraszam na konsultacje)";26.0;30.0;;5.0
-11;rano;6.0;261553;40;ob;;16.5;;20.0;;28.0;30.0;;5.0
-12;rano;7.0;251792;;-;;19.0;;38.0;"(w string2 jest problem --- nie działą w pythonie3, ponieważ tam ½ daje floata; zapraszam na konsultacje)";20.0;30.0;;5.0
-13;rano;7.0;251728;40;ob;;19.0;;38.0;"(w string2 jest problem --- nie działą w pythonie3, ponieważ tam ½ daje floata; zapraszam na konsultacje)";18.0;30.0;;5.0
-14;wieczór;1.0;251812;40;ob;;18.0;;32.0;"(w string2 jest problem --- nie działą w pythonie3, ponieważ tam ½ daje floata; zapraszam na konsultacje)";22.0;40.0;;5.0
-15;wieczór;1.0;251817;40;ob;;18.0;;32.0;;36.0;40.0;;5.0
-16;wieczór;2.0;251775;39;ob;;12.0;;40.0;(gratulacje!) ;12.0;40.0;;5.0
-17;wieczór;2.0;238010;39;ob;nb;;;;;;;;
-18;wieczór;3.0;245339;40;ob;;21.0;;40.0;(brak blok1);36.0;40.0;;5.0
-19;wieczór;3.0;245357;40;ob;;21.0;;40.0;;38.0;40.0;;5.0
-20;wieczór;4.0;251790;40;ob;;19.0;;40.0;;36.0;40.0;;5.0
-21;wieczór;4.0;251777;40;ob;;19.0;;40.0;;14.0;40.0;;5.0
-22;wieczór;5.0;TS – proszę podać nr. Indeksu (osobiście na zajęciach);40;;;12.0;;40.0;;;;;
-23;wieczór;6.0;MK – proszę podać nr. Indeksu (osobiście na zajęciach);40;;;12.0;;30.0;"(w string2 jest problem --- nie działą w pythonie3, ponieważ tam ½ daje floata; zapraszam na konsultacje)";30.0;40.0;;5.0
-24;wieczor;7.0;251791;40;;;20.0;;40.0;"(w string2 jest problem --- nie działą w pythonie3, ponieważ tam ½ daje floata; zapraszam na konsultacje)";33.0;40.0;;5.0
-25;wieczor;7.0;251799;40;;;20.0;;40.0;"(w string2 jest problem --- nie działą w pythonie3, ponieważ tam ½ daje floata; zapraszam na konsultacje)";6.0;40.0;;5.0
-26;;;;note: maksimum to 40 pkt;;;;;;;;;;
+;Grupa ;Numer;Nr indeksu ;Zaj 1 (max 40);Zaj 1 ob;Zaj 2 ob;Zaj 2 (max 22) – uwaga ocena niepełna ;Unnamed: 8;Zaj 3 (max 40 --- 10 punktów za każdy plik);Unnamed: 10;Kol 1: SQL ;Kol 1 Max ;Zaj 4 ob;Zaj 4;Zaj 5 ob;Zaj 5 
+0;rano;1.0;237995;40;ob;;16.0;;40.0;;16.0;30.0;;;;
+1;rano ;1.0;245263;40;ob;;16.0;;40.0;;26.0;30.0;;;;
+2;rano;2.0;245352;40;ob;;22.0;(gratulacje!);40.0;;21.0;30.0;;5.0;;
+3;rano;2.0;245349;40;ob;;22.0;(gratulacje!);40.0;;16.0;30.0;;5.0;;
+4;rano;3.0;;;-;;21.0;;;;;;;;;
+5;rano;;;;;;;;;;;;;;;
+6;rano;4.0;245251;39;ob;;22.0;(gratulacje!);12.0;(string1 zrobiony, string2 częsciowo);15.0;30.0;;5.0;;5.0
+7;rano;4.0;245370;39;ob;;22.0;(gratulacje!) ;12.0;;18.0;30.0;;5.0;;5.0
+8;rano;5.0;245262;38;ob;;19.0;;40.0;(string1 zrobiony, string2 częsciowo);5.0;30.0;nb ;5.0;;
+9;rano;5.0;245244;38;ob;;19.0;;40.0;;26.0;30.0;;5.0;;
+10;rano;6.0;261632;40;ob;;16.5;;35.0;;26.0;30.0;;5.0;;
+11;rano;6.0;261553;40;ob;;16.5;;35.0;;28.0;30.0;;5.0;;
+12;rano;7.0;251792;;-;;19.0;;38.0;;20.0;30.0;;5.0;;
+13;rano;7.0;251728;40;ob;;19.0;;38.0;;18.0;30.0;;5.0;;
+14;wieczór;1.0;251812;40;ob;;18.0;;32.0;"(w string2 jest problem --- nie działą w pythonie3, ponieważ tam ½ daje floata; zapraszam na konsultacje)";22.0;40.0;;5.0;;
+15;wieczór;1.0;251817;40;ob;;18.0;;32.0;;36.0;40.0;;5.0;;
+16;wieczór;2.0;251775;39;ob;;22.0;;40.0;(gratulacje!) ;12.0;40.0;;5.0;;
+17;wieczór;2.0;238010;39;ob;nb;;;;;;;;;;
+18;wieczór;3.0;245339;40;ob;;21.0;;40.0;(brak blok1);36.0;40.0;;5.0;;
+19;wieczór;3.0;245357;40;ob;;21.0;;40.0;;38.0;40.0;;5.0;;
+20;wieczór;4.0;251790;40;ob;;19.0;;40.0;;36.0;40.0;;5.0;;
+21;wieczór;4.0;251777;40;ob;;19.0;;40.0;;14.0;40.0;;5.0;;
+22;wieczór;5.0;TS – proszę podać nr. Indeksu (osobiście na zajęciach);40;;;12.0;;40.0;;;;;;;
+23;wieczór;6.0;MK – proszę podać nr. Indeksu (osobiście na zajęciach);40;;;12.0;;30.0;"(w string2 jest problem --- nie działą w pythonie3, ponieważ tam ½ daje floata; zapraszam na konsultacje)";30.0;40.0;;5.0;;
+24;wieczor;7.0;251791;40;;;20.0;;40.0;"(w string2 jest problem --- nie działą w pythonie3, ponieważ tam ½ daje floata; zapraszam na konsultacje)";33.0;40.0;;5.0;;
+25;wieczor;7.0;251799;40;;;20.0;;40.0;"(w string2 jest problem --- nie działą w pythonie3, ponieważ tam ½ daje floata; zapraszam na konsultacje)";6.0;40.0;;5.0;;
+26;;;;note: maksimum to 40 pkt;;;;;;;;;;;;

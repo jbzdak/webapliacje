@@ -1,5 +1,5 @@
-Formularze w Django i obsługa sesji w HTTP
-==========================================
+Wykład 6: Formularze w Django i obsługa sesji w HTTP
+====================================================
 
 
 :date: 2015-11-16

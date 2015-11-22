@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Address list</title>
+</head>
+<body>
+
+<ul>
+{% for a in adresses %}
+  <li>
+    {{ a.zip_code }} {{ a.street_address }} {{ a.street_no }} {{ a.city }} {{ a.voivoidship }}
+  </li>
+  {% empty %}
+  <li>Nothing to show</li>
+{% endfor %}
+</ul>
+</body>
+</html>
