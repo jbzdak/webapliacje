@@ -129,6 +129,7 @@ Przyjrzyjmy się jeszcze raz fukcji widoku:
   def view(request):
       if request.method == 'POST':
           form = Form(request.POST)
+          if form.is_valid():
               name = form.cleaned_data['your_name']
               # Coś robimy z name
               return HttpResponseRedirect('/thanks/') # Przekierowanie

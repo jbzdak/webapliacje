@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<ul>
+    {% for item in posts %}
+        <li>
+        <div>
+            <h2>{{ item.posted_at }}</h2>
+            <p>{{ item.text }}</p>
+            <a href="/edit?post_id={{ item.id }}">Edit post</a>
+        </div>
+        </li>
+    {% empty %}
+        <li><p>No posts to show</p></li>
+    {% endfor %}
+</ul>
+<a href="/edit">Add new post</a>
+</body>
+</html>

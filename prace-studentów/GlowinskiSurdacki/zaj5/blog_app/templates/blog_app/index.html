@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+<h1>POSTS:</h1>
+    <ul>
+        {% for post in posts %}
+        <li>{{ post.text }}<br />
+        {{ post.posted_at }}<a href = "edit?post_id={{ post.id }}">Edit</a></li><br />
+        {% empty %}
+        <li>No posts to show</li>
+        {% endfor %}
+    </ul>
+    <a href='/edit'>Add post</a>
+</body>
+</html>

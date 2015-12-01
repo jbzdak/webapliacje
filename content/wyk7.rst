@@ -1,6 +1,41 @@
 Szablony Django i tworzenie ładnych stron WWW
 =============================================
 
+:date: 2015-11-25
+:tags: zaj7, wykład, materiały
+:category: materiały
+
+.. note::
+
+  Wykład do pobrania również w wersji PDF.
+
+  .. raw:: html
+
+     <a href="downloads/pdfs/wyk7.pdf">Wersja pdf tutaj</a>
+
+
+Ogłoszenie
+----------
+
+Postanowiłem trochę zmodyfikować mój plan na przedmiot. Na wykładzie 7 będą
+zajęcia pt.: "Jak tworzyć aplikacje w Django: poprawne praktyki". A od zajęć
+7 będziecie pisali przez 4 zajęcia projekt zaliczeniowy.
+
+Dzięki temu:
+
+* Większość grupy napisze poważny projekt zaliczeniowy (na czym mi zależy)
+* Będziecie mieli wolną końcówkę semestru na przygotowania do sesji
+  (na czym, jak mniemam zależy wam).
+
+W związku ze zmianą planów, muszę przygotować wykład jeszcze raz, więc
+proszę o cierpliwość
+
+Projekty
+--------
+
+Zachęcam do zerknięcia na zakładkę z projektami (jest na górze) i wstępne
+obmyślenie waszego projektu.
+
 
 Formularze tworzone z Modeli
 ----------------------------
@@ -271,6 +306,7 @@ Wybieranie po rodzaju tagu
     Selektor równy nazwie tagu wybiera wszystkie tagi danego typu:
 
     .. code-block:: css
+
         h1 {
             background-color: black;
         }
@@ -388,7 +424,7 @@ biblioteki Bootstrap", jest to zestaw styli i javaskryptu dostarczonego przez
 firmę Twitter i rozwijanego na zasadach open-source.
 
 Przykładowo ta strona korzysta z szablonu bootstrapa, dokładniej rzecz biorąc
-``tego szalonu <http://getbootstrap.com/examples/blog/>``__.
+`tego szalonu <http://getbootstrap.com/examples/blog/>`__.
 
 .. note::
 
@@ -472,6 +508,7 @@ Mechanizm dziedziczenia w szablonach
 Tutaj znów najłatwiej jest na przykładzie, to jest szablon login tego samego projektu:
 
 .. code-block:: html
+
     {% extends "base.html" %}
 
     {% block additional-styles %}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <form action='/edit' method='POST'>
+        <label>
+            text: <input name='text' type='text' placeholder='Your post text' value="{{ post_text }}"/>
+        </label>
+        <input type="hidden" value="{{ edited }}" name="edited"/>
+        {% if not has_text %}
+        <p>Please add post text.</p>
+        {% endif %}
+      <button>Submit</button>
+    </form>
+</body>
+</html>
