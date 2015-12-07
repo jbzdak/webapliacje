@@ -167,6 +167,11 @@ Zalety:
 Testy systemowe
 ---------------
 
+.. note::
+
+  Powiązanym pojęciem są testy behavioralne.
+
+
 Co testujemy
 ************
 
@@ -212,6 +217,13 @@ bardziej dokładne.
 4. Często testowany jest "stan projektu po dniu pracy"
 5. Relatywnie trudno zlokalizować defekt
 
+
+.. note::
+
+  Są inne rodzaje testów, np. fuzz testing, w którym aplikację zarzuca się
+  nonsensownymi danymi. Fuzz testing ma mniejsze zastosowanie dla aplikacji WWW,
+  ale jest przydatny np. do testowania bezpieczeństwa kernala i sterowników.
+
 Piramida testów
 ---------------
 
@@ -220,7 +232,7 @@ Piramida projektów zwinnych
 
 1. Najwięcej powinno być testów jednostkowych --- musi być ich najwięcej,
    ponieważ wykonują się one najszybciej, i umożliwiają najłatwiejsze naprawienie
-  błędu.
+   błędu.
 2. Mniej powinno być testów integracyjnych --- są one ważne bo sprawdzają działanie
    komponentów razem, ale skoro mamy dużo testów jednostkowych, to integracyjne
    mają mniej rzeczy do sprawdzenia.
@@ -242,28 +254,6 @@ Jeśli projekt jest mały, pracuje nad nim mały zespół, może udać się tak
 1. Trochę testów jednostkowych --- ale tylko do najbardziej skomplikowanych
    części aplikacji.
 2. Testy systemowe, które sprawdzają czy całość działa razem.
-
-Testowanie w Django
--------------------
-
-Na co pozwala framework Django
-******************************
-
-Django posiada własny system testów, który pozwala na:
-
-1. Testowanie jednostkowe aplikacji.
-2. Proste testy integracyjne (jeśli sprawdzamy komponenty należące do jednego
-   projektu).
-
-Co gwarantuje framework Django
-******************************
-
-Główną funkcjonalnością frameworku testów Django jest zarządzanie bazą danych,
-w taki sposób by przed każdym testem baza danych:
-
-1. Zawierała wszystkie tabele (uruchomiono wszystkie migracje)
-2. Była pusta (zawiera dane jeśli migracje je wstawiły, ale nie zawiera danych
-   które wstawiały inne testy).
 
 Pisanie testów w Django
 -----------------------
@@ -322,8 +312,51 @@ Przykład testu:
       response = c.get("/index/") # Wykonujemy zapytanie http
       # Sprawdzamy czy server odpowiedział statusem 200
       self.assertEqual(200, response.status_code)
-      # Sprwadzamy czzawartość jest odpowiednia
+      # Sprwadzamy czy zawartość jest odpowiednia
+      # Jeśli nie jest leci wyjątek :)
       self.assertIn('No posts to show', response.content.decode("utf-8"))
+
+Testowanie w Django
+-------------------
+
+Na co pozwala framework Django
+******************************
+
+Django posiada własny system testów, który pozwala na:
+
+1. Testowanie jednostkowe aplikacji.
+2. Proste testy integracyjne (jeśli sprawdzamy komponenty należące do jednego
+   projektu).
+
+Framework testów Django pozwala na przetestowanie:
+
+1. Zachowań obiektów typu: modele, managery (to są unittesty)
+2. Testowanie wybierania danych z bazy danych
+3. Wykonywanie zapytań HTTP i testowanie ich działania (np. czy dane zapisały się do bazy,
+   czy HTML zawiera informację o błędach).
+
+Framework testów Django nie pozwala na:
+
+1. Testowanie poprawności działania kodu Javascript.
+2. Testowanie wyglądu stron WWW.
+
+
+.. note::
+
+  Do testowania powyższych dwóch rzeczy (owszem można to robić) używa się
+  rozwiązań, takich jak Lettuce i Selenium, jednak ja sam nigdy nie musiałem
+  ich używać.
+
+Co gwarantuje framework Django
+******************************
+
+Główną funkcjonalnością frameworku testów Django jest zarządzanie bazą danych,
+w taki sposób by przed każdym testem baza danych:
+
+1. Zawierała wszystkie tabele (uruchomiono wszystkie migracje)
+2. Była pusta (zawiera dane jeśli migracje je wstawiły, ale nie zawiera danych
+   które wstawiały inne testy).
+
 
 Interfejs administracyjny
 -------------------------
@@ -368,4 +401,169 @@ głównym pliku ``urls.py`` zostawić takie mapowanie:
       url(r'^admin/', include(admin.site.urls)),
   ]
 
-Przyka
+
+Przykład
+********
+
+Początek
+^^^^^^^^
+
+Po stworzeniu nowego projektu, panel administracyjny będzie zawierał możliwość:
+
+1. Dodawania użytkowników
+2. Dodawania grup użytkowników
+3. Dodawania użytkownikom
+
+Główna strona interfejsu admina wygląda tak:
+
+.. figure:: static/wyk8/admin-czysty.png
+  :width: 80%
+
+  Główna strona interfejsu admina
+
+Model i admin
+^^^^^^^^^^^^^
+
+Dodajmy nową aplikację o nazwie ``zaj8app`` z takim modelem:
+
+.. code-block:: python
+
+  class Student(models.Model):
+
+    name  = models.CharField(max_length=100)
+    e_mail = models.EmailField()
+
+
+.. note::
+
+   Dodajemy ją do ``settings.INSTALLED_APPS`` oraz:
+   ``manage.py makemigrations`` i ``manage.py migrate``.
+
+   Dodajemy też superużytkownika: ``./manage.py createsuperuser``.
+
+.. note::
+
+  Na bardzo dużym marginesie: najprostszą metodą na przechowywanie imienia osoby
+  jest podanie jej długiego pola tekstowego. Nie każda kultura `używa
+  nazwisk <http://www.w3.org/International/questions/qa-personal-names>`__.
+
+Do pliku ``admin.py`` w aplikacji ``zaj8app`` dodajemy klasę:
+
+.. code-block:: python
+
+  # To jest tzw. dekorator, mówi on że klasa StudentAdmin opisuje interfejs
+  # admina dla modelu Student
+  @admin.register(models.Student)
+  class StudentAdmin(admin.ModelAdmin):
+    pass
+
+Klasa ta nie robi w zasadzie nic --- wszystkie ustawienia Admina są domyślne,
+tak skonfigurowany Admin pozwala na:
+
+1. Dodanie i edycję studenta
+2. Wyświetla (bezużyteczną na razie) listę studentów.
+
+.. figure:: static/wyk8/default-list.png
+  :width: 80%
+
+  Lista studentów
+
+.. figure:: static/wyk8/default-add.png
+  :width: 80%
+
+  Dodawanie studentów
+
+.. figure:: static/wyk8/default-add-err.png
+  :width: 80%
+
+  Dodawanie studentów (walidacja)
+
+
+Zmiana zachowania listy 1
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Powiedzmy że w liście chcemy wyświetlać imie i nazwisko studenta, oraz
+jego e-mail w formacie ``j...@gmail.com``.
+
+.. code-block:: python
+
+  # To jest tzw. dekorator, mówi on że klasa StudentAdmin opisuje interfejs
+  # admina dla modelu Student
+  @admin.register(models.Student)
+  class StudentAdmin(admin.ModelAdmin):
+
+    # Te pola będą wyświtlane w liście.
+    # Mogą tu być:
+    # 1. Pola modelu
+    # 2. Zeroargumentowe funkcje na modelu
+    # 3. Jednoargumentowe funkcje na adminie
+    list_display = ('name', 'masked_e_mail')
+
+    def masked_e_mail(self, obj):
+      # obj to edytowany student
+      email = obj.e_mail
+      at = email.rindex('@')
+      return email[0] + ('.' * (at-2)) + email[at:]
+
+
+.. figure:: static/wyk8/list-fixed.png
+  :width: 80%
+
+  Dodawanie studentów (walidacja)
+
+Zmiana zachowania widoku edycji
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Powiedzmy, że chcemy zmienić kolejność pól w widoku edycji, dodamey do modelu
+zatem::
+
+  fields = ('e_mail', 'name')
+
+Dalej, chcemy generować numer albumu, który jednocześnie będzie kluczem głównym
+modelu::
+
+.. code-block:: python
+
+  class Student(models.Model):
+
+    nr_albumu = models.AutoField(primary_key=True)
+
+    name  = models.CharField(max_length=100)
+    e_mail = models.EmailField()
+
+.. note::
+
+  Ogólnie klucz główny nie powinien być widoczny poza bazą danych.
+
+  Migracja zmieniająca klucz główny może być trudna dla Was do przeprowadzenia.
+
+Pole z ``nr_albumu`` nie jest edytowalne, w tym celu należy dodać je do
+``fields`` **oraz do** ``readonly_fields``::
+
+  # To jest tzw. dekorator, mówi on że klasa StudentAdmin opisuje interfejs
+  # admina dla modelu Student
+  @admin.register(models.Student)
+  class StudentAdmin(admin.ModelAdmin):
+
+    # Te pola będą wyświtlane w liście.
+    # Mogą tu być:
+    # 1. Pola modelu
+    # 2. Zeroargumentowe funkcje na modelu
+    # 3. Jednoargumentowe funkcje na adminie
+    list_display = ('nr_albumu', 'name', 'masked_e_mail')
+
+    readonly_fields = ('nr_albumu',)
+
+    fields = ('nr_albumu', 'e_mail', 'name')
+
+    def masked_e_mail(self, obj):
+      # obj to edytowany student
+      email = obj.e_mail
+      at = email.rindex('@')
+      return email[0] + ('.' * (at-2)) + email[at:]
+
+Więcej informacji o interfejsie administracyjnym:
+
+* https://docs.djangoproject.com/en/1.8/ref/contrib/admin/
+
+
