@@ -1,5 +1,5 @@
-Szablony Django i tworzenie ładnych stron WWW
-=============================================
+Wykład 7: Szablony Django i tworzenie ładnych stron WWW
+=======================================================
 
 :date: 2015-11-25
 :tags: zaj7, wykład, materiały

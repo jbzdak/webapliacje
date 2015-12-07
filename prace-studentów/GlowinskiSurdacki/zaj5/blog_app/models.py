@@ -10,3 +10,4 @@ class BlogComment(models.Model):
     text = models.TextField()
     owner = models.CharField(max_length=20)
     post = models.ForeignKey('BlogPost', null=False)
+    posted_at = models.DateTimeField(auto_now_add=True)

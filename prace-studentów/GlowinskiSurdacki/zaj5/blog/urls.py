@@ -10,5 +10,6 @@ urlpatterns = [
     # url(r'^admin/', include(admin.site.urls)),
     url('^index/?$', views.index),
     url('^edit/?$', views.edit),
-
+    url('^post/?$', views.post),
+    url('^/?$', views.index),
 ]

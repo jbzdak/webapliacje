@@ -51,6 +51,7 @@ generate wyk4
 generate wyk5
 generate wyk6
 generate wyk7
+generate wyk8
 
 generate zaj2
 generate zaj3

@@ -46,6 +46,7 @@ class TestFor3(TestCase):
   def test_for_empty_list(self):
     c = Client()
     response = c.get("/index/")
+    self.assertEqual(200, response.status_code)
     self.assertIn('No posts to show', response.content.decode("utf-8"))
 
   def test_entries_are_displayed(self):

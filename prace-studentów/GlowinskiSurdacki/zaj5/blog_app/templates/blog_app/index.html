@@ -8,7 +8,8 @@
     <ul>
         {% for post in posts %}
         <li>{{ post.text }}<br />
-        {{ post.posted_at }}<a href = "edit?post_id={{ post.id }}">Edit</a></li><br />
+        {{ post.posted_at }}<a href = "edit?post_id={{ post.id }}">Edit</a><br />
+            <a href = "post?post_id={{ post.id }}">Posts with comments</a></li><br />
         {% empty %}
         <li>No posts to show</li>
         {% endfor %}

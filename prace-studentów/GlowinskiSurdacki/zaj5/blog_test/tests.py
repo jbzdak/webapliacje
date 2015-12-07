@@ -1,7 +1,8 @@
 import datetime
 from django.core.exceptions import ImproperlyConfigured, FieldDoesNotExist
 from django.test import TestCase, Client
-
+import django
+django.setup()
 
 # Create your tests here.
 
