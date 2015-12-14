@@ -1,27 +1,27 @@
 Tranzakcie w bazie danyh
 ========================
 
-Zacznijmy od przykładu, mam system bazodanowy który implementuje funkcjonalność
+Zacznijmy od przykładu, mam system bazodanowy, który implementuje funkcjonalność
 przelewów. Algorytm przelewu działa następująco:
 
-1. Sprawdzamy czy istnieje konto A
-2. Sprawczamy czy istnieje konto B
-3. Sprawdzamy czy konto ma saldo pozwalające na przelew.
-4. Zmieniamy saldo konta A, zmniejszając je o K (kwotę przelewu)
-5. Zmieniamy saldo konta B, zwiększając je o K
+1. Sprawdzamy czy istnieje konto A,
+2. Sprawczamy czy istnieje konto B,
+3. Sprawdzamy czy konto ma saldo pozwalające na przelew,
+4. Zmieniamy saldo konta A, zmniejszając je o K (kwotę przelewu),
+5. Zmieniamy saldo konta B, zwiększając je o K.
 
-Saldo konta A ma 200 zł a użytkownik próbuje **na raz** dokonać dwóch przelewów:
+Saldo konta A ma 200 zł, a użytkownik próbuje **na raz** dokonać dwóch przelewów:
 
-1. Z konta A do konta B na kwotę 200 zł
-2. Z konta A do konta C na kwotę 200 zł
+1. Z konta A do konta B na kwotę 200 zł,
+2. Z konta A do konta C na kwotę 200 zł.
 
 Jaki jest wynik tej operacji:
 
-A. Na koncie A jest -200 zł a na kontach B i C po 200
-B. Na koncie A jest 0 zł a na kontach B i C po 200
-C. Na koncie A jest 0 zł a na kontach B i C po 0
+A. Na koncie A jest -200 zł, a na kontach B i C po 200;
+B. Na koncie A jest 0 zł, a na kontach B i C po 200;
+C. Na koncie A jest 0 zł, a na kontach B i C po 0;
 
-Odpowiedź brzmi: Nie wiadomo! Ten algorytm zawiera tzw. *hazard*
+Odpowiedź brzmi: Nie wiadomo! Ten algorytm zawiera, tzw. *hazard*
 (lub *race condition*)! W zależności od czasów uruchomienia tych operacji
 możliwe są różne ostateczne wyniki.
 
@@ -31,10 +31,10 @@ ACID
 ACID to podstawowe założenia systemu tranzakcyjnego:
 
 Atomicity
-  Transakcje są atomowe, albo się udają albo nie, albo wykonują wszystkie zmiany
+  Transakcje są atomowe, albo się udają, albo nie, albo wykonują wszystkie zmiany
   w baziedanych, albo żadnej.
 
-  Transakcja która się powiodła jest zapisywana (z. ang. *commit*), a transakcja
+  Transakcja, która się powiodła jest zapisywana (z. ang. *commit*), a transakcja
   która się nie powiodła wycofywana (z. ang. *rollback*).
 
 Consistency
@@ -83,7 +83,7 @@ Phantom Read
   .. note::
 
     Różnica między Non-Repeatable Read a Phantom Read jest dość ulotna,
-    zasadniczo polega to na tym że Phantom Read może wystąpić jeśli inna
+    zasadniczo polega to na tym, że Phantom Read może wystąpić jeśli inna
     transakcja doda nowe dane.
 
   **Short example**:
@@ -97,9 +97,9 @@ Write Skew
   Jest to anomalia w bazach MVCC, w której dwie transakcje (z których każda oddzielnie
   zostawia bazę w dobrym stanie) przenoszą bazę danych do niedozwolonego stanu.
 
-  Mamy bazę danych banku w której zamiast przechowywać saldo, przechowuje się 
+  Mamy bazę danych banku, w której zamiast przechowywać saldo, przechowuje się 
   listę transakcji, a sumując ją uzyskuje saldo: ``SELECT SUM(t.value) FOR account .... INNER JOIN transaction as t ON ...``.
-  Dodatkowo mamy ograniczenie które zakłada że saldo jest większe od zera.
+  Dodatkowo mamy ograniczenie, które zakłada, że saldo jest większe od zera.
 
   * Na początku transakcji konto A ma saldo 100PLN
   * T1 się zaczyna
@@ -127,10 +127,10 @@ Bazy dancyh z zatrzaskami
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Zatrzask pozwala na oznaczenie danego wiersza jako zablokowanego
-do odczytu lub zapisu. Jeśli transakcja A ma zatrzask na wierszu B do zapisu
+do odczytu lub zapisu. Jeśli transakcja A ma zatrzask na wierszu B do zapisu,
 to żadna inna transakcja nie może uzyskać zatrzasku na tym wierszu. Jeśli ta
 sama transakcja ma zatrzask do odczutu, to inne transakcje mogą uzyskać zatrzask
-do odczytu ale nie do zapisu.
+do odczytu, ale nie do zapisu.
 
 Read Uncommitted
   W tym poziomie izolacji nie ma żadanych zatrzasków.
@@ -142,9 +142,9 @@ Read Uncommited
   niezakończone transakcje, ale widzą zmiany wykonane przez transakcje
   zakończone.
 
-  Zatrzaski zakładane są na
+  Zatrzaski zakładane są na:
 
-  * Każdy wiersz do którego się zapisuje
+  * Każdy wiersz, do którego się zapisuje;
   * Każdy odczytywany wiersz.
 
   Wiersze do zapisu są trzymane do końca transakcj, ale te do odczytu są
@@ -158,7 +158,7 @@ Repeatable Read
 
   Zatrzaski zakładane są na
 
-  * Każdy wiersz do którego się zapisuje
+  * Każdy wiersz, do którego się zapisuje;
   * Każdy odczytywany wiersz.
 
   Zatrzaski są zwalniane dopiero pod koniec transakcji.
@@ -172,22 +172,22 @@ Serialized
 
   Zatrzaski zakładane są na
 
-  * Każdy wiersz do którego się zapisuje
+  * Każdy wiersz, do którego się zapisuje
   * Każdy odczytywany wiersz.
   * Każde zapytanie dodaje jeszcze zatrzask na zakres danych, który uniemożliwia
-    wstawienie danych które zmieniałyby jego wynik.
+    wstawienie danych, które zmieniałyby jego wynik.
 
   Zatrzaski są zwalniane dopiero pod koniec transakcji.
 
 Bazy danych oparte o MVCC
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Takie bazy danych działają inaczej niż te oparte na zatrzaskach, każda transakcja
+Takie bazy danych działają inaczej, niż te oparte na zatrzaskach, każda transakcja
 widzi zawsze spójny obraz bazy danych, z chwili swojego rozpoczęcia.
 
 .. note::
 
-  Główna zaleta MVCC jest taka że najczęściej, możliwy jest bezkolizyjny zapis
+  Główna zaleta MVCC jest taka, że najczęściej, możliwy jest bezkolizyjny zapis
   równoległy i odczyt danego wiersza.
 
 
@@ -209,7 +209,7 @@ Każdy wiersz posiada kilka magicznych kolmn
 
 .. note::
 
-  Obecność magicznych kolumn pokazuje nam że tworzenie **bardzo małyh tabel**
+  Obecność magicznych kolumn pokazuje nam, że tworzenie **bardzo małyh tabel**
   w postgresql może być niewydajne.
 
 Podstawowe operacje MVCC
@@ -239,8 +239,8 @@ Transakcja widzi wiersz jeśli:
 VACUUM
 ^^^^^^
 
-Baza danych MVCC nie może usuwać wiersza z dysku od razu, musi on być dostępny
-aż wszystkie transakcje które mogą go widzieć się zakończą.
+Baza danych MVCC nie może usuwać wiersza z dysku od razu, musi on być dostępny,
+aż wszystkie transakcje, które mogą go widzieć się zakończą.
 
 Proces czyszczenia danych jest nazywany ``VACUUM``, i działa z grubsza automatycznie.
 
@@ -259,7 +259,7 @@ Snapshot Isolation
 Bazy Danych NoSQL
 -----------------
 
-Ostatnio bardzo modne są bazy danych NoSQL, które dzielą się z grubsza na takie
+Ostatnio bardzo modne są bazy danych NoSQL, które dzielą się z grubsza na takie,
 które:
 
 * Przechowują dane trudne to dodania do modelu relacyjnego: np. dokumenty które
@@ -285,17 +285,17 @@ Mailinator, która odbiera kilkaset e-maili na sekundę i działa na jednym
 serwerze, w `obecnej architekturze <http://highscalability.com/mailinator-architecture>`__
 nie ma możliwości podzelenia ruchu na wiele serwerów.
 
-System może być mało wydajny i nie skalowalny. Jeśli zrobie system który na jednym
+System może być mało wydajny i nie skalowalny. Jeśli zrobie system, który na jednym
 serwerze obsłuży 10 maili na sekundę, ale który skaluje się perfekcyjnie (tj.
 kolejne komputery dodane do klastra powodują liniowy wzrost ilości przetwarzanych
-wiadomości) to po dodaniu 200 kompuerów do klastra osiągnę mozliwość przetwarzania
-większej ilości e-maili niż robi to mailinator. System będzie mało wydajny ale
+wiadomości), to po dodaniu 200 kompuerów do klastra osiągnę mozliwość przetwarzania
+większej ilości e-maili, niż robi to mailinator. System będzie mało wydajny ale
 skalowalny.
 
 Problem z Durability
 ********************
 
-Powiedzmy że mamy klaster 10 baz danych (tj. 10 komputerów serwuje tą samą bazę danych).
+Powiedzmy, że mamy klaster 10 baz danych (tj. 10 komputerów serwuje tę samą bazę danych).
 
 Durability wymaga by po zakończeniu transakcji dane znalazły się na dysku
 każdego z tych komputerów. Już sam zapis na dysk bardzo spowalnia proces
@@ -310,9 +310,9 @@ Model Eventual Consistency
 **************************
 
 Bazy danych NoSql operują w modelu eventual consistency. W bazach SQL po zapisaniu
-transakcji, mamy gwarancję że stan wszystkich komputerów w klastrze jest spójny.
+transakcji, mamy gwarancję, że stan wszystkich komputerów w klastrze jest spójny.
 
-Bazy danych SQL gwarantują natomiast że: "stan bazy danych będzie spójny kiedyś,
+Bazy danych SQL gwarantują natomiast, że: "stan bazy danych będzie spójny kiedyś,
 prawdopodobnie". Pozwala to np. odnoować transakcję, która została zapisana na
 dysku tylko jednego serwera (który potem po jakimś czasie rozpropaguje dane dalej).
 
@@ -335,20 +335,20 @@ Serwery asynchroniczne
 
 Mamy zasadniczo dwa rodzaje serwerów przetwarzających rządania HTTP:
 
-1. Takie które jednemu zapytaniu przypisują jeden wątek.
-2. Takie które z jednego wątka wykonują wiele zapytań.
+1. Takie, które jednemu zapytaniu przypisują jeden wątek.
+2. Takie, które z jednego wątku wykonują wiele zapytań.
 
 Django zawsze działą w systemie synchronicznym, czyli jednemu zapytaniu
 przypisuje się jeden wątek.
 
-Dla pewnych rodzajów serwerów serwery synchroniczne są nie wydajne, a serwery
+Dla pewnych rodzajów serwerów, serwery synchroniczne są nie wydajne, a serwery
 asnychroniczne mogą być wydajniejsze o kilkaset razy (tj. mogą przetworzyć
 kilkaset razy więcej zapytań).
 
 Komunikacja blokująca
 *********************
 
-Komunikacja blokująca działa tak że kiedy chcemy wykonać jakąś operację 
+Komunikacja blokująca działa tak, że kiedy chcemy wykonać jakąś operację 
 związaną z odczytem bądź zapisem danych
 (z dysku, z bazy danych, z gniazda sieciowego), to akualny wątek blokuje się
 do czasu jej zakończenia.
@@ -356,7 +356,7 @@ do czasu jej zakończenia.
 Na przykład jeśli wykonujemy zapytanie, to aktualny
 wątek czeka aż nie otrzyma odpowiedzi.
 
-Okazuje się że dla "typowych" aplikacji webowych wątek przez większość czasu
+Okazuje się, że dla "typowych" aplikacji webowych wątek przez większość czasu
 "czeka" na zakończenie komunikacji, w tym czasie procesor może przełączyć się
 na inny wątek i go wykonywać.
 
@@ -371,7 +371,7 @@ Zyski są takie:
 1. Każdy wątek zajmuje przynajmniej 1mb ramu, przy 1000 wątków robi się z tego
    gigabajt.
 2. Przełączenie procesora między wątkami też zajmuje trochę czasu, w Internecie
-   znalazłem że jest to czas rzędu mikrosekundy.
+   znalazłem, że jest to czas rzędu mikrosekundy.
 
    Dodatkowo przełączenie procesora między wątkami powoduje opróżnienie keszu
    procesora, co również zmniejsza wydajność.
@@ -383,7 +383,7 @@ Wady serwerów asynchronicznych:
 
 Przykład:
 
-Rozważmy serwer który obsługuje N połączeń. Gdy dowolne z nich wyśle jedną linijkę 
+Rozważmy serwer, który obsługuje N połączeń. Gdy dowolne z nich wyśle jedną linijkę 
 tekstu linijka ta trafia do wszystkich polączonych:
 
   clients = set()
@@ -417,4 +417,4 @@ Możliwe jest rozwiązanie pośrednie z użyciem tzw. zielonych wątków,
 w którym jeden wątek systemu operacyjnego, obsługuje wiele zielonych wątków
 w programie.
 
-Przykładem języka który obsłguje zielone wątki jest GO.
+Przykładem języka, który obsłguje zielone wątki jest GO.
