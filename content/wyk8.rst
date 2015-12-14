@@ -23,7 +23,7 @@ Koszty utrzymania
 ^^^^^^^^^^^^^^^^^
 
 Zarządzający projektami informatycznymi twierdzą, że utrzymanie oprogramowania
-kosztuje więcej niż jego napisanie, to jaka jest zależność między nimi bardzo
+kosztuje więcej niż jego napisanie, to jaka jest to zależność bardzo
 zależy od specyfiki proramowania. Niektórzy mówią że napisanie kosztuje
 20% a utrzymanie 80%, inni trochę inaczej.
 
@@ -74,7 +74,7 @@ Rodzaje testów
 .. note::
 
   W literaturze znajduje się bardzo różne klasyfikacje testów (sam temat jest
-  relatywnie nowy ma może 10 lat), więc latwo znajdziecie inną klasyfikację.
+  relatywnie nowy ma może 15 lat), więc latwo znajdziecie inną klasyfikację.
 
 
 Testy jednostkowe
@@ -102,7 +102,7 @@ taki sam interfejs API jak dany kompoment.
   taki backend wysyłający e-maile jest przykładem mocka.
 
 Czas i miejsce wykonania
-************************
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Wykonywać się bardzo szybko, najlepiej w ciągu raczej sekund niż minut.
 2. Wykonuje je sam programista na swoim komputerze.
@@ -112,9 +112,8 @@ Czas i miejsce wykonania
 5. Testowane są zmiany każdego programisty oddzielnie (testowany jest każdy komit
    oddzielnie)
 
-
 Zalety i wady
-*************
+^^^^^^^^^^^^^
 
 Zalety:
 
@@ -130,7 +129,7 @@ Testy Integracyjne
 ******************
 
 Co testujemy
-************
+^^^^^^^^^^^^
 
 To czy komponenty zastosowane razem działają poprawnie, tutaj też raczej testuje
 się API niż interfejs użytkownika.
@@ -138,7 +137,7 @@ się API niż interfejs użytkownika.
 Testy jednostkowe są w stanie (z dużą dozą pewności) stwierdzić,
 że dany komponent dziala poprawnie. Nie są w stanie natomiast stwierdzić że:
 
-1. API tych komponentów jest kompatybilne (czyli: dwa komponenty razem się ze
+1. API dwóch komponentów jest kompatybilne (czyli: dwa komponenty razem się ze
    sobą dogadają) --- każdy testowany jest osobno.
 2. Nie ma jakichś zależności bezpośrednio nie wyrażonych w API, które powodują 
    problemy z integracją.
@@ -146,7 +145,7 @@ Testy jednostkowe są w stanie (z dużą dozą pewności) stwierdzić,
 Do sprawdzenia takich zależności stosuje się testy integracyjne.
 
 Czas i miejsce wykonania
-************************
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Mogą być wolniejsze, ale ciągle powinny wykonywać się raczej w ciągu minut
    niż godzin.
@@ -156,7 +155,7 @@ Czas i miejsce wykonania
    oddzielnie)
 
 Zalety i wady
-*************
+^^^^^^^^^^^^^
 
 Zalety:
 
@@ -165,7 +164,7 @@ Zalety:
 2. Relatywnie łatwo zlokalizować defekt (choć trudniej niż przy jednostkowych)
 
 Testy systemowe
----------------
+***************
 
 .. note::
 
@@ -181,6 +180,9 @@ produkcyjnego replikę).
 Testuje się raczej zachowania danego systemu niż działanie poszczególnych API,
 np. testy systemowe często symulują działanie użytkownika klikającego w
 przeglądarkę.
+
+Można też testować API wystawiane przez system, ale z założeniem że testuje się 
+**zachowanie systemu jako całości**.
 
 
 Czas i miejsce wykonania
@@ -200,9 +202,9 @@ Zalety:
 
 Wady:
 
-1. Relatywnie trudno zlokalizować defekt (bo informacja może być ogólna)
+1. Relatywnie trudno zlokalizować defekt (bo informacja może być ogólna),
+   na poziomie: "Lista produktów zawiera produkty o złej cenie".
 2. Czas wykonania.
-
 
 Testy akceptacyjne
 ******************
@@ -223,6 +225,22 @@ bardziej dokładne.
   Są inne rodzaje testów, np. fuzz testing, w którym aplikację zarzuca się
   nonsensownymi danymi. Fuzz testing ma mniejsze zastosowanie dla aplikacji WWW,
   ale jest przydatny np. do testowania bezpieczeństwa kernala i sterowników.
+
+Systemy CI
+----------
+
+Zasadniczo testy są o tyle przydatne, o ile ludzie je wykonują. Programiści nie
+lubią wykonywać testów. Dlatego stworzono systemy CI które:
+
+1. Pobierają każdą zmianę z repozytorium
+2. Budują projekt
+3. Uruchamiają wszystkie testy (lub wszystkie testy nie systemowe)
+4. Informują programiste o tym czy testy przeszły.
+
+Ci mogą też robić inne rzeczy:
+
+1. Odrzucać zmiany jeśli "testów jest mniej"
+2. Odrzucać zmiany jeśli kod nie spełnia wymogów formatowania
 
 Piramida testów
 ---------------
@@ -331,8 +349,8 @@ Django posiada własny system testów, który pozwala na:
 Framework testów Django pozwala na przetestowanie:
 
 1. Zachowań obiektów typu: modele, managery (to są unittesty)
-2. Testowanie wybierania danych z bazy danych
-3. Wykonywanie zapytań HTTP i testowanie ich działania (np. czy dane zapisały się do bazy,
+2. Wybierania danych z bazy danych
+3. Wykonywania zapytań HTTP i testowanie ich działania (np. czy dane zapisały się do bazy,
    czy HTML zawiera informację o błędach).
 
 Framework testów Django nie pozwala na:
@@ -374,7 +392,7 @@ Do czego admin się nie nadaje:
    powiedzenie: użytkownik ma uprawnienia do modyfikacji np. "swoich postów".
 2. Do udostępniania osobom nietechnicznym --- bardzo łatwo jest pisać 
    interfejsy admina, jest on też **bardzo elastyczny**, ale nie na tyle
-   elastyczny by udostępnić go osobom którym nie wyjaśni się pojęcie np.
+   elastyczny by udostępnić go osobom którym nie wyjaśni się pojęcia np.
    **klucza obcego**.
 
 Model uprawnień Django
@@ -386,6 +404,14 @@ Django posiada wbudowany system uprawnień, który pozwala na powiedzenie:
    instancji danego modelu. Np. Edytor może
 2. Nie pozwala on (w aktualnej wersji) na wyrażenie że: ten użytkownik może
    edytować, tą instancję tego modelu a innych nie.
+
+Użytkownik może wejść na panel administracyjny jeśli:
+
+* Jego konto jest aktywne
+* Ma zaznaczone pole ``is_staff``
+
+Użytkownik widzi listę encji z danego modelu jeśli ma jakiekolwiek uprawnienia
+do tego modelu.
 
 Uruchomienie panelu administracyjnego
 *************************************
@@ -520,7 +546,7 @@ zatem::
   fields = ('e_mail', 'name')
 
 Dalej, chcemy generować numer albumu, który jednocześnie będzie kluczem głównym
-modelu::
+modelu:
 
 .. code-block:: python
 
