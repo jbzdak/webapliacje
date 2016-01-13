@@ -1,6 +1,20 @@
 Tranzakcie w bazie danyh
 ========================
 
+:date: 2015-12-14
+:tags: zaj9, wykład, materiały
+:category: materiały
+
+
+.. note::
+
+  Wykład do pobrania również w wersji PDF.
+
+  .. raw:: html
+
+     <a href="downloads/pdfs/wyk9.pdf">Wersja pdf tutaj</a>
+
+
 Zacznijmy od przykładu, mam system bazodanowy, który implementuje funkcjonalność
 przelewów. Algorytm przelewu działa następująco:
 
@@ -26,7 +40,7 @@ Odpowiedź brzmi: Nie wiadomo! Ten algorytm zawiera, tzw. *hazard*
 możliwe są różne ostateczne wyniki.
 
 ACID
-****
+----
 
 ACID to podstawowe założenia systemu tranzakcyjnego:
 
@@ -137,7 +151,7 @@ Read Uncommitted
 
   Możliwe są wszystkie anomalie.
 
-Read Uncommited
+Read Commited
   W tym poziomie izolacji transackje nie widzą zmian wykonanych przez
   niezakończone transakcje, ale widzą zmiany wykonane przez transakcje
   zakończone.
@@ -312,7 +326,7 @@ Model Eventual Consistency
 Bazy danych NoSql operują w modelu eventual consistency. W bazach SQL po zapisaniu
 transakcji, mamy gwarancję, że stan wszystkich komputerów w klastrze jest spójny.
 
-Bazy danych SQL gwarantują natomiast, że: "stan bazy danych będzie spójny kiedyś,
+Bazy danych NoSQL gwarantują natomiast, że: "stan bazy danych będzie spójny kiedyś,
 prawdopodobnie". Pozwala to np. odnoować transakcję, która została zapisana na
 dysku tylko jednego serwera (który potem po jakimś czasie rozpropaguje dane dalej).
 
@@ -384,7 +398,7 @@ Wady serwerów asynchronicznych:
 Przykład:
 
 Rozważmy serwer, który obsługuje N połączeń. Gdy dowolne z nich wyśle jedną linijkę 
-tekstu linijka ta trafia do wszystkich polączonych:
+tekstu linijka ta trafia do wszystkich polączonych::
 
   clients = set()
 
